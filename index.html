@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kostenloses Webinar – Mehr Energie im Alltag | Martina Lau</title>
+  <meta name="description" content="Entdecke in diesem kostenlosen Webinar, wie du deinen Energiehaushalt nachhaltig optimierst – mit Wissen, das wirklich zu dir passt." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="landing">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <div class="nav__logo-icon">
+            <img src="Bilder/Logo_MartinaLau.png" alt="Martina Lau Logo" />
+          </div>
+          <div class="nav__logo-name">
+            Martina Lau
+            <small>Gesundheit &amp; Vitalität</small>
+          </div>
+        </a>
+        <a href="#anmeldung" class="btn btn--outline">Kostenlos anmelden</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════
+       HERO
+       ════════════════════════ -->
+  <section class="hero">
+    <!-- Goldene Partikel -->
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+    <!-- Schwebende Ribbons -->
+    <div class="ribbons" aria-hidden="true">
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+    </div>
+
+    <div class="hero__bg-line" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero__inner">
+
+        <!-- LINKS: Copy -->
+        <div>
+          <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+
+          <div class="gold-badge">
+            ✦ Live-Webinar · Limitierte Plätze · <span id="badge-next-date">Nächster Termin</span> · 19:00 Uhr
+          </div>
+
+          <span class="eyebrow eyebrow--gold">Für Frauen 30+ · Mütter · Familienmanagerinnen</span>
+
+          <h1>
+            Endlich mehr Energie —<br/>
+            verstehe, was dein<br/>
+            Körper <em>wirklich braucht.</em>
+          </h1>
+
+          <p class="hero__lead">
+            Du kaufst Bio, isst Tofu, Hafermilch und andere gesunde Lebensmittel — und machst dazu noch Sport. Und trotzdem: das Mittagstief kommt wie ein Uhrwerk, der Kopf wird schwer, der Bauch bläht sich auf, und die Hose zwickt genau da, wo sie schon immer gezwickt hat. Woran liegt das eigentlich?
+          </p>
+          <p class="hero__lead" style="margin-top:0.8rem;">
+            In diesem kostenlosen Webinar verstehst du, warum „vieles richtig machen" oft nicht reicht. Du sicherst deinen Computer vor Trojanern — aber welche Firewall nutzt du für deinen Körper? Knack den Code mit mir: versteh den Unterschied zwischen <em>Glauben</em> und <em>Wissen</em> — und was das für deine Energie, deinen Stoffwechsel und dein Wohlbefinden wirklich bedeutet.
+          </p>
+
+          <!-- Trust Strip -->
+          <div class="trust-strip">
+            <div class="trust-strip__item">
+              <span class="trust-strip__stars">★★★★★</span>
+              <span class="trust-strip__text"><strong>5,0 / 5</strong> · SEHR GUT</span>
+            </div>
+            <div class="trust-strip__sep">·</div>
+            <div class="trust-strip__item">
+              <span class="trust-strip__text"><strong>20 Bewertungen</strong> auf ProvenExpert</span>
+            </div>
+            <div class="trust-strip__sep">·</div>
+            <div class="trust-strip__item">
+              <span class="trust-strip__text"><strong>100%</strong> Empfehlungen</span>
+            </div>
+          </div>
+
+          <div style="border:1.5px solid rgba(255,210,100,0.7);border-radius:4px;padding:1.8rem 2rem;background:linear-gradient(135deg,rgba(212,175,85,0.1) 0%,rgba(255,220,120,0.05) 100%);box-shadow:0 0 28px rgba(255,210,80,0.18),inset 0 1px 0 rgba(255,230,130,0.12);margin-top:1.8rem;">
+
+            <div class="countdown-wrap" style="margin-top:0;">
+              <div class="countdown-wrap__label">Webinar beginnt in</div>
+              <div class="countdown" id="countdown">
+                <div class="countdown__unit">
+                  <span class="countdown__num" data-days>00</span>
+                  <span class="countdown__label">Tage</span>
+                </div>
+                <div class="countdown__unit">
+                  <span class="countdown__num" data-hours>00</span>
+                  <span class="countdown__label">Stunden</span>
+                </div>
+                <div class="countdown__unit">
+                  <span class="countdown__num" data-minutes>00</span>
+                  <span class="countdown__label">Minuten</span>
+                </div>
+                <div class="countdown__unit">
+                  <span class="countdown__num" data-seconds>00</span>
+                  <span class="countdown__label">Sekunden</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,210,100,0.2);">
+              <div style="font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:#FFD87A;margin-bottom:1rem;font-weight:600;text-shadow:0 0 10px rgba(255,220,80,0.4);">✦ Dein Platz · Jetzt sichern</div>
+              <ul id="upcoming-dates" style="list-style:none;padding:0;margin:0;"></ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RECHTS: Formular -->
+        <div id="anmeldung">
+          <div class="form-box">
+            <p class="form-box__title">Sichere dir jetzt deinen<br/>kostenlosen Platz</p>
+            <p class="form-box__sub">Live-Webinar · <span id="badge-next-date-2"></span> · 19:00 Uhr · 100% kostenlos</p>
+
+            <!--
+              E-MAIL-TOOL: action-URL anpassen
+              Test: action="danke.html" method="get"
+            -->
+            <form action="danke.html" method="get" id="registration-form">
+              <div class="form-group">
+                <label for="fname">Vorname</label>
+                <input type="text" id="fname" name="fname" placeholder="Dein Vorname" required />
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" name="email" placeholder="deine@email.de" required />
+              </div>
+              <div class="form-checkbox">
+                <input type="checkbox" id="privacy" name="privacy" required />
+                <label for="privacy">
+                  Ich bin einverstanden, dass meine Daten gespeichert werden, um mir den Webinar-Zugang zuzusenden. Jederzeit abmeldbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
+                </label>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg">
+                Jetzt kostenlos anmelden →
+              </button>
+            </form>
+
+            <div class="form-proof">
+              <p class="form-proof__text">Bereits <strong>über 200 Frauen</strong> haben mit Martina ihren Weg zu mehr Energie gefunden</p>
+            </div>
+
+            <p style="text-align:center;font-size:0.7rem;color:#aaa;margin-top:0.8rem;line-height:1.6;">
+              🔒 Kein Spam · Jederzeit abmeldbar · 100% kostenlos
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       VIDEO — MARTINA SPRICHT
+       ════════════════════════ -->
+  <section class="video-intro">
+    <div class="container--narrow" style="text-align:center;">
+      <span class="eyebrow">Bevor du dich anmeldest</span>
+      <h2 style="font-size:clamp(1.4rem,2.8vw,2rem);margin-bottom:0.6rem;">
+        Schau dir diese <em style="font-style:italic;font-weight:300;">60 Sekunden</em> an
+      </h2>
+      <div class="divider divider--gold" style="margin:1rem auto 1.8rem;"></div>
+
+      <!-- Sprecherin-Preview -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.8rem;">
+        <img src="Bilder/IMG_7122.JPG" alt="Martina Lau"
+             style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid rgba(212,175,110,0.45);box-shadow:0 4px 16px rgba(0,0,0,0.12);flex-shrink:0;" />
+        <div style="text-align:left;">
+          <strong style="font-size:0.95rem;color:var(--ink);display:block;line-height:1.3;">Martina Lau</strong>
+          <span style="font-size:0.75rem;color:var(--warm-gray);">Gesundheit &amp; Vitalität</span>
+        </div>
+      </div>
+
+      <p style="font-size:0.9rem;color:var(--warm-gray);margin-bottom:2rem;line-height:1.85;">
+        Martina erklärt dir in ihrer eigenen Sprache, worum es in diesem Webinar wirklich geht — und warum es sich lohnt, dabei zu sein.
+      </p>
+
+      <div class="video-intro__wrapper">
+        <a href="https://youtu.be/22vTj5wvuUk" target="_blank" rel="noopener"
+           style="display:block;position:relative;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.25);cursor:pointer;">
+          <!-- Screenshot als Hintergrundbild -->
+          <img src="Bilder/Screenshot 2026-05-21 174115.png"
+               alt="Martina Lau – Webinar-Vorschau"
+               style="width:100%;display:block;object-fit:cover;" />
+          <!-- Dunkles Overlay -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);"></div>
+          <!-- Banner oben -->
+          <div style="position:absolute;top:0;left:0;right:0;background:linear-gradient(135deg,rgba(0,80,100,0.92),rgba(0,152,166,0.88));padding:0.7rem 1.4rem;display:flex;align-items:center;gap:0.6rem;">
+            <span style="color:#FFD87A;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;">▶ &nbsp;Jetzt ansehen · 60 Sekunden</span>
+          </div>
+          <!-- Play-Button Mitte -->
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="width:80px;height:80px;background:rgba(0,152,166,0.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 28px rgba(0,0,0,0.4),0 0 0 8px rgba(0,152,166,0.2);">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <a href="#anmeldung" class="btn btn--primary">Jetzt kostenlos anmelden →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       ERKENNST DU DICH WIEDER?
+       ════════════════════════ -->
+  <section style="background:var(--cream-teal);padding:5.5rem 0;">
+    <div class="container">
+
+      <div class="section-head" style="margin-bottom:3rem;">
+        <span class="gold-star" style="opacity:0.4;">✦ &nbsp; ✦ &nbsp; ✦</span>
+        <span class="eyebrow">Dieses Webinar ist für dich</span>
+        <h2>Erkennst du dich wieder?</h2>
+        <div class="divider divider--gold" style="margin:1.2rem auto 1.5rem;"></div>
+      </div>
+
+      <div class="img-text-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+
+        <!-- Liste links -->
+        <div>
+          <ul class="for-who__list">
+            <li><span class="check">✦</span> <strong>Kein Erfolg trotz „gesundem" Essen?</strong> Du achtest auf Bio, lässt Zucker weg und treibst Sport — doch die Waage bewegt sich nicht?</li>
+            <li><span class="check">✦</span> <strong>Ständig müde &amp; Kopf leer?</strong> Du fühlst dich, als würdest du mit angezogener Handbremse durchs Leben fahren?</li>
+            <li><span class="check">✦</span> <strong>Was soll ich denn noch alles tun?</strong> Nahrungsergänzungsmittel hier, Superfoods da — doch spürst du wirklich einen Unterschied?</li>
+            <li><span class="check">✦</span> <strong>Zell-Rost durch Zucker &amp; Softdrinks?</strong> Du denkst, die Limo zwischendurch gibt dir Energie — tut sie aber nicht.</li>
+            <li><span class="check">✦</span> <strong>Die Autophagie-Bremse durch Dauer-Snacking?</strong> Hier mal eine Nuss, da ein kleiner Riegel — dein Körper bekommt keine Pause.</li>
+            <li><span class="check">✦</span> <strong>Schwindende Kraft ab 35+?</strong> Du isst zu wenig Protein und wunderst dich über nachlassende Form und Energie.</li>
+          </ul>
+          <p style="margin-top:1.8rem;font-size:1rem;font-weight:500;color:var(--teal);line-height:1.7;">Schluss mit Blähbauch, Brainfog und Müdigkeit trotz Sport — erfahre, wie du dein Energie-System auf High-Performance bringst.</p>
+          <div style="margin-top:2rem;">
+            <a href="#anmeldung" class="btn btn--primary btn--lg">Ich bin dabei →</a>
+          </div>
+        </div>
+
+        <!-- Foto rechts -->
+        <div style="overflow:hidden;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,0.14);">
+          <img src="Bilder/IMG_7140.JPG" alt="Martina Lau"
+               style="width:100%;display:block;object-fit:cover;" />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       WAS DICH ERWARTET
+       ════════════════════════ -->
+  <section class="learn">
+    <div class="container">
+      <div class="section-head">
+        <span class="gold-star" style="opacity:0.4;">✦ &nbsp; ✦ &nbsp; ✦</span>
+        <span class="eyebrow">Im Webinar</span>
+        <h2>Was dich in 60 Minuten erwartet</h2>
+        <div class="divider divider--gold" style="margin:1.2rem auto 1.5rem;"></div>
+        <p>Praxisnah, wissenschaftlich fundiert und direkt umsetzbar — für Frauen, die es genau wissen wollen.</p>
+      </div>
+
+      <div class="learn__grid">
+        <div class="learn-card">
+          <div class="learn-card__num">01</div>
+          <h4>Warum Energie kein Zufall ist</h4>
+          <p>Du wirst verstehen, warum du müde bist — auch wenn du schläfst, dich ernährst und eigentlich „alles richtig" machst. Diese Erkenntnis verändert alles.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__num">02</div>
+          <h4>Der Zusammenhang, den kaum jemand kennt</h4>
+          <p>Energie hängt von mehr ab als Schlaf und Ernährung. Es gibt einen Faktor, den die Wissenschaft längst kennt — der im Alltag aber fast nie besprochen wird.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__num">03</div>
+          <h4>Warum Pauschalempfehlungen nicht reichen</h4>
+          <p>Nicht jede Frau ist gleich. Was das konkret für deinen Alltag bedeutet — und was wirklich zählt, wenn du nachhaltig mehr Energie willst.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__num">04</div>
+          <h4>Dein erster konkreter Schritt</h4>
+          <p>Du gehst nicht mit einer Aufgabenliste nach Hause, sondern mit einem klaren nächsten Schritt — umsetzbar, passend zu deinem Leben, sofort möglich.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       ÜBER MARTINA
+       ════════════════════════ -->
+  <section class="about">
+    <!-- Goldene Partikel -->
+    <canvas id="particles-canvas-about" aria-hidden="true"></canvas>
+
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="about__inner">
+
+        <div class="about__photo">
+          <img src="Bilder/IMG_7118.JPG" alt="Martina Lau" />
+        </div>
+
+        <div>
+          <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+          <span class="eyebrow eyebrow--gold">Deine Referentin</span>
+          <h2>Hallo, ich bin<br/>Martina Lau.</h2>
+          <div class="divider divider--gold-left"></div>
+
+          <p>
+            Nach <strong>8 Jahren im Hormonzentrum</strong> wurde ich Mutter. Hätte ich mein heutiges Wissen damals schon gehabt — mir wäre einiges erspart geblieben. Diese Jahre haben mich gelehrt, wie wenig wir Frauen oft wirklich über unseren eigenen Körper wissen — und wie viel möglich wird, wenn wir anfangen zu <em>verstehen</em> statt nur zu glauben.
+          </p>
+
+
+<div class="quote-block">
+            <p>„Ich helfe Frauen nicht mit Pauschalempfehlungen. Ich helfe ihnen mit dem Wissen, das ich selbst gebraucht hätte — fundiert, ehrlich und wirklich umsetzbar."</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       TESTIMONIALS
+       ════════════════════════ -->
+  <section style="background:var(--teal-pale);padding:5rem 0;">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Was andere Frauen sagen</span>
+        <div class="divider divider--gold" style="margin:0.8rem auto 2.5rem;"></div>
+      </div>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card testimonial-card--light">
+          <span class="testimonial-card__stars">★★★★★</span>
+          <blockquote>„Professionalität gepaart mit Herz. Immer positiv, empathisch und hilfsbereit — mit einem Tatendrang, der ansteckend ist."</blockquote>
+          <div class="testimonial-card__name">— Verifizierte Bewertung · ProvenExpert</div>
+        </div>
+
+        <div class="testimonial-card testimonial-card--light">
+          <span class="testimonial-card__stars">★★★★★</span>
+          <blockquote>„Martina ist unglaublich positiv, voller Energie und total engagiert — von schneller Auffassungsgabe und noch schneller in der Umsetzung. Sie ist mit ganzem Herzen dabei, Menschen wirklich zu helfen. Kompetent, umfassend — und sie ermöglicht echte Erfolge."</blockquote>
+          <div class="testimonial-card__name">— Viola M.</div>
+        </div>
+
+        <div class="testimonial-card testimonial-card--light">
+          <span class="testimonial-card__stars">★★★★★</span>
+          <blockquote>„Ich fühle mich bei Martina bestens aufgehoben. Sie sieht den Menschen als Ganzes und hinterfragt sehr viel, um bestmöglich zu unterstützen. Bei dir spürt man einfach, dass du liebst, was du tust."</blockquote>
+          <div class="testimonial-card__name">— M.</div>
+        </div>
+
+      </div>
+      <p style="text-align:center;margin-top:1.5rem;font-size:0.75rem;color:var(--warm-gray);">
+        20 verifizierte Bewertungen auf ProvenExpert · Ø 5,0 von 5 · SEHR GUT · 100% Empfehlungsrate
+      </p>
+
+      <!-- ProvenExpert ProSeal Widget -->
+      <div style="margin-top:2rem;display:flex;justify-content:center;">
+        <noscript><a href="https://www.provenexpert.com/martina-lau/?utm_source=seals&utm_campaign=embedded-proseal&utm_medium=profile&utm_content=1ba6ad6f-8c93-4775-a19a-f3ac88b6ca52" target="_blank" title="Kundenbewertungen &amp; Erfahrungen zu Martina Lau" class="pe-pro-seal-more-infos" rel="nofollow">Mehr Infos</a></noscript>
+        <script defer id="proSeal">
+          window.loadProSeal = function(){
+            window.provenExpert.proSeal({
+              widgetId: "1ba6ad6f-8c93-4775-a19a-f3ac88b6ca52",
+              language:"de-DE",
+              usePageLanguage: false,
+              bannerColor: "#097E92",
+              textColor: "#FFFFFF",
+              showBackPage: true,
+              showReviews: true,
+              hideDate: true,
+              hideName: false,
+              googleStars: false,
+              displayReviewerLastName: false,
+              embeddedSelector: "#proSealWidget"
+            })
+          };
+          window.addEventListener("load", function () {
+            var script = document.createElement('script');
+            script.src = "https://s.provenexpert.net/seals/proseal-v2.js";
+            script.onload = loadProSeal;
+            document.head.appendChild(script);
+          }, false);
+        </script>
+        <div id="proSealWidget"></div>
+      </div>
+      <!-- ProvenExpert ProSeal Widget Ende -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- ════════════════════════
+       FINAL CTA
+       ════════════════════════ -->
+  <section class="cta-section">
+    <!-- Ribbons -->
+    <div class="ribbons" aria-hidden="true">
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+    </div>
+    <!-- Partikel -->
+    <canvas id="particles-canvas-cta" aria-hidden="true"></canvas>
+
+    <div class="container">
+      <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+      <span class="eyebrow eyebrow--gold">Dein kostenloser Platz wartet</span>
+      <h2>60 Minuten, die wirklich<br/><em>etwas verändern können.</em></h2>
+      <div class="divider divider--gold" style="margin:1.2rem auto 1.5rem;"></div>
+      <p>Viele Frauen beschreiben das Coaching mit Martina als Wendepunkt. Und deswegen ist das Webinar ein erster Schritt, den du dir wert sein solltest.</p>
+      <a href="#anmeldung" class="btn btn--primary btn--lg">Jetzt kostenlos anmelden →</a>
+      <p style="margin-top:1rem;font-size:0.72rem;color:rgba(255,255,255,0.25);">
+        Kein Spam · Jederzeit abmeldbar · 100% kostenlos
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span>© 2026 Martina Lau · Alle Rechte vorbehalten</span>
+        <div class="footer__links">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

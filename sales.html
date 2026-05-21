@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persönliche Performanceanalyse | Martina Lau</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .sales-hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* Transformation Vorher/Nachher */
+    .transform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .transform-col {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 2.2rem 2rem;
+      border: 1px solid rgba(212,175,110,0.08);
+    }
+
+    .transform-col--after {
+      background: var(--gradient-dark);
+      border-color: rgba(0,152,166,0.3);
+    }
+
+    .transform-col__label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .transform-col--after .transform-col__label {
+      color: rgba(212,175,110,0.45);
+      border-bottom-color: var(--gold-border);
+    }
+
+    .transform-col ul { list-style:none; display:flex; flex-direction:column; gap:0.75rem; }
+
+    .transform-col li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--charcoal);
+    }
+
+    .transform-col--after li { color: rgba(255,255,255,0.68); }
+    .icon-x     { color: rgba(0,0,0,0.2); flex-shrink:0; }
+    .icon-check { color: var(--gold-deep); flex-shrink:0; }
+
+    /* FAQ */
+    .faq-section { background: linear-gradient(160deg, var(--cream-teal) 0%, var(--teal-pale) 100%); }
+
+    /* Final CTA */
+    .sales-cta {
+      background: var(--gradient-dark);
+      padding: 7rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sales-cta > * { position:relative;z-index:1; }
+    .sales-cta .container--narrow { position:relative;z-index:1; }
+
+    .sales-cta h2 {
+      color: var(--white);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: 1.2rem;
+      line-height: 1.25;
+    }
+
+    .sales-cta h2 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sales-cta p {
+      color: rgba(255,255,255,0.5);
+      max-width: 480px;
+      margin: 0 auto 2.8rem;
+      font-size: 0.95rem;
+      line-height: 1.9;
+    }
+
+    @media (max-width: 900px) {
+      .sales-hero__inner { grid-template-columns: 1fr; gap: 3rem; }
+      .transform-grid    { grid-template-columns: 1fr; }
+      .offer-card        { position: static; }
+    }
+  </style>
+</head>
+<body data-page="sales">
+
+  <!-- Kein Nav auf Salespage — keine Ablenkung, kein Absprung -->
+
+  <!-- ════════════════════════
+       HERO
+       ════════════════════════ -->
+  <section class="sales-hero">
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="ribbons" aria-hidden="true">
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+    </div>
+
+    <div class="container">
+      <div class="sales-hero__inner">
+
+        <!-- LINKS: Copy -->
+        <div>
+          <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+          <div class="gold-badge">✦ Dein nächster Schritt</div>
+          <span class="eyebrow eyebrow--gold">Die Performanceanalyse</span>
+
+          <h1>
+            Hör auf zu raten.<br/>
+            <em>Fang an zu wissen.</em>
+          </h1>
+
+          <p>
+            Du hast gerade gelernt, wie sehr die Nährstoffversorgung auf zellulärer Ebene über Energie, Stimmung und Wohlbefinden entscheidet. Die Frage ist: <strong>Wie sieht es bei dir aus?</strong>
+          </p>
+
+          <p>
+            Pauschalempfehlungen greifen nicht, weil jeder Körper anders ist. Was zählt, sind deine persönlichen Werte — messbar, objektiv, individuell.
+          </p>
+
+          <p>
+            Mit der <strong>Persönlichen Performanceanalyse</strong> bekommst du zum ersten Mal einen klaren Blick auf dein individuelles Fettsäureprofil — bequem von zu Hause aus, ausgewertet in einem unabhängigen Labor, erklärt von Martina persönlich.
+          </p>
+
+          <div class="quote-block" style="margin-top:2.2rem;">
+            <p>„Ich dachte, ich mache schon alles richtig. Erst als ich meine Werte kannte, habe ich verstanden, was meinem Körper wirklich gefehlt hat."</p>
+            <p style="margin-top:0.6rem;font-size:0.8rem;opacity:0.6;">— Lisa S.</p>
+          </div>
+        </div>
+
+        <!-- RECHTS: Angebot -->
+        <div>
+          <div class="offer-card">
+            <div class="offer-card__eyebrow">✦ Inklusive Erstgespräch</div>
+            <div class="offer-card__title">
+              Persönliche Performanceanalyse
+            </div>
+            <div class="offer-card__subtitle">
+              Dein individuelles Fettsäureprofil — messbar, objektiv, mit persönlicher Begleitung
+            </div>
+
+            <!-- Preis-Anker -->
+            <div style="margin-bottom:1.6rem;padding:1.2rem 1.4rem;background:linear-gradient(135deg,rgba(0,152,166,0.05),rgba(201,168,76,0.06));border-radius:6px;border:1px solid rgba(201,168,76,0.18);text-align:center;">
+              <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:0.5rem;" id="price-label">Regulärer Preis</div>
+              <div style="display:flex;align-items:baseline;justify-content:center;gap:0.8rem;">
+                <!-- Rabattpreis (sichtbar wenn Code aktiv) -->
+                <span id="price-sale" style="font-family:var(--font-serif);font-size:2.4rem;font-weight:600;background:linear-gradient(135deg,var(--gold-deep),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;">99 €</span>
+                <span id="price-strikethrough" style="font-size:1rem;color:var(--light-gray);text-decoration:line-through;">149 €</span>
+                <!-- Vollpreis (sichtbar wenn Code abgelaufen) -->
+                <span id="price-full" style="display:none;font-family:var(--font-serif);font-size:2.4rem;font-weight:600;background:linear-gradient(135deg,var(--gold-deep),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;">149 €</span>
+              </div>
+              <div id="price-saving" style="font-size:0.7rem;color:var(--teal);margin-top:0.4rem;font-weight:500;">Du sparst 50 € als Webinar-Teilnehmerin</div>
+
+              <!-- Rabattcode-Block (nur wenn Code aktiv) -->
+              <div id="code-block" style="margin-top:0.9rem;padding:0.8rem 1rem;background:rgba(212,175,85,0.08);border:1px dashed rgba(212,175,85,0.35);border-radius:6px;">
+                <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(212,175,110,0.5);margin-bottom:0.3rem;">Dein Rabattcode</div>
+                <div style="font-family:var(--font-serif);font-size:1.3rem;letter-spacing:0.12em;color:var(--gold-light);font-weight:600;">ZELLE50</div>
+                <div style="font-size:0.65rem;color:rgba(255,255,255,0.35);margin-top:0.3rem;">Code bei Ablefy im Checkout eingeben</div>
+                <!-- Ablauf-Countdown -->
+                <div id="code-expiry-wrap" style="margin-top:0.8rem;padding-top:0.7rem;border-top:1px solid rgba(212,175,85,0.15);">
+                  <div style="font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(212,175,110,0.4);margin-bottom:0.4rem;">Code läuft ab in</div>
+                  <div id="code-countdown" style="display:flex;justify-content:center;gap:0.8rem;">
+                    <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);"><span data-days style="font-family:var(--font-serif);font-size:1rem;color:var(--gold-light);">00</span> T</span>
+                    <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);"><span data-hours style="font-family:var(--font-serif);font-size:1rem;color:var(--gold-light);">00</span> Std</span>
+                    <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);"><span data-minutes style="font-family:var(--font-serif);font-size:1rem;color:var(--gold-light);">00</span> Min</span>
+                    <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);"><span data-seconds style="font-family:var(--font-serif);font-size:1rem;color:var(--gold-light);">00</span> Sek</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="offer-card__features">
+              <li><span class="check">✓</span> <span>Test-Kit kommt bequem zu dir nach Hause — alles inklusive</span></li>
+              <li><span class="check">✓</span> <span>Einfache Durchführung: ein kleiner Tropfen, wenige Minuten</span></li>
+              <li><span class="check">✓</span> <span>Auswertung durch ein unabhängiges, akkreditiertes Labor</span></li>
+              <li><span class="check">✓</span> <span>Dein persönliches Fettsäureprofil inkl. Omega-3-Index</span></li>
+              <li><span class="check">✓</span> <span>30-min. Auswertungsgespräch mit Martina — persönlich, inklusive</span></li>
+              <li><span class="check">✓</span> <span>Konkrete Empfehlungen basierend auf deinen echten Werten</span></li>
+            </ul>
+
+            <!-- ABLEFY-LINK: href durch deinen echten Ablefy-Produktlink ersetzen -->
+            <a href="https://myablefy.com/s/martinalau/performance-analyse" class="btn btn--primary btn--lg">
+              Jetzt für 99 € bestellen →
+            </a>
+
+            <div class="offer-card__guarantee">
+              🔒 Unabhängiges Labor · Diskreter Versand · Rechnung inklusive
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       VORHER / NACHHER
+       ════════════════════════ -->
+  <section style="background:var(--cream);padding:5.5rem 0;">
+    <div class="container">
+      <div class="section-head">
+        <span class="gold-star" style="opacity:0.4;">✦ &nbsp; ✦ &nbsp; ✦</span>
+        <span class="eyebrow">Was sich verändert</span>
+        <h2>Vom Vermuten zum Wissen</h2>
+        <div class="divider divider--gold" style="margin:1.2rem auto 1.5rem;"></div>
+        <p>Der Unterschied zwischen raten und wissen ist größer als du denkst.</p>
+      </div>
+
+      <div class="transform-grid">
+        <div class="transform-col">
+          <div class="transform-col__label">Ohne Analyse</div>
+          <ul>
+            <li><span class="icon-x">✕</span> Du probierst Nahrungsergänzungen aus — ohne zu wissen, ob du sie brauchst</li>
+            <li><span class="icon-x">✕</span> Du ernährst dich bewusst, spürst aber keinen klaren Unterschied</li>
+            <li><span class="icon-x">✕</span> Du weißt nicht, ob deine Energie wirklich mit Nährstoffen zusammenhängt</li>
+            <li><span class="icon-x">✕</span> Jede Empfehlung passt auf alle — aber nicht auf dich</li>
+          </ul>
+        </div>
+
+        <div class="transform-col transform-col--after">
+          <div class="transform-col__label">Mit deiner Performanceanalyse</div>
+          <ul>
+            <li><span class="icon-check">✦</span> Du weißt genau, wo dein Körper steht — mit echten Zahlenwerten</li>
+            <li><span class="icon-check">✦</span> Du triffst fundierte Entscheidungen, statt dem nächsten Trend zu folgen</li>
+            <li><span class="icon-check">✦</span> Du verstehst den Zusammenhang zwischen deinen Werten und deinem Wohlbefinden</li>
+            <li><span class="icon-check">✦</span> Du bekommst einen Plan, der wirklich zu deinem Körper passt</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       SO FUNKTIONIERT'S
+       ════════════════════════ -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Der Ablauf</span>
+        <h2>In 4 Schritten zu deinen Werten</h2>
+        <div class="divider divider--gold" style="margin:1.2rem auto 1.5rem;"></div>
+        <p>Unkompliziert, diskret und von zu Hause aus.</p>
+      </div>
+
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-step__icon">01</div>
+          <h4>Online bestellen</h4>
+          <p>Du bestellst direkt online — sicher, unkompliziert, in wenigen Klicks.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__icon">02</div>
+          <h4>Test-Kit erhalten</h4>
+          <p>Dein persönliches Kit kommt diskret nach Hause — mit allem, was du brauchst.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__icon">03</div>
+          <h4>Test einsenden</h4>
+          <p>Ein kleiner Tropfen Blut auf die Testkarte — fertig. Rückkuvert liegt bei.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__icon">04</div>
+          <h4>Gespräch mit Martina</h4>
+          <p>Martina erklärt deine Werte und entwickelt gemeinsam mit dir einen konkreten Plan.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:3.5rem;">
+        <a href="https://myablefy.com/s/martinalau/performance-analyse" class="btn btn--primary btn--lg">Jetzt für 99 € bestellen →</a>
+        <p style="font-size:0.72rem;color:var(--warm-gray);margin-top:1rem;">
+          Ergebnis ca. 2–3 Wochen nach Einsendung · Gespräch danach nach Vereinbarung
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       BILD – MARTINA IM GESPRÄCH
+       ════════════════════════ -->
+  <section style="background:var(--cream-teal);padding:5.5rem 0;">
+    <div class="container">
+      <div class="img-text-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+
+        <!-- Foto links -->
+        <div>
+          <img src="Bilder/IMG_7134.JPG" alt="Martina Lau im Auswertungsgespräch mit einer Kundin"
+               style="width:100%;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,0.14);object-fit:cover;display:block;" />
+        </div>
+
+        <!-- Text rechts -->
+        <div>
+          <span class="eyebrow">Persönliche Begleitung</span>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:1rem;">Du bist nicht allein<br/>mit deinen Werten.</h2>
+          <div class="divider divider--gold-left" style="margin-bottom:1.5rem;"></div>
+          <p>Das Auswertungsgespräch ist kein Standardtermin. Martina nimmt sich 30 Minuten Zeit, erklärt dir deine Ergebnisse verständlich — und entwickelt gemeinsam mit dir einen konkreten Plan, der zu deinem Alltag passt.</p>
+          <p style="margin-top:1rem;">Keine Flut von Informationen. Kein „Probier mal das." Sondern echte Klarheit über das, was dir persönlich helfen wird.</p>
+          <div style="margin-top:2rem;">
+            <a href="https://myablefy.com/s/martinalau/performance-analyse" class="btn btn--primary">Jetzt für 99 € bestellen →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       TESTIMONIALS
+       ════════════════════════ -->
+  <section class="about" style="padding:5rem 0;">
+    <canvas id="particles-canvas-testimonials" aria-hidden="true"></canvas>
+    <div class="ribbons" aria-hidden="true">
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+    </div>
+
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="section-head">
+        <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+        <span class="eyebrow eyebrow--gold">Erfahrungen</span>
+        <h2 style="color:var(--white);">Was andere Frauen sagen</h2>
+        <div class="divider divider--gold" style="margin:1.2rem auto 2rem;"></div>
+      </div>
+
+      <div class="testimonials-grid">
+        <!-- ✅ Echtes Testimonial von ProvenExpert -->
+        <div class="testimonial-card">
+          <span class="testimonial-card__stars">★★★★★</span>
+          <blockquote>„Professionalität gepaart mit Herz. Immer positiv, empathisch und hilfsbereit — mit einem Tatendrang, der ansteckend ist."</blockquote>
+          <div class="testimonial-card__name">— Verifizierte Bewertung · ProvenExpert</div>
+        </div>
+
+        <!-- ✅ Echtes Testimonial – Viola M. -->
+        <div class="testimonial-card">
+          <span class="testimonial-card__stars">★★★★★</span>
+          <blockquote>„Martina ist unglaublich positiv, voller Energie und total engagiert — von schneller Auffassungsgabe und noch schneller in der Umsetzung. Sie ist mit ganzem Herzen dabei, Menschen wirklich zu helfen. Kompetent, umfassend — und sie ermöglicht echte Erfolge."</blockquote>
+          <div class="testimonial-card__name">— Viola M.</div>
+        </div>
+
+        <!-- ✅ Echtes Testimonial – M. -->
+        <div class="testimonial-card">
+          <span class="testimonial-card__stars">★★★★★</span>
+          <blockquote>„Ich fühle mich bei Martina bestens aufgehoben. Sie sieht den Menschen als Ganzes und hinterfragt sehr viel, um bestmöglich zu unterstützen. Bei dir spürt man einfach, dass du liebst, was du tust."</blockquote>
+          <div class="testimonial-card__name">— M.</div>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:1.8rem;font-size:0.72rem;color:rgba(255,255,255,0.2);">
+        20 verifizierte Bewertungen auf ProvenExpert · Ø 5,0 von 5 · SEHR GUT · 100% Empfehlungsrate
+      </p>
+
+      <!-- ProvenExpert ProSeal Widget -->
+      <div style="margin-top:2rem;display:flex;justify-content:center;">
+        <noscript><a href="https://www.provenexpert.com/martina-lau/?utm_source=seals&utm_campaign=embedded-proseal&utm_medium=profile&utm_content=1ba6ad6f-8c93-4775-a19a-f3ac88b6ca52" target="_blank" title="Kundenbewertungen &amp; Erfahrungen zu Martina Lau" class="pe-pro-seal-more-infos" rel="nofollow">Mehr Infos</a></noscript>
+        <script defer id="proSealWidgetSales">
+          window.loadProSealSales = function(){
+            window.provenExpert.proSeal({
+              widgetId: "1ba6ad6f-8c93-4775-a19a-f3ac88b6ca52",
+              language:"de-DE",
+              usePageLanguage: false,
+              bannerColor: "#097E92",
+              textColor: "#FFFFFF",
+              showBackPage: true,
+              showReviews: true,
+              hideDate: true,
+              hideName: false,
+              googleStars: false,
+              displayReviewerLastName: false,
+              embeddedSelector: "#proSealWidgetSales"
+            })
+          };
+          window.addEventListener("load", function () {
+            var script = document.createElement('script');
+            script.src = "https://s.provenexpert.net/seals/proseal-v2.js";
+            script.onload = loadProSealSales;
+            document.head.appendChild(script);
+          }, false);
+        </script>
+        <div id="proSealWidgetSales"></div>
+      </div>
+      <!-- ProvenExpert ProSeal Widget Ende -->
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       FAQ
+       ════════════════════════ -->
+  <section class="faq-section" style="padding:5.5rem 0;">
+    <div class="container--narrow">
+      <div class="section-head">
+        <span class="eyebrow">Fragen &amp; Antworten</span>
+        <h2>Das fragst du dich vielleicht</h2>
+        <div class="divider divider--gold" style="margin:1.2rem auto 2.5rem;"></div>
+      </div>
+
+      <div>
+        <div class="faq-item">
+          <h4>Ist der Test schmerzhaft?</h4>
+          <p>Kaum spürbar. Der Test erfordert nur einen kleinen Tropfen Blut aus der Fingerkuppe — vergleichbar mit einem Blutzuckertest. Die meisten beschreiben es als kurzes Kribbeln.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Wer wertet meinen Test aus?</h4>
+          <p>Die Auswertung erfolgt durch ein vollständig unabhängiges, akkreditiertes Labor. Martina hat keinen Einfluss auf die Laborwerte — du bekommst objektive, wissenschaftliche Ergebnisse.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Bin ich nach dem Gespräch zu irgendetwas verpflichtet?</h4>
+          <p>Nein. Das Auswertungsgespräch ist ein eigenständiger, vollständiger Service. Du erhältst deine Werte und individuelle Empfehlungen — wie du damit weitergehst, entscheidest allein du.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Für wen ist die Performanceanalyse geeignet?</h4>
+          <p>Für jede Frau, die aufhören möchte zu raten und anfangen möchte zu wissen. Besonders wertvoll, wenn du trotz bewusster Ernährung nicht die Energie hast, die du dir wünschst.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Wie lange dauert es bis zum Ergebnis?</h4>
+          <p>Nach Eingang deiner Probe im Labor dauert die Auswertung in der Regel 2–3 Wochen. Danach koordinierst du mit Martina einen persönlichen Termin für das Gespräch.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Ich lebe nicht in Deutschland — kann ich trotzdem mitmachen?</h4>
+          <p>Ja. Der Versand ist in viele europäische Länder möglich, und das Gespräch findet online statt. Melde dich einfach — Martina klärt die Details persönlich mit dir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════
+       FINAL CTA
+       ════════════════════════ -->
+  <section class="sales-cta">
+    <canvas id="particles-canvas-cta" aria-hidden="true"></canvas>
+    <div class="ribbons" aria-hidden="true">
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+      <div class="ribbon-glow"></div>
+    </div>
+
+    <div class="container--narrow">
+      <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+      <span class="eyebrow eyebrow--gold" style="display:block;text-align:center;margin-bottom:1rem;">Dein Körper hat die Antworten bereits — du brauchst nur die richtigen Fragen</span>
+
+      <h2>Jetzt weißt du, was möglich ist.<br/><em>Mach den nächsten Schritt.</em></h2>
+
+      <div class="divider divider--gold" style="margin:1.5rem auto 2rem;"></div>
+
+      <p>Nicht irgendwann. Jetzt — während das Wissen aus dem Webinar noch frisch ist.</p>
+
+      <a href="https://myablefy.com/s/martinalau/performance-analyse" class="btn btn--primary btn--lg">Jetzt für 99 € bestellen →</a>
+
+      <p style="margin-top:1.2rem;font-size:0.7rem;color:rgba(255,255,255,0.22);">
+        🔒 Unabhängiges Labor · Ohne Verpflichtung · Persönliche Begleitung durch Martina
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span>© 2026 Martina Lau · Alle Rechte vorbehalten</span>
+        <div class="footer__links">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
