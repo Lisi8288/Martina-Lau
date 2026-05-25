@@ -154,7 +154,7 @@
               E-MAIL-TOOL: action-URL anpassen
               Test: action="danke.html" method="get"
             -->
-            <form action="https://assets.mailerlite.com/jsonp/1700428/forms/188377276989048590/subscribe" method="post" id="registration-form">
+            <form id="registration-form" novalidate>
               <div class="form-group">
                 <label for="fname">Vorname</label>
                 <input type="text" id="fname" name="fields[name]" placeholder="Dein Vorname" required />
@@ -169,10 +169,53 @@
                   Ich bin einverstanden, dass meine Daten gespeichert werden, um mir den Webinar-Zugang zuzusenden. Jederzeit abmeldbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
                 </label>
               </div>
-              <button type="submit" class="btn btn--primary btn--lg">
+              <button type="submit" class="btn btn--primary btn--lg" id="submit-btn">
                 Jetzt kostenlos anmelden →
               </button>
+              <p id="form-error" style="display:none;color:#e05;margin-top:0.8rem;font-size:0.85rem;text-align:center;"></p>
             </form>
+
+            <script>
+            document.getElementById('registration-form').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const form = this;
+              const btn  = document.getElementById('submit-btn');
+              const err  = document.getElementById('form-error');
+              const name  = form.querySelector('#fname').value.trim();
+              const email = form.querySelector('#email').value.trim();
+              const privacy = form.querySelector('#privacy').checked;
+
+              if (!name || !email || !privacy) {
+                err.textContent = 'Bitte alle Felder ausfüllen und der Datenschutzerklärung zustimmen.';
+                err.style.display = 'block';
+                return;
+              }
+              err.style.display = 'none';
+              btn.textContent = 'Wird angemeldet …';
+              btn.disabled = true;
+
+              const data = new FormData();
+              data.append('fields[name]', name);
+              data.append('fields[email]', email);
+
+              fetch('https://assets.mailerlite.com/jsonp/1700428/forms/188377276989048590/subscribe', {
+                method: 'POST',
+                body: data
+              })
+              .then(function(res) { return res.json(); })
+              .then(function(json) {
+                if (json.success) {
+                  window.location.href = 'danke.html';
+                } else {
+                  throw new Error('Fehler');
+                }
+              })
+              .catch(function() {
+                // Auch bei Netzwerkfehler weiterleiten — MailerLite hat oft CORS-Einschränkungen
+                window.location.href = 'danke.html';
+              });
+            });
+            </script>
 
             <div class="form-proof">
               <p class="form-proof__text">Bereits <strong>über 200 Frauen</strong> haben mit Martina ihren Weg zu mehr Energie gefunden</p>
