@@ -154,7 +154,15 @@
               E-MAIL-TOOL: action-URL anpassen
               Test: action="danke.html" method="get"
             -->
-            <form id="registration-form" novalidate>
+            <!-- Versteckter iframe: nimmt die MailerLite-Antwort auf, ohne die Seite zu verlassen -->
+            <iframe name="ml-hidden-frame" style="display:none;" aria-hidden="true"></iframe>
+
+            <form
+              action="https://assets.mailerlite.com/jsonp/1700428/forms/188377276989048590/subscribe"
+              method="post"
+              target="ml-hidden-frame"
+              id="registration-form"
+              novalidate>
               <div class="form-group">
                 <label for="fname">Vorname</label>
                 <input type="text" id="fname" name="fields[name]" placeholder="Dein Vorname" required />
@@ -177,43 +185,26 @@
 
             <script>
             document.getElementById('registration-form').addEventListener('submit', function(e) {
-              e.preventDefault();
-              const form = this;
-              const btn  = document.getElementById('submit-btn');
-              const err  = document.getElementById('form-error');
-              const name  = form.querySelector('#fname').value.trim();
-              const email = form.querySelector('#email').value.trim();
-              const privacy = form.querySelector('#privacy').checked;
+              const name    = document.getElementById('fname').value.trim();
+              const email   = document.getElementById('email').value.trim();
+              const privacy = document.getElementById('privacy').checked;
+              const err     = document.getElementById('form-error');
+              const btn     = document.getElementById('submit-btn');
 
               if (!name || !email || !privacy) {
+                e.preventDefault();
                 err.textContent = 'Bitte alle Felder ausfüllen und der Datenschutzerklärung zustimmen.';
                 err.style.display = 'block';
                 return;
               }
+
+              // Formular geht in den versteckten iframe — wir leiten sofort weiter
               err.style.display = 'none';
               btn.textContent = 'Wird angemeldet …';
               btn.disabled = true;
-
-              const data = new FormData();
-              data.append('fields[name]', name);
-              data.append('fields[email]', email);
-
-              fetch('https://assets.mailerlite.com/jsonp/1700428/forms/188377276989048590/subscribe', {
-                method: 'POST',
-                body: data
-              })
-              .then(function(res) { return res.json(); })
-              .then(function(json) {
-                if (json.success) {
-                  window.location.href = 'danke.html';
-                } else {
-                  throw new Error('Fehler');
-                }
-              })
-              .catch(function() {
-                // Auch bei Netzwerkfehler weiterleiten — MailerLite hat oft CORS-Einschränkungen
+              setTimeout(function() {
                 window.location.href = 'danke.html';
-              });
+              }, 800);
             });
             </script>
 
