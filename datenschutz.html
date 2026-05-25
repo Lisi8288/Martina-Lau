@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Datenschutzerklärung | Martina Lau</title>
   <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Consent Mode v2 Default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied', 'ad_user_data': 'denied',
+      'ad_personalization': 'denied', 'analytics_storage': 'denied',
+      'functionality_storage': 'denied', 'personalization_storage': 'denied',
+      'security_storage': 'denied', 'wait_for_update': 1000
+    });
+  </script>
+  <script>function loadGTM(){}</script>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -91,6 +105,61 @@
       </div>
     </div>
   </footer>
+
+<!-- Cookie Banner — Consent Mode v2 -->
+<style>
+  #cb-overlay { position:fixed;inset:0;z-index:99998;background:rgba(0,30,37,.55);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity .35s ease; }
+  #cb-overlay.cb-visible { display:block; }
+  #cb-overlay.cb-show { opacity:1; }
+  #cb-banner { position:fixed;bottom:0;left:0;right:0;z-index:99999;background:linear-gradient(160deg,#FDFAF7 0%,#E6F7F9 100%);border-top:2px solid #C9A84C;box-shadow:0 -12px 48px rgba(0,78,88,.18);padding:1.6rem 2rem;display:none;transform:translateY(100%);transition:transform .45s cubic-bezier(0.22,1,0.36,1);font-family:'Jost',sans-serif; }
+  #cb-banner.cb-visible { display:block; }
+  #cb-banner.cb-show { transform:translateY(0); }
+  .cb-inner { max-width:1100px;margin:0 auto; }
+  .cb-top { display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1.2rem; }
+  .cb-text { flex:1;min-width:260px; }
+  .cb-text p { font-size:.88rem;line-height:1.7;color:#003740;margin:0; }
+  .cb-text a { color:#0098A6;text-decoration:underline;font-size:.82rem; }
+  .cb-title { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#004E58;margin-bottom:.5rem; }
+  .cb-toggles { display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.2rem; }
+  .cb-toggle-row { display:flex;align-items:center;gap:.9rem;background:rgba(0,152,166,.07);border-radius:10px;padding:.7rem 1rem; }
+  .cb-toggle-label { flex:1;font-size:.84rem;color:#003740; }
+  .cb-toggle-label strong { display:block;font-size:.86rem;font-weight:700;color:#004E58; }
+  .cb-toggle-label span { font-size:.78rem;color:#33B0BC; }
+  .cb-switch { position:relative;width:44px;height:24px;flex-shrink:0; }
+  .cb-switch input { opacity:0;width:0;height:0; }
+  .cb-slider { position:absolute;inset:0;background:#B0CDD0;border-radius:24px;cursor:pointer;transition:background .3s; }
+  .cb-slider::before { content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;left:3px;top:3px;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.2); }
+  .cb-switch input:checked + .cb-slider { background:#0098A6; }
+  .cb-switch input:checked + .cb-slider::before { transform:translateX(20px); }
+  .cb-switch input:disabled + .cb-slider { background:#C9A84C;cursor:default; }
+  .cb-switch input:disabled + .cb-slider::before { transform:translateX(20px); }
+  .cb-buttons { display:flex;gap:.8rem;flex-wrap:wrap; }
+  .cb-btn { flex:1;min-width:130px;padding:.75rem 1.4rem;border-radius:50px;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:all .3s ease; }
+  .cb-btn-accept { background:linear-gradient(135deg,#C9A84C,#9A7830);color:#fff; }
+  .cb-btn-save { background:linear-gradient(135deg,#004E58,#0098A6);color:#fff; }
+  .cb-btn-reject { background:transparent;color:#004E58;border:1.5px solid #004E58; }
+  @media(max-width:640px){ #cb-banner{padding:1.2rem 1rem;} .cb-buttons{flex-direction:column;} }
+</style>
+<div id="cb-overlay"></div>
+<div id="cb-banner" role="dialog" aria-modal="true" aria-label="Cookie-Einstellungen">
+  <div class="cb-inner">
+    <div class="cb-top"><div class="cb-text">
+      <p class="cb-title">🍪 Deine Privatsphäre</p>
+      <p>Diese Website verwendet Cookies. Technisch notwendige sind immer aktiv. Google Tag Manager und Google Ads kannst du einzeln aktivieren. Mehr Infos: <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+    </div></div>
+    <div class="cb-toggles">
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" checked disabled><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Technisch notwendig</strong><span>Immer aktiv</span></div></div>
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-gtm"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Google Tag Manager</strong><span>Standardmäßig deaktiviert</span></div></div>
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-marketing"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Marketing &amp; Werbung</strong><span>Google Ads — setzt GTM voraus</span></div></div>
+    </div>
+    <div class="cb-buttons">
+      <button class="cb-btn cb-btn-accept" id="cb-accept-all">Alle akzeptieren</button>
+      <button class="cb-btn cb-btn-save" id="cb-save">Auswahl speichern</button>
+      <button class="cb-btn cb-btn-reject" id="cb-reject-all">Alle ablehnen</button>
+    </div>
+  </div>
+</div>
+<script>'use strict';(function(){const K='martina_lau_consent',E=365,b=document.getElementById('cb-banner'),o=document.getElementById('cb-overlay'),g=document.getElementById('cb-gtm'),m=document.getElementById('cb-marketing');m.addEventListener('change',function(){if(this.checked)g.checked=true;});g.addEventListener('change',function(){if(!this.checked)m.checked=false;});function apply(gtm,mkt){loadGTM();gtag('consent','update',{'ad_storage':mkt?'granted':'denied','ad_user_data':mkt?'granted':'denied','ad_personalization':mkt?'granted':'denied','analytics_storage':mkt?'granted':'denied','functionality_storage':mkt?'granted':'denied','personalization_storage':mkt?'granted':'denied','security_storage':'denied'});(window.dataLayer=window.dataLayer||[]).push({'event':'consent_update','gtm_consent':gtm?'granted':'denied','marketing_consent':mkt?'granted':'denied'});}function save(gtm,mkt){localStorage.setItem(K,JSON.stringify({gtm:gtm,marketing:mkt,timestamp:new Date().toISOString(),version:'2.0',expires:Date.now()+E*86400000}));apply(gtm,mkt);close();}function open(){o.classList.add('cb-visible');b.classList.add('cb-visible');requestAnimationFrame(()=>{o.classList.add('cb-show');b.classList.add('cb-show');});document.body.style.overflow='hidden';}function close(){b.classList.remove('cb-show');o.classList.remove('cb-show');setTimeout(()=>{b.classList.remove('cb-visible');o.classList.remove('cb-visible');document.body.style.overflow='';},450);}function load(){try{const r=localStorage.getItem(K);if(!r)return null;const d=JSON.parse(r);if(d.expires&&Date.now()>d.expires){localStorage.removeItem(K);return null;}return d;}catch(e){return null;}}document.getElementById('cb-accept-all').addEventListener('click',()=>{g.checked=m.checked=true;save(true,true);});document.getElementById('cb-reject-all').addEventListener('click',()=>{g.checked=m.checked=false;save(false,false);});document.getElementById('cb-save').addEventListener('click',()=>{const gt=g.checked,mk=m.checked&&gt;save(gt,mk);});const s=load();if(s){apply(s.gtm||false,s.marketing||false);}else{setTimeout(open,600);}})();</script>
 
 </body>
 </html>

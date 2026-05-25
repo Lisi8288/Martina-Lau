@@ -6,6 +6,26 @@
   <title>Kostenloses Webinar – Mehr Energie im Alltag | Martina Lau</title>
   <meta name="description" content="Entdecke in diesem kostenlosen Webinar, wie du deinen Energiehaushalt nachhaltig optimierst – mit Wissen, das wirklich zu dir passt." />
   <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Consent Mode v2 Default — muss VOR GTM stehen -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage':              'denied',
+      'ad_user_data':            'denied',
+      'ad_personalization':      'denied',
+      'analytics_storage':       'denied',
+      'functionality_storage':   'denied',
+      'personalization_storage': 'denied',
+      'security_storage':        'denied',
+      'wait_for_update': 1000
+    });
+  </script>
+  <!-- Google Tag Manager — Platzhalter, GTM-ID eintragen sobald vorhanden -->
+  <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');</script> -->
+  <script>function loadGTM(){}</script>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body data-page="landing">
@@ -446,5 +466,279 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+<!-- ══════════════════════════════════════════════
+     DSGVO COOKIE BANNER — Consent Mode v2
+     Martina Lau · martinalau.org
+     ══════════════════════════════════════════════ -->
+<style>
+  #cb-overlay {
+    position: fixed; inset: 0; z-index: 99998;
+    background: rgba(0,30,37,.55);
+    backdrop-filter: blur(4px);
+    display: none; opacity: 0;
+    transition: opacity .35s ease;
+  }
+  #cb-overlay.cb-visible { display: block; }
+  #cb-overlay.cb-show { opacity: 1; }
+
+  #cb-banner {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 99999;
+    background: linear-gradient(160deg, #FDFAF7 0%, #E6F7F9 100%);
+    border-top: 2px solid #C9A84C;
+    box-shadow: 0 -12px 48px rgba(0,78,88,.18);
+    padding: 1.6rem 2rem;
+    display: none;
+    transform: translateY(100%);
+    transition: transform .45s cubic-bezier(0.22,1,0.36,1);
+    font-family: 'Jost', sans-serif;
+  }
+  #cb-banner.cb-visible { display: block; }
+  #cb-banner.cb-show { transform: translateY(0); }
+
+  .cb-inner { max-width: 1100px; margin: 0 auto; }
+
+  .cb-top {
+    display: flex; gap: 2rem; align-items: flex-start;
+    flex-wrap: wrap; margin-bottom: 1.2rem;
+  }
+  .cb-text { flex: 1; min-width: 260px; }
+  .cb-text p { font-size: .88rem; line-height: 1.7; color: #003740; margin: 0; }
+  .cb-text a { color: #0098A6; text-decoration: underline; font-size: .82rem; }
+
+  .cb-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600;
+    color: #004E58; margin-bottom: .5rem;
+  }
+
+  .cb-toggles { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.2rem; }
+  .cb-toggle-row {
+    display: flex; align-items: center; gap: .9rem;
+    background: rgba(0,152,166,.07); border-radius: 10px;
+    padding: .7rem 1rem;
+  }
+  .cb-toggle-label { flex: 1; font-size: .84rem; color: #003740; }
+  .cb-toggle-label strong { display: block; font-size: .86rem; font-weight: 700; color: #004E58; }
+  .cb-toggle-label span { font-size: .78rem; color: #33B0BC; }
+
+  .cb-switch { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .cb-switch input { opacity: 0; width: 0; height: 0; }
+  .cb-slider {
+    position: absolute; inset: 0; background: #B0CDD0;
+    border-radius: 24px; cursor: pointer;
+    transition: background .3s;
+  }
+  .cb-slider::before {
+    content: ''; position: absolute;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; left: 3px; top: 3px;
+    transition: transform .3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  }
+  .cb-switch input:checked + .cb-slider { background: #0098A6; }
+  .cb-switch input:checked + .cb-slider::before { transform: translateX(20px); }
+  .cb-switch input:disabled + .cb-slider { background: #C9A84C; cursor: default; }
+  .cb-switch input:disabled + .cb-slider::before { transform: translateX(20px); }
+
+  .cb-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .cb-buttons .cb-btn { flex: 1 1 0; }
+  .cb-btn {
+    flex: 1; min-width: 130px;
+    padding: .75rem 1.4rem;
+    border-radius: 50px; border: none; cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: .8rem; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    transition: all .3s ease;
+  }
+  .cb-btn-accept {
+    background: linear-gradient(135deg, #C9A84C, #9A7830);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(201,168,76,.4);
+  }
+  .cb-btn-accept:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(201,168,76,.5); }
+  .cb-btn-save {
+    background: linear-gradient(135deg, #004E58, #0098A6);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0,78,88,.35);
+  }
+  .cb-btn-save:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,78,88,.45); }
+  .cb-btn-reject {
+    background: transparent;
+    color: #004E58;
+    border: 1.5px solid #004E58;
+    flex: 1; min-width: 130px;
+  }
+  .cb-btn-reject:hover { background: rgba(0,78,88,.08); }
+
+  @media (max-width: 640px) {
+    #cb-banner { padding: 1.2rem 1rem; }
+    .cb-buttons { flex-direction: column; }
+    .cb-btn { min-width: unset; }
+  }
+</style>
+
+<div id="cb-overlay"></div>
+
+<div id="cb-banner" role="dialog" aria-modal="true" aria-label="Cookie-Einstellungen">
+  <div class="cb-inner">
+    <div class="cb-top">
+      <div class="cb-text">
+        <p class="cb-title">🍪 Deine Privatsphäre</p>
+        <p>
+          Diese Website verwendet Cookies und ähnliche Technologien.
+          Technisch notwendige Cookies sind immer aktiv.
+          Google Tag Manager und Google Ads Conversion Tracking kannst du einzeln aktivieren — standardmäßig sind beide deaktiviert.
+          Mehr Infos in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="cb-toggles">
+      <div class="cb-toggle-row">
+        <label class="cb-switch">
+          <input type="checkbox" checked disabled>
+          <span class="cb-slider"></span>
+        </label>
+        <div class="cb-toggle-label">
+          <strong>Technisch notwendig</strong>
+          <span>Grundfunktionen der Website — immer aktiv, keine Einwilligung erforderlich</span>
+        </div>
+      </div>
+      <div class="cb-toggle-row">
+        <label class="cb-switch">
+          <input type="checkbox" id="cb-gtm">
+          <span class="cb-slider"></span>
+        </label>
+        <div class="cb-toggle-label">
+          <strong>Google Tag Manager</strong>
+          <span>Lädt den Tag Manager zur Verwaltung von Website-Tags — standardmäßig deaktiviert</span>
+        </div>
+      </div>
+      <div class="cb-toggle-row">
+        <label class="cb-switch">
+          <input type="checkbox" id="cb-marketing">
+          <span class="cb-slider"></span>
+        </label>
+        <div class="cb-toggle-label">
+          <strong>Marketing &amp; Werbung</strong>
+          <span>Google Ads Conversion Tracking &amp; personalisierte Werbung — setzt Google Tag Manager voraus</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cb-buttons">
+      <button class="cb-btn cb-btn-accept" id="cb-accept-all">Alle akzeptieren</button>
+      <button class="cb-btn cb-btn-save"   id="cb-save">Auswahl speichern</button>
+      <button class="cb-btn cb-btn-reject" id="cb-reject-all">Alle ablehnen</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+(function() {
+  const STORAGE_KEY = 'martina_lau_consent';
+  const EXPIRY_DAYS = 365;
+
+  const banner  = document.getElementById('cb-banner');
+  const overlay = document.getElementById('cb-overlay');
+  const chkGtm  = document.getElementById('cb-gtm');
+  const chkMktg = document.getElementById('cb-marketing');
+
+  chkMktg.addEventListener('change', function() { if (this.checked) chkGtm.checked = true; });
+  chkGtm.addEventListener('change',  function() { if (!this.checked) chkMktg.checked = false; });
+
+  function applyConsent(gtm, marketing) {
+    loadGTM();
+    gtag('consent', 'update', {
+      'ad_storage':              marketing ? 'granted' : 'denied',
+      'ad_user_data':            marketing ? 'granted' : 'denied',
+      'ad_personalization':      marketing ? 'granted' : 'denied',
+      'analytics_storage':       marketing ? 'granted' : 'denied'
+    });
+    gtag('consent', 'update', {
+      'functionality_storage':   marketing ? 'granted' : 'denied',
+      'personalization_storage': marketing ? 'granted' : 'denied',
+      'security_storage':        'denied'
+    });
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event':             'consent_update',
+      'gtm_consent':       gtm       ? 'granted' : 'denied',
+      'marketing_consent': marketing ? 'granted' : 'denied'
+    });
+  }
+
+  function saveConsent(gtm, marketing) {
+    const data = {
+      gtm: gtm, marketing: marketing,
+      timestamp: new Date().toISOString(),
+      version: '2.0',
+      expires: Date.now() + EXPIRY_DAYS * 86400000
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    applyConsent(gtm, marketing);
+    closeBanner();
+  }
+
+  function openBanner() {
+    overlay.classList.add('cb-visible');
+    banner.classList.add('cb-visible');
+    requestAnimationFrame(() => {
+      overlay.classList.add('cb-show');
+      banner.classList.add('cb-show');
+    });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBanner() {
+    banner.classList.remove('cb-show');
+    overlay.classList.remove('cb-show');
+    setTimeout(() => {
+      banner.classList.remove('cb-visible');
+      overlay.classList.remove('cb-visible');
+      document.body.style.overflow = '';
+    }, 450);
+  }
+
+  function loadSaved() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (data.expires && Date.now() > data.expires) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+      return data;
+    } catch(e) { return null; }
+  }
+
+  document.getElementById('cb-accept-all').addEventListener('click', function() {
+    chkGtm.checked = true; chkMktg.checked = true;
+    saveConsent(true, true);
+  });
+  document.getElementById('cb-reject-all').addEventListener('click', function() {
+    chkGtm.checked = false; chkMktg.checked = false;
+    saveConsent(false, false);
+  });
+  document.getElementById('cb-save').addEventListener('click', function() {
+    const gtm = chkGtm.checked;
+    const marketing = chkMktg.checked && gtm;
+    saveConsent(gtm, marketing);
+  });
+
+  const saved = loadSaved();
+  if (saved) {
+    applyConsent(saved.gtm || false, saved.marketing || false);
+  } else {
+    setTimeout(openBanner, 600);
+  }
+})();
+</script>
+
 </body>
 </html>
