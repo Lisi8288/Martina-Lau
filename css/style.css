@@ -521,7 +521,10 @@ canvas[id^="particles-canvas"] {
   grid-template-columns: 1fr 420px;
   gap: 5rem;
   align-items: center;
+  min-width: 0;
 }
+
+.hero__inner > * { min-width: 0; }
 
 .hero h1 {
   font-size: clamp(2rem, 4vw, 3.1rem);
@@ -1339,7 +1342,32 @@ canvas[id^="particles-canvas"] {
   .container, .container--narrow, .container--wide {
     padding: 0 1.2rem;
     width: 100%;
+    max-width: 100%;
   }
+
+  /* Alle Grid-Kinder: min-width 0 damit sie nicht überlaufen */
+  .hero__inner > *,
+  .about__inner > *,
+  .steps-grid > *,
+  .learn__grid > * { min-width: 0; }
+
+  /* Text bricht um statt zu überlaufen */
+  p, h1, h2, h3, h4, li, blockquote {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Cookie-Banner auf Mobile: kein Überlauf */
+  #cb-banner {
+    padding: 1.2rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+  }
+  .cb-inner { width: 100%; }
+  .cb-text p { font-size: 0.82rem; }
+  .cb-toggle-label span { font-size: 0.74rem; }
 
   /* Gold-Badge: darf auf Mobile umbrechen */
   .gold-badge {
