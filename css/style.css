@@ -1409,13 +1409,14 @@ canvas[id^="particles-canvas"] {
     grid-template-columns: 1fr !important;
   }
 
-  /* Zahlen-Stats nebeneinander bleiben, aber kleiner */
+  /* Zahlen-Stats: Trennlinien auf Mobile ausblenden */
   .speaker-stats {
     gap: 1rem !important;
     flex-wrap: wrap;
     justify-content: center;
   }
   .speaker-stats > div { min-width: 120px; }
+  .speaker-stats > div[style*="width:1px"] { display: none !important; }
 
   /* Buttons volle Breite */
   .btn--lg {
