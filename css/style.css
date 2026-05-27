@@ -1416,7 +1416,7 @@ canvas[id^="particles-canvas"] {
     justify-content: center;
   }
   .speaker-stats > div { min-width: 120px; }
-  .speaker-stats > div[style*="width:1px"] { display: none !important; }
+  .speaker-sep { display: none !important; }
 
   /* Buttons volle Breite */
   .btn--lg {
