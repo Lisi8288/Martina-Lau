@@ -1394,9 +1394,19 @@ canvas[id^="particles-canvas"] {
     width: 100%;
   }
 
-  /* Countdown-Box */
-  .countdown { gap: 0.8rem; }
+  /* Countdown-Box: 2x2 auf Mobile */
+  .countdown {
+    gap: 0.8rem;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
+  .countdown--center { justify-items: center; }
   .countdown__num { font-size: 2.2rem; }
+
+  /* Datum-Kästchen zentrieren */
+  #upcoming-dates { text-align: center; }
+  #upcoming-dates li { justify-content: center; }
 
   /* For-Who Liste */
   .for-who__list { grid-template-columns: 1fr; }
