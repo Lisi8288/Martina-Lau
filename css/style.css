@@ -500,8 +500,8 @@ canvas[id^="particles-canvas"] {
 
 .hero__inner {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 5rem;
+  grid-template-columns: 1fr 440px;
+  gap: 9rem;
   align-items: center;
   min-width: 0;
 }
