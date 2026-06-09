@@ -208,8 +208,27 @@ function initWebinar() {
   const videoSection     = document.getElementById('video-section');
   const countdownEl      = document.getElementById('webinar-countdown');
   const nextDateEl       = document.getElementById('next-date-text');
-  const nextThursday     = getNextThursday();
   const now              = new Date();
+
+  // ── URL-Parameter für Tests: ?preview=live | ?preview=post | ?preview=countdown ──
+  const preview = new URLSearchParams(window.location.search).get('preview');
+  if (preview === 'live') {
+    if (countdownSection) countdownSection.style.display = 'none';
+    if (videoSection)     videoSection.style.display = 'block';
+    document.querySelectorAll('[id^="particles-canvas"]').forEach(c => initGoldenParticles(c.id));
+    initShimmer();
+    return;
+  }
+  if (preview === 'post') {
+    window.location.replace('sales.html');
+    return;
+  }
+
+  // ── TEST-Datum: heute um 10:00 Uhr (nur für Test am 09.06.2026 — danach entfernen!) ──
+  // const testDate = new Date(); testDate.setHours(10, 0, 0, 0);
+  // const nextThursday = testDate;
+
+  const nextThursday = getNextThursday();
 
   if (nextDateEl) nextDateEl.textContent = formatDate(nextThursday);
 
