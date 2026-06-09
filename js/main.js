@@ -2,13 +2,13 @@
    MARTINA LAU – FUNNEL SCRIPTS
    ============================================ */
 
-// ── Nächsten Donnerstag 19:00 CET berechnen ──
+// ── Nächsten Dienstag 20:00 CET berechnen ──
 function getNextThursday(referenceDate) {
   const d = referenceDate ? new Date(referenceDate) : new Date();
   const day = d.getDay();
-  const daysUntilThursday = (4 - day + 7) % 7 || 7;
-  d.setDate(d.getDate() + daysUntilThursday);
-  d.setHours(19, 0, 0, 0);
+  const daysUntilTuesday = (2 - day + 7) % 7 || 7;
+  d.setDate(d.getDate() + daysUntilTuesday);
+  d.setHours(20, 0, 0, 0);
   return d;
 }
 
@@ -28,7 +28,7 @@ function formatDate(date) {
     weekday: 'long',
     day: 'numeric',
     month: 'long'
-  }) + ' · 19:00 Uhr';
+  }) + ' · 20:00 Uhr';
 }
 
 function formatDateShort(date) {
