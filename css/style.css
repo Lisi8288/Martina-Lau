@@ -1389,10 +1389,10 @@ canvas[id^="particles-canvas"] {
   .hero .gold-badge { text-align: center; margin-left: auto; margin-right: auto; }
   .hero .eyebrow--gold { font-size: 0.72rem; white-space: nowrap; }
   /* Countdown-Balken auf Mobile: untereinander stapeln + zentrieren */
-  #countdown-bar { flex-direction: column; align-items: center; gap: 1.2rem; text-align: center; }
-  #countdown-bar > div:last-child { text-align: center; }
+  #countdown-bar { flex-direction: column; align-items: center; gap: 1.2rem; text-align: center; padding: 1.2rem 1rem; }
+  #countdown-bar > div:last-child { text-align: center; width: 100%; }
   #countdown-bar #upcoming-dates { text-align: center; }
-  #upcoming-dates li { white-space: nowrap; font-size: 1rem; }
+  #upcoming-dates li { white-space: nowrap; font-size: 0.88rem; }
 
   /* Upcoming dates: darf umbrechen */
   #upcoming-dates {
