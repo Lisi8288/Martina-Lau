@@ -24,11 +24,13 @@ function getUpcomingThursdays(count = 3) {
 }
 
 function formatDate(date) {
-  return date.toLocaleDateString('de-DE', {
+  const datePart = date.toLocaleDateString('de-DE', {
     weekday: 'long',
-    day: 'numeric',
-    month: 'long'
-  }) + ' · 20:00 Uhr';
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+  return datePart + '|20:00 Uhr';
 }
 
 function formatDateShort(date) {
@@ -71,7 +73,8 @@ function renderUpcomingDates(listEl, count = 3) {
   dates.forEach((d, i) => {
     const li = document.createElement('li');
     if (i === 0) li.classList.add('is-next');
-    li.textContent = formatDate(d);
+    const parts = formatDate(d).split('|');
+    li.innerHTML = parts[0] + '<br><span style="font-size:0.9em;opacity:0.85;">' + parts[1] + '</span>';
     listEl.appendChild(li);
   });
 }
