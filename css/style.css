@@ -496,7 +496,7 @@ canvas[id^="particles-canvas"] {
 }
 
 .hero > * { position: relative; z-index: 1; }
-.hero .container { position: relative; z-index: 1; }
+.hero .container { position: relative; z-index: 1; max-width: 1440px; padding: 0 4rem; }
 
 .hero__inner {
   display: grid;
