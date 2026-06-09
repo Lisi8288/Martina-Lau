@@ -508,6 +508,21 @@ canvas[id^="particles-canvas"] {
 
 .hero__inner > * { min-width: 0; }
 
+/* Badge zentriert im Hero */
+.hero .gold-badge {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1rem;
+  text-align: center;
+}
+
+/* Eyebrow einzeilig im Hero */
+.hero .eyebrow--gold {
+  white-space: nowrap;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
 .hero h1 {
   font-size: clamp(2rem, 4vw, 3.1rem);
   color: var(--white);
