@@ -226,7 +226,7 @@ function initWebinar() {
 
   // ── TEST-Datum: heute um 10:00 Uhr (nur für Test am 09.06.2026 — danach entfernen!) ──
   const webinarStart   = new Date(); webinarStart.setHours(10, 0, 0, 0);
-  const lastEnd        = new Date(); lastEnd.setHours(10, 50, 0, 0);
+  const lastEnd        = new Date(); lastEnd.setHours(12, 0, 0, 0);
   const postWebinarEnd = new Date(); postWebinarEnd.setHours(23, 59, 0, 0);
   const nextThursday   = webinarStart;
   const isLive         = now >= webinarStart && now <= lastEnd;
