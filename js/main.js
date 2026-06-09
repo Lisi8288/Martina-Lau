@@ -224,12 +224,12 @@ function initWebinar() {
     return;
   }
 
-  // ── TEST-Datum: heute um 10:00 Uhr (nur für Test am 09.06.2026 — danach entfernen!) ──
-  const webinarStart   = new Date(); webinarStart.setHours(10, 0, 0, 0);
-  const lastEnd        = new Date(); lastEnd.setHours(12, 0, 0, 0);
-  const postWebinarEnd = new Date(); postWebinarEnd.setHours(23, 59, 0, 0);
-  const nextThursday   = webinarStart;
-  const isLive         = now >= webinarStart && now <= lastEnd;
+  const nextThursday   = getNextThursday();
+  const lastTuesday    = new Date(nextThursday);
+  lastTuesday.setDate(lastTuesday.getDate() - 7);
+  const lastEnd        = new Date(lastTuesday.getTime() + 1 * 60 * 60 * 1000);  // Di 21:00
+  const postWebinarEnd = new Date(lastTuesday.getTime() + 7 * 60 * 60 * 1000);  // Mi 03:00
+  const isLive         = now >= lastTuesday && now <= lastEnd;
   const isPostWebinar  = now > lastEnd && now <= postWebinarEnd;
 
   const postSection = document.getElementById('post-webinar-section');
@@ -264,7 +264,7 @@ function initSales() {
   const nextTh     = getNextThursday();
   const lastTh     = new Date(nextTh);
   lastTh.setDate(lastTh.getDate() - 7);
-  const webinarEnd = new Date(lastTh.getTime() + 2 * 60 * 60 * 1000);    // Do 21:00
+  const webinarEnd = new Date(lastTh.getTime() + 1 * 60 * 60 * 1000);    // Di 21:00
   const codeExpiry = new Date(webinarEnd.getTime() + 5 * 24 * 60 * 60 * 1000); // +5 Tage
   const codeValid  = now >= webinarEnd && now <= codeExpiry;
 
