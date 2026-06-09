@@ -587,14 +587,14 @@ canvas[id^="particles-canvas"] {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 3px;
-  padding: 0.85rem 1rem;
-  min-width: 68px;
+  padding: 1.2rem 1.4rem;
+  min-width: 88px;
 }
 
 .countdown__num {
   display: block;
   font-family: var(--font-serif);
-  font-size: 1.9rem;
+  font-size: 2.6rem;
   font-weight: 600;
   line-height: 1;
   background: linear-gradient(135deg, var(--gold-light), var(--gold-bright));
