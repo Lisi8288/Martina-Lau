@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Persönliche Performanceanalyse | Martina Lau</title>
   <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Consent Mode v2 Default -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied', 'ad_user_data': 'denied',
+      'ad_personalization': 'denied', 'analytics_storage': 'denied',
+      'functionality_storage': 'denied', 'personalization_storage': 'denied',
+      'security_storage': 'denied', 'wait_for_update': 1000
+    });
+    // Gespeicherte Einwilligung SOFORT anwenden — vor GTM-Start
+    (function() {
+      try {
+        var raw = localStorage.getItem('martina_lau_consent');
+        if (!raw) return;
+        var d = JSON.parse(raw);
+        if (d.expires && Date.now() > d.expires) return;
+        var mkt = !!d.marketing;
+        gtag('consent', 'update', {
+          'ad_storage':              mkt ? 'granted' : 'denied',
+          'ad_user_data':            mkt ? 'granted' : 'denied',
+          'ad_personalization':      mkt ? 'granted' : 'denied',
+          'analytics_storage':       mkt ? 'granted' : 'denied',
+          'functionality_storage':   mkt ? 'granted' : 'denied',
+          'personalization_storage': mkt ? 'granted' : 'denied'
+        });
+      } catch (e) {}
+    })();
+  </script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
