@@ -790,11 +790,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       'ad_personalization':      marketing ? 'granted' : 'denied',
       'analytics_storage':       marketing ? 'granted' : 'denied'
     });
-    gtag('consent', 'update', {
-      'functionality_storage':   marketing ? 'granted' : 'denied',
-      'personalization_storage': marketing ? 'granted' : 'denied',
-      'security_storage':        'denied'
-    });
+    if (marketing) {
+      gtag('consent', 'update', {
+        'functionality_storage':   'granted',
+        'personalization_storage': 'granted'
+      });
+    }
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       'event':             'consent_update',
