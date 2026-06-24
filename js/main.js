@@ -196,7 +196,7 @@ function initLanding() {
   const countdownEl  = document.getElementById('countdown');
   const datesListEl  = document.getElementById('upcoming-dates');
   const badgeDateEl  = document.getElementById('badge-next-date');
-  const nextThursday = getNextThursday();
+  const nextThursday = getUpcomingThursdays(1)[0];
 
   if (countdownEl) initCountdown(nextThursday, countdownEl);
   if (datesListEl) renderUpcomingDates(datesListEl, 1);
