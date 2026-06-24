@@ -13,12 +13,17 @@ function getNextThursday(referenceDate) {
 }
 
 function getUpcomingThursdays(count = 3) {
-  const dates = [];
-  const start = new Date('2026-07-07T20:00:00');
-  for (let i = 0; i < count; i++) {
-    dates.push(new Date(start.getTime() + i * 7 * 24 * 60 * 60 * 1000));
+  const fixed = [
+    new Date('2026-07-07T20:00:00'),
+    new Date('2026-07-28T20:00:00'),
+  ];
+  // alle 2 Wochen ab 28.07.
+  while (fixed.length < count + 10) {
+    const prev = fixed[fixed.length - 1];
+    fixed.push(new Date(prev.getTime() + 14 * 24 * 60 * 60 * 1000));
   }
-  return dates;
+  const now = new Date();
+  return fixed.filter(d => d > now).slice(0, count);
 }
 
 function formatDate(date) {
