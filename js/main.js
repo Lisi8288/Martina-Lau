@@ -14,11 +14,9 @@ function getNextThursday(referenceDate) {
 
 function getUpcomingThursdays(count = 3) {
   const dates = [];
-  let ref = new Date();
+  const start = new Date('2026-07-07T20:00:00');
   for (let i = 0; i < count; i++) {
-    const d = getNextThursday(ref);
-    dates.push(d);
-    ref = new Date(d.getTime() + 1000 * 60);
+    dates.push(new Date(start.getTime() + i * 7 * 24 * 60 * 60 * 1000));
   }
   return dates;
 }
