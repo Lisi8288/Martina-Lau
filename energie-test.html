@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energie-Test – Deine persönliche Energie-Auswertung | Martina Lau</title>
+  <meta name="description" content="Immer müde, obwohl du eigentlich alles richtig machst? Mach den kostenlosen Energie-Test und erfahre in deiner persönlichen Auswertung, welcher von 5 Bereichen dich wirklich ausbremst." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Consent Mode v2 Default — muss VOR GTM stehen -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage':              'denied',
+      'ad_user_data':            'denied',
+      'ad_personalization':      'denied',
+      'analytics_storage':       'denied',
+      'functionality_storage':   'denied',
+      'personalization_storage': 'denied',
+      'security_storage':        'denied',
+      'wait_for_update': 1000
+    });
+    (function() {
+      try {
+        var raw = localStorage.getItem('martina_lau_consent');
+        if (!raw) return;
+        var d = JSON.parse(raw);
+        if (d.expires && Date.now() > d.expires) return;
+        var mkt = !!d.marketing;
+        gtag('consent', 'update', {
+          'ad_storage':              mkt ? 'granted' : 'denied',
+          'ad_user_data':            mkt ? 'granted' : 'denied',
+          'ad_personalization':      mkt ? 'granted' : 'denied',
+          'analytics_storage':       mkt ? 'granted' : 'denied',
+          'functionality_storage':   mkt ? 'granted' : 'denied',
+          'personalization_storage': mkt ? 'granted' : 'denied'
+        });
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PBWMW7QB');</script>
+  <!-- End Google Tag Manager -->
+  <script>function loadGTM(){}</script>
+
+  <!-- MailerLite Universal -->
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '1700428');
+  </script>
+  <!-- End MailerLite Universal -->
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       ENERGIE-TEST — Quiz-Funnel (Seiten-Zusatz)
+       ══════════════════════════════════════════ */
+    .qz-screen { display: none; }
+    .qz-screen.is-active { display: block; }
+
+    /* Logo2 hat den Schriftzug "Tina Lau" eingebaut (statt nur dem Icon) — etwas größer als der Standard-Icon-Logo, damit der Text lesbar bleibt */
+    .nav__logo-icon img { height: 76px; }
+
+    .gold-em {
+      font-style: italic; font-weight: 300;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-bright), var(--gold-light));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* Intro — jetzt eine mehrteilige Landingpage (Hero, Wiedererkennung, Bereiche,
+       Martina/Vertrauen, Abschluss-CTA) statt einem einzelnen Hero-Screen. Alle
+       Start-Buttons tragen die Klasse .start-quiz-btn und starten denselben Quiz-Flow. */
+    .qz-hero { padding: 4.5rem 0 4rem; }
+    .qz-hero .container { position: relative; z-index: 1; }
+    .qz-hero-grid { display: block; max-width: 640px; text-align: left; padding-right: 2rem; }
+    .qz-hero-text .eyebrow--gold {
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      letter-spacing: 0.1em;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+      filter: drop-shadow(0 0 10px rgba(212,175,110,0.65)) drop-shadow(0 0 22px rgba(212,175,110,0.4));
+    }
+    .qz-hero-text h1 { font-size: clamp(1.7rem, 2.5vw, 2.25rem); line-height: 1.28; margin-bottom: 1.1rem; white-space: normal; }
+    .qz-intro-lead { font-size: clamp(1.4rem, 2.7vw, 1.7rem); line-height: 1.55; color: rgba(255,255,255,0.9); }
+    .qz-areas-line { font-size: clamp(1.1rem, 1.8vw, 1.25rem); color: var(--gold-light); letter-spacing: 0.03em; margin: 0.8rem 0 1.8rem; }
+
+    .qz-benefits { list-style: none; margin: 0 0 1.8rem; text-align: left; }
+    .qz-benefits li {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.5;
+      margin-bottom: 0.9rem;
+    }
+    .qz-benefits li:last-child { margin-bottom: 0; }
+    .qz-benefits li .check { color: var(--gold-light); font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* Leuchtender Gold-Rahmen um alle Quiz-Start-Buttons, angelehnt an den
+       Countdown-Kasten auf index.html (#countdown-bar) */
+    .start-quiz-btn {
+      border: 2px solid rgba(255,210,100,0.9) !important;
+      box-shadow: 0 4px 20px rgba(0,152,166,0.3), 0 0 22px rgba(255,210,80,0.55), 0 0 46px rgba(255,190,60,0.28) !important;
+    }
+    .start-quiz-btn:hover {
+      box-shadow: 0 10px 32px rgba(0,152,166,0.45), 0 0 30px rgba(255,210,80,0.75), 0 0 60px rgba(255,190,60,0.4) !important;
+    }
+
+    .qz-hero-text #start-quiz-btn { font-size: 0.95rem; padding: 1.35rem 3.2rem; }
+    .qz-microcopy { margin-top: 1.2rem; font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+    /* Foto bricht bewusst aus dem .container aus und läuft rechts randlos bis zur
+       Viewport-Kante — deshalb jetzt direktes Kind von .qz-hero (position:relative),
+       nicht mehr Teil von .qz-hero-grid. */
+    .qz-hero-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 44vw; min-width: 440px; text-align: center; z-index: 1; }
+    .qz-hero-photo img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: 60% 22%;
+      mask-image: radial-gradient(ellipse 85% 95% at 100% 45%, black 55%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 95% at 100% 45%, black 55%, transparent 100%);
+    }
+    .qz-hero-photo .trust-strip {
+      position: absolute; left: 50%; bottom: 58px; transform: translateX(-50%);
+      max-width: 380px !important; margin: 0 !important; justify-content: center; z-index: 2;
+    }
+    .qz-hero-photo .trust-strip__text { font-size: 0.85rem; }
+
+    #screen-intro .qz-area-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6rem; margin-top: 2.5rem; max-width: 920px; margin-left: auto; margin-right: auto; }
+    #screen-intro .qz-area-grid .learn-card { flex: 0 1 260px; padding: 2.6rem 2rem; text-align: center; }
+    #screen-intro .qz-area-grid .learn-card h4 { font-size: 1.3rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--teal-dark); margin: 0; }
+    #screen-intro .qz-areas-intro { font-size: clamp(1.2rem, 2vw, 1.5rem) !important; max-width: 680px !important; }
+
+    .qz-recognition h2 { font-size: clamp(1.9rem, 3.2vw, 2.5rem); margin-bottom: 1.8rem; }
+    .qz-recognition h3 { font-size: clamp(1.45rem, 2.4vw, 1.85rem); margin-top: 0.6rem !important; }
+    .qz-recognition p { font-size: clamp(1.15rem, 1.9vw, 1.4rem); line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .qz-hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .qz-hero-text { text-align: center; }
+      .qz-benefits { text-align: left; max-width: 420px; margin-left: auto; margin-right: auto; }
+    }
+    @media (max-width: 600px) {
+      .qz-hero-text h1 { font-size: clamp(1.8rem, 7vw, 2.3rem); }
+    }
+
+    /* Quiz */
+    .qz-progress { width: 100%; height: 6px; background: rgba(0,152,166,0.12); border-radius: 6px; overflow: hidden; margin-bottom: 0.7rem; }
+    .qz-progress__bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal-dark), var(--teal), var(--teal-light)); border-radius: 6px; transition: width 0.4s ease; }
+    .qz-dimtag { text-align: center; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; margin-bottom: 0.4rem; }
+    .qz-progress__label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm-gray); text-align: center; margin-bottom: 2rem; }
+
+    .qz-question__title { font-size: clamp(1.2rem, 3.4vw, 1.55rem); text-align: center; margin-bottom: 2rem; line-height: 1.35; }
+
+    .qz-options { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+    .qz-option {
+      display: block; width: 100%; text-align: left;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 8px; padding: 1.15rem 1.4rem;
+      font-family: var(--font-sans); font-size: 1rem; color: var(--charcoal);
+      cursor: pointer; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.1s;
+    }
+    .qz-option:hover { border-color: rgba(0,152,166,0.4); background: var(--teal-pale); }
+    .qz-option:active { transform: scale(0.99); }
+    .qz-option.is-selected { border-color: var(--teal); background: var(--teal-pale); box-shadow: 0 0 0 2px rgba(0,152,166,0.15); }
+
+    .qz-back {
+      display: inline-block; margin-top: 1.8rem; background: none; border: none;
+      color: var(--warm-gray); font-size: 0.8rem; cursor: pointer; text-decoration: underline;
+      font-family: var(--font-sans);
+    }
+
+    /* E-Mail-Gate — nutzt bestehende .form-box Optik */
+    #screen-email input { font-size: 16px; }
+
+    /* Ergebnis */
+    .qz-result-card {
+      background: var(--white); border: 1px solid var(--gold-border); border-radius: 10px;
+      padding: 2.2rem 1.9rem; margin-top: 1.5rem;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.06), 0 1px 0 rgba(201,168,76,0.08);
+    }
+    .qz-result-card p { font-size: 0.95rem; color: var(--charcoal); line-height: 1.85; margin-bottom: 0.9rem; }
+    .qz-result-card p:last-child { margin-bottom: 0; }
+    .qz-result-card em { color: var(--gold-deep); font-style: italic; }
+
+    .qz-check-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.8rem 1.9rem; margin-top: 1.2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .qz-check-card h4 {
+      font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--teal-dark); margin-bottom: 1rem;
+    }
+    .qz-check-row { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.86rem; color: var(--charcoal); line-height: 1.6; margin-bottom: 0.7rem; }
+    .qz-check-row:last-child { margin-bottom: 0; }
+    .qz-dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 5px; flex: 0 0 9px; }
+    .qz-dot--0 { background: #4CAF82; }
+    .qz-dot--1 { background: var(--gold); }
+    .qz-dot--2 { background: #D9765C; }
+
+    .qz-tip {
+      background: var(--gold-subtle); border-left: 2px solid var(--gold);
+      border-radius: 0 8px 8px 0; padding: 1rem 1.2rem; margin-top: 1.2rem;
+      font-size: 0.85rem; color: var(--charcoal); line-height: 1.7;
+    }
+    .qz-tip strong { color: var(--gold-deep); }
+    .qz-tip em { font-style: italic; color: var(--gold-deep); }
+
+    .qz-safety {
+      background: var(--teal-pale); border: 1px solid rgba(0,152,166,0.15);
+      border-radius: 8px; padding: 1.2rem 1.4rem; margin-top: 1.5rem;
+    }
+    .qz-safety p { font-size: 0.78rem; color: var(--warm-gray); line-height: 1.75; }
+
+    .qz-referent { margin-top: 2.2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .qz-referent__who { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.1rem; }
+    .qz-referent__who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid rgba(212,175,110,0.45); flex-shrink: 0; }
+    .qz-referent__who strong { display: block; font-size: 0.95rem; color: var(--dark); }
+    .qz-referent__who span { font-size: 0.76rem; color: var(--warm-gray); }
+    .qz-referent p { font-size: 0.88rem; color: var(--charcoal); line-height: 1.8; margin-bottom: 0.9rem; }
+    .qz-referent__awards { font-size: 0.74rem; color: var(--warm-gray); margin-bottom: 1.1rem; }
+    .qz-quote { border-left: 2px solid var(--gold); padding-left: 1.2rem; margin: 0; }
+    .qz-quote p { font-family: var(--font-serif); font-style: italic; font-size: 0.92rem; color: var(--charcoal); line-height: 1.75; margin-bottom: 0.4rem !important; }
+    .qz-quote span { display: block; font-size: 0.7rem; color: var(--warm-gray); }
+
+    .qz-webinar-cta {
+      background: var(--gradient-dark); border-radius: 10px;
+      padding: 2.8rem 2rem; text-align: center; margin-top: 2.2rem;
+      color: #fff; position: relative; overflow: hidden;
+      border: 1px solid rgba(255,210,100,0.5);
+      box-shadow: 0 0 40px rgba(255,190,60,0.18), 0 20px 60px rgba(0,0,0,0.35);
+    }
+    #qz-webinar-btn {
+      border: 2px solid rgba(255,210,100,0.9) !important;
+      box-shadow: 0 4px 20px rgba(0,152,166,0.3), 0 0 22px rgba(255,210,80,0.55), 0 0 46px rgba(255,190,60,0.28) !important;
+    }
+    #qz-webinar-btn:hover {
+      box-shadow: 0 10px 32px rgba(0,152,166,0.45), 0 0 30px rgba(255,210,80,0.75), 0 0 60px rgba(255,190,60,0.4) !important;
+    }
+    .qz-webinar-cta h3 { color: #fff; font-size: clamp(1.2rem, 3vw, 1.5rem); margin: 0.8rem 0 0.5rem; }
+    .qz-webinar-cta p { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 1.6rem; }
+    #qz-webinar-date { color: var(--gold-light); font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 1.6rem; display: block; }
+
+    @media (max-width: 600px) {
+      .qz-option { padding: 1.05rem 1.2rem; }
+      .qz-webinar-cta { padding: 2.2rem 1.4rem; }
+      .qz-result-card, .qz-check-card { padding: 1.6rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBWMW7QB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+  <!-- NAV — bewusst ohne zweites CTA, die einzige Aktion ist der Test -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <div class="nav__logo-icon">
+            <img src="Bilder/Logo2.png" alt="Tina Lau Logo" />
+          </div>
+          <div class="nav__logo-name">
+            Martina Lau
+            <small>Gesundheit &amp; Vitalität</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ════════════════════════
+         SCREEN 1 — INTRO (mehrteilige Landingpage)
+         ════════════════════════ -->
+    <div class="qz-screen is-active" id="screen-intro">
+
+      <!-- 1. HERO -->
+      <section class="webinar-header qz-hero">
+        <canvas id="particles-canvas-intro" aria-hidden="true"></canvas>
+        <div class="ribbons" aria-hidden="true">
+          <div class="ribbon"></div>
+          <div class="ribbon"></div>
+          <div class="ribbon"></div>
+          <div class="ribbon-glow"></div>
+          <div class="ribbon-glow"></div>
+        </div>
+
+        <div class="container">
+          <div class="qz-hero-grid">
+            <div class="qz-hero-text">
+              <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+              <span class="eyebrow eyebrow--gold">Kostenloser Selbsttest bei ständiger Müdigkeit</span>
+
+              <h1>Ständig müde — und du fragst dich,<br/><em class="gold-em">woran es liegen könnte</em>?</h1>
+
+              <p class="qz-intro-lead">
+                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> — und erhalte direkt im Anschluss deine persönliche Auswertung.
+              </p>
+              <p class="qz-areas-line">Schlaf · Blutzucker · Fette · Stress · Verdauung</p>
+
+              <ul class="qz-benefits">
+                <li><span class="check">✓</span> 20 kurze Fragen – ca. 2–3 Minuten</li>
+                <li><span class="check">✓</span> Dein persönlicher Energie-Typ</li>
+                <li><span class="check">✓</span> Persönliche Auswertung direkt im Anschluss</li>
+              </ul>
+
+              <button type="button" class="btn btn--primary btn--lg start-quiz-btn" id="start-quiz-btn">Meinen Energie-Typ herausfinden →</button>
+
+              <p class="qz-microcopy">Kostenlos · unverbindlich · Ergebnis direkt danach</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="qz-hero-photo">
+          <img src="Bilder/0106__2026-05-23_RB__0393.jpg.jpeg" alt="Martina Lau" />
+          <div class="trust-strip">
+            <div class="trust-strip__item">
+              <span class="trust-strip__stars">★★★★★ 5,0 / 5</span>
+              <span class="trust-strip__sep">·</span>
+              <span class="trust-strip__text">34 verifizierte Bewertungen</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. WIEDERERKENNUNG -->
+      <section style="background:var(--cream-teal);padding:5.5rem 0;">
+        <div class="container qz-recognition" style="text-align:center;">
+          <h2>Du schläfst genug – und bist trotzdem müde?</h2>
+
+          <p>Vielleicht wachst du morgens schon erschöpft auf. Am Nachmittag kommt das nächste Tief. Die Konzentration lässt nach oder dir fehlt für ganz normale Dinge einfach die Energie.</p>
+
+          <p>Du versuchst früher ins Bett zu gehen, achtest auf deine Ernährung oder greifst zum nächsten Kaffee – <strong>aber so richtig verändert sich nichts.</strong></p>
+
+          <p style="margin-top:2.2rem;">Und irgendwann fragst du dich:</p>
+
+          <h3 style="margin-top:0.3rem;">Warum bin ich eigentlich ständig so müde?</h3>
+
+          <p>Müdigkeit ist nicht gleich Müdigkeit. Unterschiedliche Faktoren können beeinflussen, wie energiegeladen du dich im Alltag fühlst.</p>
+
+          <p style="font-weight:600;color:var(--teal-dark);margin-top:1.2rem;">Genau hier setzt der Energie-Selbsttest an.</p>
+
+          <button type="button" class="btn btn--primary btn--lg start-quiz-btn" style="margin-top:1.5rem;">Jetzt Energie-Test starten →</button>
+        </div>
+      </section>
+
+      <!-- 3. WAS WIRD IM TEST ANGESCHAUT -->
+      <section class="learn">
+        <div class="container">
+          <div class="section-head">
+            <span class="gold-star" style="opacity:0.4;">✦ &nbsp; ✦ &nbsp; ✦</span>
+            <h2>5 Bereiche. 20 Fragen. Deine persönliche Auswertung.</h2>
+            <div class="divider divider--gold" style="margin:1.2rem auto 1.5rem;"></div>
+            <p class="qz-areas-intro">Der Energie-Selbsttest betrachtet fünf Bereiche, die mit deinem Energielevel zusammenhängen können:</p>
+          </div>
+
+          <div class="qz-area-grid">
+            <div class="learn-card"><h4>Schlaf</h4></div>
+            <div class="learn-card"><h4>Blutzucker</h4></div>
+            <div class="learn-card"><h4>Fette</h4></div>
+            <div class="learn-card"><h4>Stress</h4></div>
+            <div class="learn-card"><h4>Verdauung</h4></div>
+          </div>
+
+          <p style="text-align:center;max-width:640px;margin:2.5rem auto 0;">
+            Anhand deiner Antworten erfährst du, <strong>welcher Energie-Typ du bist</strong> und welche Bereiche mit deiner Müdigkeit zusammenhängen könnten. So bekommst du eine erste Orientierung, was möglicherweise hinter deiner Müdigkeit steckt.
+          </p>
+
+          <div style="text-align:center;margin-top:2rem;">
+            <button type="button" class="btn btn--primary btn--lg start-quiz-btn">Meinen Energie-Typ herausfinden →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. MARTINA / VERTRAUEN -->
+      <section class="about">
+        <div class="container">
+          <div class="about__inner">
+            <div class="about__photo">
+              <img src="Bilder/IMG_7118.JPG" alt="Martina Lau" />
+            </div>
+            <div>
+              <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+              <span class="eyebrow eyebrow--gold">Warum dieser Test entstanden ist</span>
+              <h2>Martina Lau<br/>M.A. Gesundheitsmanagement &amp; Prävention</h2>
+              <div class="divider divider--gold-left"></div>
+
+              <p>Martina beschäftigt sich seit vielen Jahren intensiv mit Gesundheit und den unterschiedlichen Faktoren, die unser Wohlbefinden und unsere Energie beeinflussen.</p>
+              <p>Dabei zeigt sich immer wieder: <strong>Müdigkeit ist nicht gleich Müdigkeit — und es gibt nicht den einen Ansatz, der zu jedem passt.</strong></p>
+              <p>Genau daraus ist der Energie-Selbsttest entstanden. Er soll dir eine einfache Möglichkeit geben, deine eigene Situation aus verschiedenen Blickwinkeln zu betrachten und eine erste Orientierung zu bekommen, <strong>wo es sich für dich lohnen könnte, genauer hinzuschauen.</strong></p>
+
+              <div class="quote-block quote-block--gold">
+                <p>★★★★★ 5,0 / 5 bei 34 verifizierten Bewertungen</p>
+              </div>
+
+              <button type="button" class="btn btn--primary btn--lg start-quiz-btn" style="margin-top:1.8rem;">Kostenlosen Energie-Test starten →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ABSCHLUSS-CTA -->
+      <section class="cta-section">
+        <div class="ribbons" aria-hidden="true">
+          <div class="ribbon"></div>
+          <div class="ribbon"></div>
+          <div class="ribbon"></div>
+          <div class="ribbon-glow"></div>
+          <div class="ribbon-glow"></div>
+        </div>
+        <div class="container--narrow">
+          <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+          <h2>Bereit herauszufinden, welcher <em>Energie-Typ</em> du bist?</h2>
+          <div class="divider divider--gold" style="margin:1.5rem auto 2rem;"></div>
+          <p>20 kurze Fragen. Wenige Minuten. Deine persönliche Auswertung direkt im Anschluss.</p>
+          <button type="button" class="btn btn--primary btn--lg start-quiz-btn">Jetzt kostenlosen Energie-Test starten →</button>
+          <p class="qz-microcopy" style="margin-top:2.2rem;">Kostenlos · unverbindlich · ca. 2–3 Minuten</p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ════════════════════════
+         SCREEN 2 — QUIZ
+         ════════════════════════ -->
+    <section class="qz-screen" id="screen-quiz" style="background:var(--cream-teal);padding:4.5rem 0;">
+      <div class="container--narrow">
+        <div class="qz-progress"><div class="qz-progress__bar" id="qz-progress-bar"></div></div>
+        <p class="qz-dimtag" id="qz-dimtag"></p>
+        <p class="qz-progress__label" id="qz-progress-label">Frage 1 von 20</p>
+
+        <h2 class="qz-question__title" id="qz-question-title"></h2>
+        <ul class="qz-options" id="qz-options-list"></ul>
+
+        <button type="button" class="qz-back" id="qz-back-btn" style="display:none;">← Zurück</button>
+      </div>
+    </section>
+
+    <!-- ════════════════════════
+         SCREEN 3 — E-MAIL-GATE
+         ════════════════════════ -->
+    <section class="qz-screen" id="screen-email" style="padding:4.5rem 0;">
+      <div class="container--narrow">
+        <div class="form-box">
+          <p class="form-box__title">Wohin dürfen wir deine Auswertung schicken?</p>
+          <p class="form-box__sub">Deinen persönlichen Energie-Bereich-Check plus den Energie-Guide mit den Faktoren hinter deiner Müdigkeit.</p>
+
+          <div class="form-proof" style="margin-bottom:1.6rem;">
+            <span style="color:var(--gold);letter-spacing:0.1em;font-size:0.85rem;flex-shrink:0;">★★★★★</span>
+            <p class="form-proof__text"><strong>5,0 · Martina Lau</strong> · 34 verifizierte Bewertungen auf ProvenExpert</p>
+          </div>
+
+          <!-- Versteckter iframe: nimmt die MailerLite-Antwort auf, ohne die Seite zu verlassen -->
+          <iframe name="ml-hidden-frame-quiz" style="display:none;" aria-hidden="true"></iframe>
+
+          <!--
+            MAIL-TOOL: MailerLite (Konto 1700428), Formular "Energie-Test Leads" (Gruppe
+            "Energie Test Leads"). Custom Fields "typ", "phase", "ziel" müssen in MailerLite
+            unter Einstellungen > Felder als Text angelegt sein, damit die fields[...] unten
+            gespeichert werden. Mögliche Werte für "typ" (8 Typen): schlaf / zucker / fette /
+            stress / verdauung / zucker_verdauung / stress_zucker / none. Details zur
+            Automation siehe Anleitung-MailerLite-Ergebnis-Mail.md im selben Ordner.
+          -->
+          <form
+            action="https://assets.mailerlite.com/jsonp/1700428/forms/19487920237486157/subscribe"
+            method="post"
+            target="ml-hidden-frame-quiz"
+            id="quiz-lead-form"
+            novalidate>
+            <div class="form-group">
+              <label for="qz-fname">Vorname</label>
+              <input type="text" id="qz-fname" name="fields[name]" placeholder="Dein Vorname" required />
+            </div>
+            <div class="form-group">
+              <label for="qz-email">E-Mail-Adresse</label>
+              <input type="email" id="qz-email" name="fields[email]" placeholder="deine@email.de" required />
+            </div>
+            <input type="hidden" name="fields[typ]" id="qz-typ-field" value="" />
+            <input type="hidden" name="fields[phase]" id="qz-phase-field" value="" />
+            <input type="hidden" name="fields[ziel]" id="qz-goal-field" value="" />
+            <div class="form-checkbox">
+              <input type="checkbox" id="qz-privacy" name="privacy" required />
+              <label for="qz-privacy">
+                Ich bin einverstanden, dass meine Daten gespeichert werden, um mir meine Auswertung, den Guide und Infos zum Webinar zuzusenden. Jederzeit abmeldbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
+              </label>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg" id="qz-submit-btn">Meine Auswertung zeigen →</button>
+            <p id="qz-form-error" style="display:none;color:#e05;margin-top:0.8rem;font-size:0.85rem;text-align:center;"></p>
+          </form>
+
+          <p style="text-align:center;font-size:0.7rem;color:#aaa;margin-top:0.8rem;line-height:1.6;">
+            🔒 Kein Spam · Jederzeit abmeldbar · 100% kostenlos
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════
+         SCREEN 4 — ERGEBNIS
+         ════════════════════════ -->
+    <section class="qz-screen" id="screen-result" style="background:var(--cream-warm);padding:4.5rem 0;">
+      <div class="container--narrow">
+        <div class="section-head">
+          <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+          <span class="eyebrow">Deine Auswertung</span>
+          <h2 id="qz-result-title"></h2>
+        </div>
+
+        <div class="qz-result-card" id="qz-result-text"></div>
+
+        <div class="qz-check-card">
+          <h4>Dein Bereich-Check</h4>
+          <div id="qz-check-rows"></div>
+        </div>
+
+        <div class="qz-tip" id="qz-tip"></div>
+
+        <div class="qz-safety">
+          <p>Anhaltende Erschöpfung kann auch an Eisen, Schilddrüse oder Schlaf liegen — lass das ärztlich abklären. Dieser Test ist keine Diagnose, sondern zeigt dir, welche Ernährungs- und Zellfaktoren du überprüfen lassen kannst.</p>
+        </div>
+
+        <div class="qz-referent">
+          <span class="eyebrow">Deine Referentin</span>
+          <div class="qz-referent__who">
+            <img src="Bilder/IMG_7122.JPG" alt="Martina Lau" />
+            <div><strong>Martina Lau</strong><span>Gesundheit &amp; Vitalität · M.A. Gesundheitsmanagement</span></div>
+          </div>
+          <p>Nach <strong>8 Jahren im Hormonzentrum</strong> wurde ich selbst Mutter — und müde. Diese Jahre haben mich gelehrt, wie wenig wir oft über unseren eigenen Körper wissen — und wie viel möglich wird, wenn wir anfangen zu <em>verstehen</em> statt nur zu glauben.</p>
+          <div class="qz-referent__awards">★ European Speaker Award 2026 · Platz 4 &nbsp;·&nbsp; ProvenExpert 5,0 „SEHR GUT" · 34 Bewertungen</div>
+          <div class="qz-quote">
+            <p>„Ich fühle mich bei Martina bestens aufgehoben. Sie sieht den Menschen als Ganzes und hinterfragt sehr viel, um bestmöglich zu unterstützen."</p>
+            <span>— Verifizierte Bewertung · ProvenExpert</span>
+          </div>
+        </div>
+
+        <div class="qz-webinar-cta">
+          <span class="gold-badge" style="margin:0 auto;width:fit-content;">✦ Webinar-Aufzeichnung</span>
+          <h3>Verstehe, was hinter deiner Auswertung steckt</h3>
+          <span id="qz-webinar-date">ca. 30 Minuten</span>
+          <p id="qz-webinar-bridge" style="text-align:left;"></p>
+          <a href="energie-test-webinar.html" class="btn btn--primary btn--lg" id="qz-webinar-btn">Jetzt Aufzeichnung ansehen →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span>© 2026 Martina Lau · Alle Rechte vorbehalten</span>
+        <div class="footer__links">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ── Config-Konstanten ──
+    // Bewusst nur EIN CTA im Ergebnis-Screen (Webinar). Die Direktbuchung der
+    // Performanceanalyse (mit Rabatt + Kochbuch-Ausschnitt) läuft stattdessen
+    // über die Mail-Sequenz nach dem Quiz, nicht als zweite Wahl direkt hier.
+    var CONFIG = {
+      WEBINAR_URL: 'energie-test-webinar.html'
+    };
+
+    document.getElementById('qz-webinar-btn').href = CONFIG.WEBINAR_URL;
+
+    // ── Quiz-Daten: 20 Fragen über 5 Bereiche + 2 Kontextfragen ──
+    // Frage-Objekt: {dim (Anzeige-Label), q, o:[[Label, {bereich:Punkte}], ...]}.
+    // Kontextfragen (nicht gewertet, nur gespeichert): {dim, q, key, o:[[Label, {}, Wert], ...]}.
+    var QUESTIONS = [
+      { dim: 'Schlaf', q: 'Wann trifft dich die Müdigkeit am stärksten?',
+        o: [['morgens, trotz Schlaf', { schlaf: 2 }], ['klassisches Nachmittagstief', { zucker: 1 }],
+            ['kurz nach dem Essen', { zucker: 2 }], ['den ganzen Tag durch', { fette: 1 }]] },
+      { dim: 'Schlaf', q: 'Schläfst du im komplett dunklen Raum, ohne Handy in der letzten Stunde?',
+        o: [['ja, beides', {}], ['nur eins von beidem', { schlaf: 1 }], ['nein, Handy läuft bis zuletzt', { schlaf: 2 }]] },
+      { dim: 'Schlaf', q: 'Wachst du nachts auf und liegst wach?',
+        o: [['nein, ich schlafe durch', {}], ['manchmal', { schlaf: 1 }], ['oft', { schlaf: 2 }]] },
+      { dim: 'Blutzucker', q: 'Wie oft überkommt dich Heißhunger auf Süßes oder Brot, Pasta, Pommes?',
+        o: [['selten', {}], ['ein paar Mal die Woche', { zucker: 1 }], ['fast täglich — schwer zu widerstehen', { zucker: 2 }]] },
+      { dim: 'Blutzucker', q: 'Bist du nach dem Essen oft nicht richtig satt?',
+        o: [['nein, ich bin gut satt', {}], ['manchmal', { zucker: 1 }], ['ja, ich brauche bald wieder etwas', { zucker: 2 }]] },
+      { dim: 'Blutzucker', q: 'Wirst du müde, zittrig oder gereizt, wenn du 3–4 Stunden nichts isst?',
+        o: [['nein', {}], ['ein bisschen', { zucker: 1 }], ['ja, deutlich', { zucker: 2 }]] },
+      { dim: 'Blutzucker', q: 'Wie oft trinkst du Gezuckertes (Limo, Saft, Latte mit Sirup)?',
+        o: [['fast nie', {}], ['gelegentlich', { zucker: 1 }], ['täglich', { zucker: 2 }]] },
+      { dim: 'Blutzucker', q: 'Wie oft ist eine echte Eiweißquelle auf deinem Teller (Eier, Fisch, Fleisch, Hülsenfrüchte)?',
+        o: [['bei fast jeder Mahlzeit', {}], ['ab und zu', { zucker: 1 }], ['eher selten', { zucker: 1 }]] },
+      { dim: 'Zell-Bausteine', q: 'Welche Fette landen am häufigsten auf deinem Teller?',
+        o: [['Sonnenblumen-/Pflanzenöl & Fertiges', { fette: 2 }], ['Butter & Olivenöl', { fette: 1 }],
+            ['fetter Fisch, Nüsse, Leinöl', {}], ['keine Ahnung', { fette: 1 }]] },
+      { dim: 'Zell-Bausteine', q: 'Wie oft isst du fetten Fisch (Lachs, Makrele, Hering)?',
+        o: [['mehrmals die Woche', {}], ['ab und zu', { fette: 1 }], ['fast nie', { fette: 2 }]] },
+      { dim: 'Zell-Bausteine', q: 'Achtest du gezielt auf hochwertige Fette / Omega-3?',
+        o: [['ja, gezielt', {}], ['unregelmäßig', { fette: 1 }], ['nein', { fette: 1 }]] },
+      { dim: 'Stress & Pausen', q: 'Wie sieht dein Tag körperlich aus?',
+        o: [['überwiegend sitzend', { stress: 1 }], ['etwas Alltagsbewegung', {}], ['regelmäßig aktiv', {}]] },
+      { dim: 'Stress & Pausen', q: 'Gönnst du dir echte Pausen ohne Bildschirm?',
+        o: [['mehrmals am Tag', {}], ['selten', { stress: 1 }], ['eigentlich nie', { stress: 2 }]] },
+      { dim: 'Stress & Pausen', q: 'Wie viel Kaffee brauchst du, um durch den Tag zu kommen?',
+        o: [['keinen oder einen', {}], ['zwei bis drei', { stress: 1 }], ['vier oder mehr', { stress: 2 }]] },
+      { dim: 'Stress & Pausen', q: 'Wie oft fühlst du dich unter Strom oder gestresst?',
+        o: [['selten', {}], ['regelmäßig', { stress: 1 }], ['fast dauernd', { stress: 2 }]] },
+      { dim: 'Verdauung', q: 'Wie oft fühlst du dich nach dem Essen aufgebläht?',
+        o: [['selten', {}], ['manchmal', { verdauung: 1 }], ['oft', { verdauung: 2 }]] },
+      { dim: 'Verdauung', q: 'Ist deine Verdauung regelmäßig?',
+        o: [['ja', {}], ['wechselhaft', { verdauung: 1 }], ['oft Probleme', { verdauung: 2 }]] },
+      { dim: 'Messen', q: 'Hast du deine Werte je gemessen (Fettsäuren, Blutzucker, Eisen)?',
+        o: [['ja, aktuell', {}], ['vor Jahren mal', { fette: 1 }], ['nie', { fette: 1 }]] },
+      { dim: 'Über dich', q: 'Wo stehst du gerade?', key: 'phase',
+        o: [['30–40', {}, '30–40'], ['40–50', {}, '40–50'], ['50+', {}, '50+'], ['in den Wechseljahren', {}, 'Wechseljahre']] },
+      { dim: 'Dein Ziel', q: 'Was würdest du am liebsten zurückgewinnen?', key: 'goal',
+        o: [['Meine Energie am Nachmittag', {}, 'Du willst deine Energie am Nachmittag zurück.'],
+            ['Einen klaren Kopf', {}, 'Du willst deinen klaren Kopf zurück.'],
+            ['Motivation & Antrieb', {}, 'Du willst Motivation und Antrieb zurück.'],
+            ['Endlich durchschlafen', {}, 'Du willst endlich wieder durchschlafen.']] }
+    ];
+
+    // ── Haupt-Typ je nach stärkstem Bereich — 8 Typen: 5 Solo + 2 Kombi + Fast-am-Ziel.
+    // Ein Nugget pro Typ stammt aus Martinas eigener White-/Black-List (bewusst nur EIN
+    // konkreter Tipp, nicht die ganze Liste — das Restliche bleibt Grund, ins Webinar zu kommen).
+    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht — jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen — was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Webinar gehen wir noch viel tiefer rein — welche Ursachen bei dir infrage kommen und wie du wirklich ins Tun kommst, um etwas zu verändern. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind — geh jetzt für dich los und schenk dir selbst die 30 Minuten, die wirklich etwas verändern können.';
+
+    var TYPES = {
+      schlaf: {
+        t: 'Typ: Erholungs-Defizit',
+        p: 'Dein Schlaf ist zwar da, aber nicht wirklich optimal — und genau deshalb kann bei dir eine Energielosigkeit auftreten, die sich auch mit noch mehr Schlaf nicht auf einmal auflöst. In der Tiefschlafphase repariert sich dein Körper eigentlich und füllt seine Energiespeicher wieder auf. Läuft diese Phase gestört ab — durch Bildschirmlicht, ein Nervensystem, das nachts nicht runterfährt — fehlt dir genau diese Energie logischerweise am nächsten Tag. Kein Wunder also, dass du dich trotz „genug" Schlaf oft wie gerädert fühlst.',
+        tip: '60 Minuten vor dem Schlafengehen Bildschirme konsequent weglegen, das Schlafzimmer wirklich dunkel machen (auch kleine Lichtquellen wie Ladekabel-LEDs stören mehr, als man denkt), und die letzte große Mahlzeit möglichst vor 18 Uhr essen — dein Verdauungssystem sollte in der Nacht Pause haben, nicht Schwerstarbeit leisten. Das ist ein Anfang. Wie tief dein Schlafdefizit wirklich sitzt und ob z.B. auch dein Nervensystem abends nicht richtig runterfährt, lässt sich damit allein noch nicht beantworten.',
+        bridge: 'Ich weiß, wie zermürbend es ist, wenn du morgens aufwachst und dich trotzdem fühlst, als hättest du gar nicht geschlafen — das raubt dir jede Kraft für den Tag, bevor er überhaupt begonnen hat. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      zucker: {
+        t: 'Typ: Blutzucker-Achterbahn',
+        p: 'Wenn dein Blutzucker Achterbahn fährt, muss dein Körper ständig gegensteuern — jede Spitze nach oben kostet ihn danach Kraft, um wieder ins Gleichgewicht zu kommen. Genau diese Energie fehlt dir logischerweise woanders: beim Nachmittagstief, beim Konzentrieren, beim Durchhalten bis zum Abend. Deine Ermüdung ist in diesem Fall keine Charakterschwäche, sondern schlicht die Rechnung für die Achterbahn, die dein Stoffwechsel gerade fährt.',
+        tip: 'Bei jeder Mahlzeit zuerst Eiweiß essen, nie auf leeren Magen zu Süßem greifen, und bei akutem Heißhunger lieber zu einer Energie-Bowl aus Datteln und Nüssen greifen als zu Schokolade — das sättigt wirklich, statt den nächsten Einbruch schon vorzuprogrammieren. Das glättet die gröbsten Ausschläge. Wie stark deine Achterbahn tatsächlich ist und wo genau sie ansetzt, zeigt sich aber erst, wenn man wirklich hinschaut.',
+        bridge: 'Ich weiß, wie frustrierend dieses ständige Auf und Ab ist — der Heißhunger, das Tief, das Gefühl, dem eigenen Körper ausgeliefert zu sein, egal wie sehr du dich bemühst. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      fette: {
+        t: 'Typ: Falsche Zell-Bausteine',
+        p: 'Deine Zellen produzieren Energie — aber nur, wenn sie aus den richtigen Bausteinen gebaut sind. Bekommen sie stattdessen die falschen Fette, brennen sie schlechter, und genau das erklärt einen Teil deiner Energielosigkeit, ohne dass du dafür eine offensichtliche Ursache findest. Das Tückische: Du fühlst nicht, welche Fette gerade in deinen Zellen verbaut werden — nur, dass dir irgendwo Energie fehlt.',
+        tip: 'Sonnenblumenöl ist eine der größten Omega-6-Quellen in einer durchschnittlichen Küche — schrittweise gegen Olivenöl oder Leinöl tauschen und öfter zu fettem Fisch greifen, bringt schon etwas Balance. Das ist ein guter Anfang. Aber ob dein persönliches Verhältnis von Omega-6 zu Omega-3 wirklich passt, lässt sich mit bloßem Auge nicht beurteilen — das ist tatsächlich Messsache.',
+        bridge: 'Ich weiß, wie zermürbend es ist, sich erschöpft zu fühlen, ohne überhaupt zu wissen, woran es liegt — vor allem, wenn du dir schon so viel Mühe gibst und trotzdem keine Erklärung findest. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      stress: {
+        t: 'Typ: Dauerstrom ohne Pause',
+        p: 'Dauerstrom ohne echte Pausen verbrennt Energie schneller, als du sie nachladen kannst — und genau das ist bei dir vermutlich ein Hauptgrund für deine Erschöpfung. Dein Nervensystem läuft im Hintergrund ständig auf Anspannung, selbst wenn du gerade nichts tust, und das kostet Kraft, die dir dann für den eigentlichen Tag fehlt. So wird aus vollem Terminkalender ganz automatisch Dauermüdigkeit.',
+        tip: 'Bewusst 2–3 kurze Pausen am Tag ohne Bildschirm einbauen — schon eine Minute 4-7-8-Atmung (4 Sekunden einatmen, 7 halten, 8 ausatmen) wirkt auf dein Nervensystem oft stärker als der nächste Kaffee. Das lindert die Symptome spürbar. Was deinen Dauerstrom bei dir konkret befeuert und wie du wirklich aus dem Modus rauskommst, ist aber eine andere Frage.',
+        bridge: 'Ich weiß, wie erschöpfend es ist, ständig zu funktionieren, ohne wirklich abschalten zu können — und wie einsam sich diese Art von Müdigkeit anfühlt, weil sie von außen keiner sieht. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      verdauung: {
+        t: 'Typ: Bauch-Bremse',
+        p: 'Wenn dein Bauch bremst — Blähungen, eine unruhige Verdauung — kostet das mehr Energie, als man denkt: Ein großer Teil deiner Kraft entsteht im Darm, und wenn es dort hakt, fehlt dir genau diese Energie später am Tag als Müdigkeit. Das ist kein Zufall, sondern eine ziemlich direkte Folge — dein Bauch und dein Energielevel hängen enger zusammen, als es sich anfühlt.',
+        tip: 'Langsamer essen, große und späte Mahlzeiten möglichst meiden, und nach dem Essen lieber ein paar Minuten laufen als sich direkt hinzusetzen — das bringt die Verdauung sanft in Schwung. Das nimmt etwas Druck raus. Woran es bei dir konkret hakt und was dein Darm wirklich braucht, um wieder rund zu laufen, lässt sich damit allein aber noch nicht beantworten.',
+        bridge: 'Ich weiß, wie belastend es ist, wenn dich dein eigener Bauch ständig ausbremst — das kostet nicht nur Energie, sondern auch Lebensqualität, Tag für Tag. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      zucker_verdauung: {
+        t: 'Typ: Zucker-Bauch',
+        p: 'Bei dir verstärken sich zwei Dinge gegenseitig: Dein Blutzucker fordert ständig Energie zum Ausgleichen — und dein Bauch verbraucht zusätzlich Kraft beim Verdauen von genau dem, was diese Achterbahn überhaupt erst auslöst. Das Ergebnis ist eine Erschöpfung, die sich doppelt anfühlt, weil eben zwei Energiefresser gleichzeitig aktiv sind, nicht nur einer.',
+        tip: 'Einen bewussten Tag lang ganz auf Zuckerbomben und Fertiggerichte verzichten — das ist der gemeinsame Nenner hinter beiden Symptomen, und schon dieser eine Tag zeigt oft überraschend deutlich, wie viel Bauch und Energie tatsächlich zusammenhängen. Das ist ein Anfang, kein vollständiges Bild.',
+        bridge: 'Ich weiß, wie zermürbend es ist, wenn sich gleich zwei Baustellen gegenseitig verstärken und du gar nicht mehr weißt, wo du zuerst ansetzen sollst. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      stress_zucker: {
+        t: 'Typ: Cortisol-Crash',
+        p: 'Ständiger Stress treibt dich unbemerkt zu genau den Gewohnheiten, die deinen Blutzucker zusätzlich durcheinanderbringen — Kaffee statt Pause, Süßes statt Schlaf, ein Glas Wein zum Runterkommen. Das kostet dich doppelt Energie: einmal, um das Stresshormon auszugleichen, einmal, um den Blutzucker wieder einzufangen. Deine Erschöpfung ist in diesem Fall die Summe aus beidem, nicht nur eine Frage von „zu wenig Schlaf".',
+        tip: 'Bevor der nächste Kaffee oder Snack kommt, eine Minute 4-7-8-Atmung ausprobieren — das beruhigt dein Nervensystem, ohne deinen Blutzucker zusätzlich zu belasten, wie es Kaffee oder Zucker tun würden. Das unterbricht die Spirale kurz. Wie tief sie bei dir wirklich sitzt, ist damit aber noch nicht beantwortet.',
+        bridge: 'Ich weiß, wie erschöpfend sich diese Spirale aus Stress und Blutzucker anfühlt — ständig unter Strom und trotzdem nie wirklich wach. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      },
+      none: {
+        t: 'Typ: Fast am Ziel',
+        p: 'Du machst vieles richtig — und bist trotzdem müde. Genau das ist das Verwirrende an deinem Ergebnis. Wenn die offensichtlichen Stellschrauben (Schlaf, Blutzucker, Fette, Stress, Verdauung) schon einigermaßen sitzen, steckt die Ursache für deine Energielosigkeit meistens in Werten, die man nicht spüren kann — nur messen.',
+        tip: 'Nicht noch mehr optimieren auf Verdacht, keine weiteren Nahrungsergänzungsmittel raten. Dein Zell-Code verrät dir erst dann etwas, wenn du wirklich hinschaust — nicht durchs Fühlen, sondern durchs Messen. Alles andere ist an dieser Stelle vermutlich Zeitverschwendung.',
+        bridge: 'Ich weiß, wie frustrierend es ist, sich wirklich Mühe zu geben und trotzdem müde zu bleiben — das fühlt sich oft ungerechter an als offensichtliche Fehler. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+      }
+    };
+
+    // ── Kurz-Check-Texte je Bereich und Stufe (0 grün, 1 gelb, 2 rot) ──
+    var CHECK_TEXT = {
+      schlaf:    ['Schlaf: sieht erholsam aus.', 'Schlaf: Menge ok, aber die Qualität bremst dich.', 'Schlaf: hier verlierst du spürbar Energie (Licht, Handy, Durchschlafen).'],
+      zucker:    ['Blutzucker: stabil.', 'Blutzucker: leichte Achterbahn.', 'Blutzucker: starke Achterbahn — ein Hauptverdächtiger für dein Tief.'],
+      fette:     ['Zell-Bausteine: gute Fettqualität.', 'Zell-Bausteine: da ist Luft nach oben.', 'Zell-Bausteine: hier fehlt deinen Zellen womöglich das Richtige — messbar.'],
+      stress:    ['Stress & Pausen: im grünen Bereich.', 'Stress & Pausen: du läufst oft ohne echte Pause.', 'Stress & Pausen: Dauerstrom ohne Erholung zieht Energie.'],
+      verdauung: ['Verdauung: unauffällig.', 'Verdauung: gelegentlich träge.', 'Verdauung: Blähbauch/Unregelmäßigkeit bremsen dich.']
+    };
+    var DIM_ORDER = ['schlaf', 'zucker', 'fette', 'stress', 'verdauung'];
+
+    // ── State ──
+    var state = {
+      index: 0,
+      answers: new Array(QUESTIONS.length).fill(null),
+      context: {},
+      type: null
+    };
+
+    function showScreen(id) {
+      document.querySelectorAll('.qz-screen').forEach(function(el) {
+        el.classList.toggle('is-active', el.id === id);
+      });
+    }
+
+    function computeScores() {
+      var scores = { schlaf: 0, zucker: 0, fette: 0, stress: 0, verdauung: 0 };
+      state.answers.forEach(function(a) {
+        if (!a) return;
+        Object.keys(a.w).forEach(function(k) { scores[k] += a.w[k]; });
+      });
+      return scores;
+    }
+
+    // Kombi-Paare: nur diese zwei Kombinationen bekommen einen eigenen Typ-Namen.
+    // Andere enge Zweikämpfe (z.B. schlaf+fette) fallen auf den Solo-Typ des stärkeren
+    // Bereichs zurück — sonst müsste jede Bereichs-Kombination einen eigenen Text kriegen.
+    var COMBO_TYPES = { 'verdauung_zucker': 'zucker_verdauung', 'stress_zucker': 'stress_zucker' };
+
+    function primaryDim(scores) {
+      var order = DIM_ORDER.slice().sort(function(a, b) { return scores[b] - scores[a]; });
+      var top = order[0], second = order[1];
+      if (scores[top] === 0) return 'none';
+
+      // Kombi-Typ nur, wenn die zwei stärksten Bereiche eng beieinander liegen
+      // (Differenz höchstens 1 Punkt) und beide spürbar ausgeprägt sind (>= 2).
+      if (scores[second] >= 2 && (scores[top] - scores[second]) <= 1) {
+        var pairKey = [top, second].sort().join('_');
+        if (COMBO_TYPES[pairKey]) return COMBO_TYPES[pairKey];
+      }
+      return top;
+    }
+
+    function level(v) { return v === 0 ? 0 : (v < 3 ? 1 : 2); }
+
+    function renderQuestion() {
+      var q = QUESTIONS[state.index];
+      document.getElementById('qz-progress-bar').style.width = (state.index / QUESTIONS.length * 100) + '%';
+      document.getElementById('qz-dimtag').textContent = q.dim || '';
+      document.getElementById('qz-progress-label').textContent = 'Frage ' + (state.index + 1) + ' von ' + QUESTIONS.length;
+      document.getElementById('qz-question-title').textContent = q.q;
+
+      var list = document.getElementById('qz-options-list');
+      list.innerHTML = '';
+      var chosen = state.answers[state.index];
+      state.locked = false;
+
+      q.o.forEach(function(opt, i) {
+        var li = document.createElement('li');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'qz-option' + (chosen && chosen.optionIndex === i ? ' is-selected' : '');
+        btn.textContent = opt[0];
+        btn.addEventListener('click', function() { selectOption(i, opt); });
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+
+      document.getElementById('qz-back-btn').style.display = state.index > 0 ? 'inline-block' : 'none';
+    }
+
+    function selectOption(optionIndex, opt) {
+      // Sperre gegen Mehrfach-Klicks während der 200ms Auto-Advance-Verzögerung —
+      // sonst läuft state.index bei schnellen Doppel-Tipps über das Array hinaus.
+      if (state.locked) return;
+      state.locked = true;
+
+      state.answers[state.index] = { optionIndex: optionIndex, w: opt[1] || {} };
+      var q = QUESTIONS[state.index];
+      if (q.key) state.context[q.key] = opt[2] || opt[0];
+
+      // ── Abbruch-Tracking: pro beantworteter Frage ein Event, damit sich in
+      // GA4 sehen lässt, an welcher Frage die Abbruchquote hochgeht.
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'quiz_question_answered',
+        question_index: state.index + 1,
+        question_total: QUESTIONS.length,
+        question_dim: q.dim
+      });
+
+      if (state.index < QUESTIONS.length - 1) {
+        setTimeout(function() {
+          state.index++;
+          renderQuestion();
+        }, 200);
+      } else {
+        var scores = computeScores();
+        state.type = primaryDim(scores);
+        document.getElementById('qz-typ-field').value = state.type;
+        document.getElementById('qz-phase-field').value = state.context.phase || '';
+        document.getElementById('qz-goal-field').value = state.context.goal || '';
+        window.dataLayer.push({ event: 'quiz_complete', quiz_typ: state.type, funnel: 'energie-test' });
+        setTimeout(function() { showScreen('screen-email'); }, 200);
+      }
+    }
+
+    document.getElementById('qz-back-btn').addEventListener('click', function() {
+      if (state.index > 0) {
+        state.index--;
+        renderQuestion();
+      }
+    });
+
+    document.querySelectorAll('.start-quiz-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showScreen('screen-quiz');
+        renderQuestion();
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'quiz_start', funnel: 'energie-test' });
+      });
+    });
+
+    function renderResult() {
+      var scores = computeScores();
+      var info = TYPES[state.type] || TYPES.none;
+
+      document.getElementById('qz-result-title').textContent = info.t;
+
+      var body = '<p>' + info.p + '</p>';
+      if (state.context.goal) {
+        body += '<p>' + state.context.goal + ' Genau da setzt der nächste Schritt an — mit Zahlen, nicht auf Verdacht.</p>';
+      }
+      document.getElementById('qz-result-text').innerHTML = body;
+
+      var rows = document.getElementById('qz-check-rows');
+      rows.innerHTML = '';
+      DIM_ORDER.forEach(function(d) {
+        var lv = level(scores[d]);
+        var row = document.createElement('div');
+        row.className = 'qz-check-row';
+        row.innerHTML = '<span class="qz-dot qz-dot--' + lv + '"></span><span>' + CHECK_TEXT[d][lv] + '</span>';
+        rows.appendChild(row);
+      });
+
+      document.getElementById('qz-tip').innerHTML =
+        '<strong>Dein erster Schritt:</strong> ' + info.tip;
+
+      document.getElementById('qz-webinar-bridge').textContent = info.bridge;
+    }
+
+    // ── E-Mail-Gate: Validierung + Submit ──
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    document.getElementById('quiz-lead-form').addEventListener('submit', function(e) {
+      var name    = document.getElementById('qz-fname').value.trim();
+      var email   = document.getElementById('qz-email').value.trim();
+      var privacy = document.getElementById('qz-privacy').checked;
+      var err     = document.getElementById('qz-form-error');
+      var btn     = document.getElementById('qz-submit-btn');
+
+      if (!name || !email || !privacy) {
+        e.preventDefault();
+        err.textContent = 'Bitte alle Felder ausfüllen und der Datenschutzerklärung zustimmen.';
+        err.style.display = 'block';
+        return;
+      }
+      if (!EMAIL_RE.test(email)) {
+        e.preventDefault();
+        err.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
+        err.style.display = 'block';
+        return;
+      }
+
+      err.style.display = 'none';
+      btn.textContent = 'Wird ausgewertet …';
+      btn.disabled = true;
+
+      // ── Conversion-Event: GA4 + Google Ads über GTM ──
+      // In GTM: Trigger auf Custom Event "lead_quiz_complete" anlegen,
+      // darüber GA4-Event-Tag und Google-Ads-Conversion-Tag auslösen.
+      // Zusätzliche Funnel-Events auf dieser Seite (nur GA4, keine Ads-Conversion):
+      // "quiz_start", "quiz_question_answered" (mit question_index/question_total/question_dim),
+      // "quiz_complete" — damit sich in GA4 die Abbruchquote pro Frage auswerten lässt.
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'lead_quiz_complete',
+        quiz_typ: state.type,
+        quiz_phase: state.context.phase || '',
+        funnel: 'energie-test'
+      });
+
+      // Formular geht in den versteckten iframe — Auswertung danach direkt zeigen
+      setTimeout(function() {
+        renderResult();
+        showScreen('screen-result');
+      }, 700);
+    });
+  })();
+  </script>
+
+<!-- ══════════════════════════════════════════════
+     DSGVO COOKIE BANNER — Consent Mode v2
+     Martina Lau · martinalau.org
+     ══════════════════════════════════════════════ -->
+<style>
+  #cb-overlay { position:fixed;inset:0;z-index:99998;background:rgba(0,30,37,.55);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity .35s ease; }
+  #cb-overlay.cb-visible { display:block; }
+  #cb-overlay.cb-show { opacity:1; }
+  #cb-banner { position:fixed;bottom:0;left:0;right:0;z-index:99999;background:linear-gradient(160deg,#FDFAF7 0%,#E6F7F9 100%);border-top:2px solid #C9A84C;box-shadow:0 -12px 48px rgba(0,78,88,.18);padding:1.6rem 2rem;display:none;transform:translateY(100%);transition:transform .45s cubic-bezier(0.22,1,0.36,1);font-family:'Jost',sans-serif; }
+  #cb-banner.cb-visible { display:block; }
+  #cb-banner.cb-show { transform:translateY(0); }
+  .cb-inner { max-width:1100px;margin:0 auto; }
+  .cb-top { display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1.2rem; }
+  .cb-text { flex:1;min-width:260px; }
+  .cb-text p { font-size:.88rem;line-height:1.7;color:#003740;margin:0; }
+  .cb-text a { color:#0098A6;text-decoration:underline;font-size:.82rem; }
+  .cb-title { font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#004E58;margin-bottom:.5rem; }
+  .cb-toggles { display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.2rem; }
+  .cb-toggle-row { display:flex;align-items:center;gap:.9rem;background:rgba(0,152,166,.07);border-radius:10px;padding:.7rem 1rem; }
+  .cb-toggle-label { flex:1;font-size:.84rem;color:#003740; }
+  .cb-toggle-label strong { display:block;font-size:.86rem;font-weight:700;color:#004E58; }
+  .cb-toggle-label span { font-size:.78rem;color:#33B0BC; }
+  .cb-switch { position:relative;width:44px;height:24px;flex-shrink:0; }
+  .cb-switch input { opacity:0;width:0;height:0; }
+  .cb-slider { position:absolute;inset:0;background:#B0CDD0;border-radius:24px;cursor:pointer;transition:background .3s; }
+  .cb-slider::before { content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;left:3px;top:3px;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.2); }
+  .cb-switch input:checked + .cb-slider { background:#0098A6; }
+  .cb-switch input:checked + .cb-slider::before { transform:translateX(20px); }
+  .cb-switch input:disabled + .cb-slider { background:#C9A84C;cursor:default; }
+  .cb-switch input:disabled + .cb-slider::before { transform:translateX(20px); }
+  .cb-buttons { display:flex;gap:.8rem;flex-wrap:wrap; }
+  .cb-btn { flex:1;min-width:130px;padding:.75rem 1.4rem;border-radius:50px;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:all .3s ease; }
+  .cb-btn-accept { background:linear-gradient(135deg,#C9A84C,#9A7830);color:#fff;box-shadow:0 6px 20px rgba(201,168,76,.4); }
+  .cb-btn-accept:hover { transform:translateY(-2px); }
+  .cb-btn-save { background:linear-gradient(135deg,#004E58,#0098A6);color:#fff;box-shadow:0 6px 20px rgba(0,78,88,.35); }
+  .cb-btn-save:hover { transform:translateY(-2px); }
+  .cb-btn-reject { background:transparent;color:#004E58;border:1.5px solid #004E58;flex:1;min-width:130px; }
+  .cb-btn-reject:hover { background:rgba(0,78,88,.08); }
+  @media(max-width:640px){ #cb-banner{padding:1.2rem 1rem;} .cb-buttons{flex-direction:column;} .cb-btn{min-width:unset;} }
+</style>
+<div id="cb-overlay"></div>
+<div id="cb-banner" role="dialog" aria-modal="true" aria-label="Cookie-Einstellungen">
+  <div class="cb-inner">
+    <div class="cb-top"><div class="cb-text">
+      <p class="cb-title">🍪 Deine Privatsphäre</p>
+      <p>Diese Website verwendet Cookies. Technisch notwendige sind immer aktiv. Google Tag Manager und Google Ads kannst du einzeln aktivieren. Mehr Infos: <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+    </div></div>
+    <div class="cb-toggles">
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" checked disabled><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Technisch notwendig</strong><span>Immer aktiv</span></div></div>
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-gtm"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Google Tag Manager</strong><span>Standardmäßig deaktiviert</span></div></div>
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-marketing"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Marketing &amp; Werbung</strong><span>Google Ads — setzt GTM voraus</span></div></div>
+    </div>
+    <div class="cb-buttons">
+      <button class="cb-btn cb-btn-accept" id="cb-accept-all">Alle akzeptieren</button>
+      <button class="cb-btn cb-btn-save" id="cb-save">Auswahl speichern</button>
+      <button class="cb-btn cb-btn-reject" id="cb-reject-all">Alle ablehnen</button>
+    </div>
+  </div>
+</div>
+<script>'use strict';(function(){const K='martina_lau_consent',E=365,b=document.getElementById('cb-banner'),o=document.getElementById('cb-overlay'),g=document.getElementById('cb-gtm'),m=document.getElementById('cb-marketing');m.addEventListener('change',function(){if(this.checked)g.checked=true;});g.addEventListener('change',function(){if(!this.checked)m.checked=false;});function apply(gtm,mkt){loadGTM();gtag('consent','update',{'ad_storage':mkt?'granted':'denied','ad_user_data':mkt?'granted':'denied','ad_personalization':mkt?'granted':'denied','analytics_storage':mkt?'granted':'denied'});if(mkt){gtag('consent','update',{'functionality_storage':'granted','personalization_storage':'granted'});}(window.dataLayer=window.dataLayer||[]).push({'event':'consent_update','gtm_consent':gtm?'granted':'denied','marketing_consent':mkt?'granted':'denied'});}function save(gtm,mkt){localStorage.setItem(K,JSON.stringify({gtm:gtm,marketing:mkt,timestamp:new Date().toISOString(),version:'2.0',expires:Date.now()+E*86400000}));apply(gtm,mkt);close();}function open(){o.classList.add('cb-visible');b.classList.add('cb-visible');requestAnimationFrame(()=>{o.classList.add('cb-show');b.classList.add('cb-show');});document.body.style.overflow='hidden';}function close(){b.classList.remove('cb-show');o.classList.remove('cb-show');setTimeout(()=>{b.classList.remove('cb-visible');o.classList.remove('cb-visible');document.body.style.overflow='';},450);}function load(){try{const r=localStorage.getItem(K);if(!r)return null;const d=JSON.parse(r);if(d.expires&&Date.now()>d.expires){localStorage.removeItem(K);return null;}return d;}catch(e){return null;}}document.getElementById('cb-accept-all').addEventListener('click',()=>{g.checked=m.checked=true;save(true,true);});document.getElementById('cb-reject-all').addEventListener('click',()=>{g.checked=m.checked=false;save(false,false);});document.getElementById('cb-save').addEventListener('click',()=>{const gt=g.checked,mk=m.checked&&gt;save(gt,mk);});const s=load();if(s){apply(s.gtm||false,s.marketing||false);}else{setTimeout(open,600);}})();</script>
+
+</body>
+</html>
