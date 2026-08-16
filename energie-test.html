@@ -7,7 +7,7 @@
   <meta name="description" content="Immer müde, obwohl du eigentlich alles richtig machst? Mach den kostenlosen Energie-Test und erfahre in deiner persönlichen Auswertung, welcher von 5 Bereichen dich wirklich ausbremst." />
   <meta name="robots" content="index, follow" />
 
-  <!-- Consent Mode v2 Default — muss VOR GTM stehen -->
+  <!-- Consent Mode v2 Default – muss VOR GTM stehen -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -62,12 +62,12 @@
 
   <style>
     /* ══════════════════════════════════════════
-       ENERGIE-TEST — Quiz-Funnel (Seiten-Zusatz)
+       ENERGIE-TEST – Quiz-Funnel (Seiten-Zusatz)
        ══════════════════════════════════════════ */
     .qz-screen { display: none; }
     .qz-screen.is-active { display: block; }
 
-    /* Logo2 hat den Schriftzug "Tina Lau" eingebaut (statt nur dem Icon) — etwas größer als der Standard-Icon-Logo, damit der Text lesbar bleibt */
+    /* Logo2 hat den Schriftzug "Tina Lau" eingebaut (statt nur dem Icon) – etwas größer als der Standard-Icon-Logo, damit der Text lesbar bleibt */
     .nav__logo-icon img { height: 76px; }
 
     .gold-em {
@@ -76,7 +76,7 @@
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    /* Intro — jetzt eine mehrteilige Landingpage (Hero, Wiedererkennung, Bereiche,
+    /* Intro – jetzt eine mehrteilige Landingpage (Hero, Wiedererkennung, Bereiche,
        Martina/Vertrauen, Abschluss-CTA) statt einem einzelnen Hero-Screen. Alle
        Start-Buttons tragen die Klasse .start-quiz-btn und starten denselben Quiz-Flow. */
     .qz-hero { padding: 4.5rem 0 4rem; }
@@ -116,8 +116,11 @@
     .qz-microcopy { margin-top: 1.2rem; font-size: 0.8rem; color: rgba(255,255,255,0.4); }
 
     /* Foto bricht bewusst aus dem .container aus und läuft rechts randlos bis zur
-       Viewport-Kante — deshalb jetzt direktes Kind von .qz-hero (position:relative),
-       nicht mehr Teil von .qz-hero-grid. */
+       Viewport-Kante – deshalb jetzt direktes Kind von .qz-hero (position:relative),
+       nicht mehr Teil von .qz-hero-grid. Text-Container bekommt bewusst höheren
+       z-index, sonst legt sich das Foto (später im DOM, gleicher z-index von
+       .webinar-header > *) optisch über den Text statt dahinter. */
+    .qz-hero > .container { position: relative; z-index: 2; }
     .qz-hero-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 44vw; min-width: 440px; text-align: center; z-index: 1; }
     .qz-hero-photo img {
       position: absolute; inset: 0; width: 100%; height: 100%;
@@ -140,13 +143,40 @@
     .qz-recognition h3 { font-size: clamp(1.45rem, 2.4vw, 1.85rem); margin-top: 0.6rem !important; }
     .qz-recognition p { font-size: clamp(1.15rem, 1.9vw, 1.4rem); line-height: 1.7; }
 
+    /* Unter 900px: Foto bleibt Vollflächen-Hintergrund hinter dem Text (das wollte
+       die Kundin ausdrücklich so) – dafür sorgt ein dunkler Scrim über dem Bild,
+       damit der Text lesbar bleibt, egal wie hell die Stelle im Foto ist. */
     @media (max-width: 900px) {
-      .qz-hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .qz-hero-grid { max-width: 100%; padding-right: 0; text-align: center; }
       .qz-hero-text { text-align: center; }
       .qz-benefits { text-align: left; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+      .qz-hero-photo {
+        position: absolute; inset: 0; top: 0; right: 0; bottom: 0;
+        width: 100%; min-width: 0; height: 100%;
+        margin-top: 0;
+      }
+      .qz-hero-photo img {
+        mask-image: none; -webkit-mask-image: none;
+        object-position: 50% 18%;
+      }
+      .qz-hero-photo::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(3,26,32,0.88) 0%, rgba(3,26,32,0.8) 55%, rgba(3,26,32,0.9) 100%);
+      }
+      /* Unter dem Button eine zweite, normal im Textfluss stehende Bewertungs-Zeile
+         zeigen (kollidiert dort mit nichts) – die im Bild schwebende obere Variante
+         auf Mobile stattdessen ausblenden. */
+      .qz-hero-photo .trust-strip { display: none; }
+      .qz-hero-trust-mobile {
+        display: flex !important; justify-content: center;
+        margin: 1.2rem auto !important; max-width: none !important;
+      }
     }
+    .qz-hero-trust-mobile { display: none; }
     @media (max-width: 600px) {
       .qz-hero-text h1 { font-size: clamp(1.8rem, 7vw, 2.3rem); }
+      .qz-intro-lead { font-size: 1.55rem; }
     }
 
     /* Quiz */
@@ -175,7 +205,7 @@
       font-family: var(--font-sans);
     }
 
-    /* E-Mail-Gate — nutzt bestehende .form-box Optik */
+    /* E-Mail-Gate – nutzt bestehende .form-box Optik */
     #screen-email input { font-size: 16px; }
 
     /* Ergebnis */
@@ -260,7 +290,7 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-  <!-- NAV — bewusst ohne zweites CTA, die einzige Aktion ist der Test -->
+  <!-- NAV – bewusst ohne zweites CTA, die einzige Aktion ist der Test -->
   <nav class="nav">
     <div class="container">
       <div class="nav__inner">
@@ -280,7 +310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <main>
 
     <!-- ════════════════════════
-         SCREEN 1 — INTRO (mehrteilige Landingpage)
+         SCREEN 1 – INTRO (mehrteilige Landingpage)
          ════════════════════════ -->
     <div class="qz-screen is-active" id="screen-intro">
 
@@ -301,20 +331,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
               <span class="eyebrow eyebrow--gold">Kostenloser Selbsttest bei ständiger Müdigkeit</span>
 
-              <h1>Ständig müde — und du fragst dich,<br/><em class="gold-em">woran es liegen könnte</em>?</h1>
+              <h1>Ständig müde – und du fragst dich,<br/><em class="gold-em">woran es liegen könnte</em>?</h1>
 
               <p class="qz-intro-lead">
-                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> — und erhalte direkt im Anschluss deine persönliche Auswertung.
+                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> – und erhalte direkt im Anschluss deine persönliche Auswertung.
               </p>
               <p class="qz-areas-line">Schlaf · Blutzucker · Fette · Stress · Verdauung</p>
 
               <ul class="qz-benefits">
                 <li><span class="check">✓</span> 20 kurze Fragen – ca. 2–3 Minuten</li>
                 <li><span class="check">✓</span> Dein persönlicher Energie-Typ</li>
-                <li><span class="check">✓</span> Persönliche Auswertung direkt im Anschluss</li>
+                <li><span class="check">✓</span> Du erfährst direkt im Anschluss, welcher Energie-Typ du bist – inklusive passender Tipps, die du direkt in deinem Alltag umsetzen kannst</li>
               </ul>
 
               <button type="button" class="btn btn--primary btn--lg start-quiz-btn" id="start-quiz-btn">Meinen Energie-Typ herausfinden →</button>
+
+              <div class="trust-strip qz-hero-trust-mobile">
+                <div class="trust-strip__item">
+                  <span class="trust-strip__stars">★★★★★ 5,0 / 5</span>
+                  <span class="trust-strip__sep">·</span>
+                  <span class="trust-strip__text">34 verifizierte Bewertungen</span>
+                </div>
+              </div>
 
               <p class="qz-microcopy">Kostenlos · unverbindlich · Ergebnis direkt danach</p>
             </div>
@@ -373,7 +411,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <p style="text-align:center;max-width:640px;margin:2.5rem auto 0;">
-            Anhand deiner Antworten erfährst du, <strong>welcher Energie-Typ du bist</strong> und welche Bereiche mit deiner Müdigkeit zusammenhängen könnten. So bekommst du eine erste Orientierung, was möglicherweise hinter deiner Müdigkeit steckt.
+            Der kostenlose Energie-Selbsttest zeigt dir, welche Bereiche möglicherweise mit deiner Müdigkeit zusammenhängen.
+          </p>
+          <p style="text-align:center;max-width:640px;margin:1rem auto 0;">
+            In nur 2–3 Minuten findest du deinen Energie-Typ heraus und bekommst direkt passende Tipps, die du im Alltag umsetzen kannst.
           </p>
 
           <div style="text-align:center;margin-top:2rem;">
@@ -396,7 +437,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="divider divider--gold-left"></div>
 
               <p>Martina beschäftigt sich seit vielen Jahren intensiv mit Gesundheit und den unterschiedlichen Faktoren, die unser Wohlbefinden und unsere Energie beeinflussen.</p>
-              <p>Dabei zeigt sich immer wieder: <strong>Müdigkeit ist nicht gleich Müdigkeit — und es gibt nicht den einen Ansatz, der zu jedem passt.</strong></p>
+              <p>Dabei zeigt sich immer wieder: <strong>Müdigkeit ist nicht gleich Müdigkeit – und es gibt nicht den einen Ansatz, der zu jedem passt.</strong></p>
               <p>Genau daraus ist der Energie-Selbsttest entstanden. Er soll dir eine einfache Möglichkeit geben, deine eigene Situation aus verschiedenen Blickwinkeln zu betrachten und eine erste Orientierung zu bekommen, <strong>wo es sich für dich lohnen könnte, genauer hinzuschauen.</strong></p>
 
               <div class="quote-block quote-block--gold">
@@ -431,7 +472,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <!-- ════════════════════════
-         SCREEN 2 — QUIZ
+         SCREEN 2 – QUIZ
          ════════════════════════ -->
     <section class="qz-screen" id="screen-quiz" style="background:var(--cream-teal);padding:4.5rem 0;">
       <div class="container--narrow">
@@ -447,7 +488,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- ════════════════════════
-         SCREEN 3 — E-MAIL-GATE
+         SCREEN 3 – E-MAIL-GATE
          ════════════════════════ -->
     <section class="qz-screen" id="screen-email" style="padding:4.5rem 0;">
       <div class="container--narrow">
@@ -506,7 +547,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- ════════════════════════
-         SCREEN 4 — ERGEBNIS
+         SCREEN 4 – ERGEBNIS
          ════════════════════════ -->
     <section class="qz-screen" id="screen-result" style="background:var(--cream-warm);padding:4.5rem 0;">
       <div class="container--narrow">
@@ -526,7 +567,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="qz-tip" id="qz-tip"></div>
 
         <div class="qz-safety">
-          <p>Anhaltende Erschöpfung kann auch an Eisen, Schilddrüse oder Schlaf liegen — lass das ärztlich abklären. Dieser Test ist keine Diagnose, sondern zeigt dir, welche Ernährungs- und Zellfaktoren du überprüfen lassen kannst.</p>
+          <p>Anhaltende Erschöpfung kann auch an Eisen, Schilddrüse oder Schlaf liegen – lass das ärztlich abklären. Dieser Test ist keine Diagnose, sondern zeigt dir, welche Ernährungs- und Zellfaktoren du überprüfen lassen kannst.</p>
         </div>
 
         <div class="qz-referent">
@@ -535,11 +576,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <img src="Bilder/IMG_7122.JPG" alt="Martina Lau" />
             <div><strong>Martina Lau</strong><span>Gesundheit &amp; Vitalität · M.A. Gesundheitsmanagement</span></div>
           </div>
-          <p>Nach <strong>8 Jahren im Hormonzentrum</strong> wurde ich selbst Mutter — und müde. Diese Jahre haben mich gelehrt, wie wenig wir oft über unseren eigenen Körper wissen — und wie viel möglich wird, wenn wir anfangen zu <em>verstehen</em> statt nur zu glauben.</p>
+          <p>Nach <strong>8 Jahren im Hormonzentrum</strong> wurde ich selbst Mutter – und müde. Diese Jahre haben mich gelehrt, wie wenig wir oft über unseren eigenen Körper wissen – und wie viel möglich wird, wenn wir anfangen zu <em>verstehen</em> statt nur zu glauben.</p>
           <div class="qz-referent__awards">★ European Speaker Award 2026 · Platz 4 &nbsp;·&nbsp; ProvenExpert 5,0 „SEHR GUT" · 34 Bewertungen</div>
           <div class="qz-quote">
             <p>„Ich fühle mich bei Martina bestens aufgehoben. Sie sieht den Menschen als Ganzes und hinterfragt sehr viel, um bestmöglich zu unterstützen."</p>
-            <span>— Verifizierte Bewertung · ProvenExpert</span>
+            <span>– Verifizierte Bewertung · ProvenExpert</span>
           </div>
         </div>
 
@@ -596,7 +637,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       { dim: 'Schlaf', q: 'Wachst du nachts auf und liegst wach?',
         o: [['nein, ich schlafe durch', {}], ['manchmal', { schlaf: 1 }], ['oft', { schlaf: 2 }]] },
       { dim: 'Blutzucker', q: 'Wie oft überkommt dich Heißhunger auf Süßes oder Brot, Pasta, Pommes?',
-        o: [['selten', {}], ['ein paar Mal die Woche', { zucker: 1 }], ['fast täglich — schwer zu widerstehen', { zucker: 2 }]] },
+        o: [['selten', {}], ['ein paar Mal die Woche', { zucker: 1 }], ['fast täglich – schwer zu widerstehen', { zucker: 2 }]] },
       { dim: 'Blutzucker', q: 'Bist du nach dem Essen oft nicht richtig satt?',
         o: [['nein, ich bin gut satt', {}], ['manchmal', { zucker: 1 }], ['ja, ich brauche bald wieder etwas', { zucker: 2 }]] },
       { dim: 'Blutzucker', q: 'Wirst du müde, zittrig oder gereizt, wenn du 3–4 Stunden nichts isst?',
@@ -635,67 +676,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ['Endlich durchschlafen', {}, 'Du willst endlich wieder durchschlafen.']] }
     ];
 
-    // ── Haupt-Typ je nach stärkstem Bereich — 8 Typen: 5 Solo + 2 Kombi + Fast-am-Ziel.
+    // ── Haupt-Typ je nach stärkstem Bereich – 8 Typen: 5 Solo + 2 Kombi + Fast-am-Ziel.
     // Ein Nugget pro Typ stammt aus Martinas eigener White-/Black-List (bewusst nur EIN
-    // konkreter Tipp, nicht die ganze Liste — das Restliche bleibt Grund, ins Webinar zu kommen).
-    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht — jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen — was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Webinar gehen wir noch viel tiefer rein — welche Ursachen bei dir infrage kommen und wie du wirklich ins Tun kommst, um etwas zu verändern. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind — geh jetzt für dich los und schenk dir selbst die 30 Minuten, die wirklich etwas verändern können.';
+    // konkreter Tipp, nicht die ganze Liste – das Restliche bleibt Grund, ins Webinar zu kommen).
+    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht – jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen – was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Webinar gehen wir noch viel tiefer rein – welche Ursachen bei dir infrage kommen und wie du wirklich ins Tun kommst, um etwas zu verändern. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind – geh jetzt für dich los und schenk dir selbst die 30 Minuten, die wirklich etwas verändern können.';
 
     var TYPES = {
       schlaf: {
         t: 'Typ: Erholungs-Defizit',
-        p: 'Dein Schlaf ist zwar da, aber nicht wirklich optimal — und genau deshalb kann bei dir eine Energielosigkeit auftreten, die sich auch mit noch mehr Schlaf nicht auf einmal auflöst. In der Tiefschlafphase repariert sich dein Körper eigentlich und füllt seine Energiespeicher wieder auf. Läuft diese Phase gestört ab — durch Bildschirmlicht, ein Nervensystem, das nachts nicht runterfährt — fehlt dir genau diese Energie logischerweise am nächsten Tag. Kein Wunder also, dass du dich trotz „genug" Schlaf oft wie gerädert fühlst.',
-        tip: '60 Minuten vor dem Schlafengehen Bildschirme konsequent weglegen, das Schlafzimmer wirklich dunkel machen (auch kleine Lichtquellen wie Ladekabel-LEDs stören mehr, als man denkt), und die letzte große Mahlzeit möglichst vor 18 Uhr essen — dein Verdauungssystem sollte in der Nacht Pause haben, nicht Schwerstarbeit leisten. Das ist ein Anfang. Wie tief dein Schlafdefizit wirklich sitzt und ob z.B. auch dein Nervensystem abends nicht richtig runterfährt, lässt sich damit allein noch nicht beantworten.',
-        bridge: 'Ich weiß, wie zermürbend es ist, wenn du morgens aufwachst und dich trotzdem fühlst, als hättest du gar nicht geschlafen — das raubt dir jede Kraft für den Tag, bevor er überhaupt begonnen hat. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Dein Schlaf ist zwar da, aber nicht wirklich optimal – und genau deshalb kann bei dir eine Energielosigkeit auftreten, die sich auch mit noch mehr Schlaf nicht auf einmal auflöst. In der Tiefschlafphase repariert sich dein Körper eigentlich und füllt seine Energiespeicher wieder auf. Läuft diese Phase gestört ab – durch Bildschirmlicht, ein Nervensystem, das nachts nicht runterfährt – fehlt dir genau diese Energie logischerweise am nächsten Tag. Kein Wunder also, dass du dich trotz „genug" Schlaf oft wie gerädert fühlst.',
+        tip: '60 Minuten vor dem Schlafengehen Bildschirme konsequent weglegen, das Schlafzimmer wirklich dunkel machen (auch kleine Lichtquellen wie Ladekabel-LEDs stören mehr, als man denkt), und die letzte große Mahlzeit möglichst vor 18 Uhr essen – dein Verdauungssystem sollte in der Nacht Pause haben, nicht Schwerstarbeit leisten. Das ist ein Anfang. Wie tief dein Schlafdefizit wirklich sitzt und ob z.B. auch dein Nervensystem abends nicht richtig runterfährt, lässt sich damit allein noch nicht beantworten.',
+        bridge: 'Ich weiß, wie zermürbend es ist, wenn du morgens aufwachst und dich trotzdem fühlst, als hättest du gar nicht geschlafen – das raubt dir jede Kraft für den Tag, bevor er überhaupt begonnen hat. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       zucker: {
         t: 'Typ: Blutzucker-Achterbahn',
-        p: 'Wenn dein Blutzucker Achterbahn fährt, muss dein Körper ständig gegensteuern — jede Spitze nach oben kostet ihn danach Kraft, um wieder ins Gleichgewicht zu kommen. Genau diese Energie fehlt dir logischerweise woanders: beim Nachmittagstief, beim Konzentrieren, beim Durchhalten bis zum Abend. Deine Ermüdung ist in diesem Fall keine Charakterschwäche, sondern schlicht die Rechnung für die Achterbahn, die dein Stoffwechsel gerade fährt.',
-        tip: 'Bei jeder Mahlzeit zuerst Eiweiß essen, nie auf leeren Magen zu Süßem greifen, und bei akutem Heißhunger lieber zu einer Energie-Bowl aus Datteln und Nüssen greifen als zu Schokolade — das sättigt wirklich, statt den nächsten Einbruch schon vorzuprogrammieren. Das glättet die gröbsten Ausschläge. Wie stark deine Achterbahn tatsächlich ist und wo genau sie ansetzt, zeigt sich aber erst, wenn man wirklich hinschaut.',
-        bridge: 'Ich weiß, wie frustrierend dieses ständige Auf und Ab ist — der Heißhunger, das Tief, das Gefühl, dem eigenen Körper ausgeliefert zu sein, egal wie sehr du dich bemühst. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Wenn dein Blutzucker Achterbahn fährt, muss dein Körper ständig gegensteuern – jede Spitze nach oben kostet ihn danach Kraft, um wieder ins Gleichgewicht zu kommen. Genau diese Energie fehlt dir logischerweise woanders: beim Nachmittagstief, beim Konzentrieren, beim Durchhalten bis zum Abend. Deine Ermüdung ist in diesem Fall keine Charakterschwäche, sondern schlicht die Rechnung für die Achterbahn, die dein Stoffwechsel gerade fährt.',
+        tip: 'Bei jeder Mahlzeit zuerst Eiweiß essen, nie auf leeren Magen zu Süßem greifen, und bei akutem Heißhunger lieber zu einer Energie-Bowl aus Datteln und Nüssen greifen als zu Schokolade – das sättigt wirklich, statt den nächsten Einbruch schon vorzuprogrammieren. Das glättet die gröbsten Ausschläge. Wie stark deine Achterbahn tatsächlich ist und wo genau sie ansetzt, zeigt sich aber erst, wenn man wirklich hinschaut.',
+        bridge: 'Ich weiß, wie frustrierend dieses ständige Auf und Ab ist – der Heißhunger, das Tief, das Gefühl, dem eigenen Körper ausgeliefert zu sein, egal wie sehr du dich bemühst. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       fette: {
         t: 'Typ: Falsche Zell-Bausteine',
-        p: 'Deine Zellen produzieren Energie — aber nur, wenn sie aus den richtigen Bausteinen gebaut sind. Bekommen sie stattdessen die falschen Fette, brennen sie schlechter, und genau das erklärt einen Teil deiner Energielosigkeit, ohne dass du dafür eine offensichtliche Ursache findest. Das Tückische: Du fühlst nicht, welche Fette gerade in deinen Zellen verbaut werden — nur, dass dir irgendwo Energie fehlt.',
-        tip: 'Sonnenblumenöl ist eine der größten Omega-6-Quellen in einer durchschnittlichen Küche — schrittweise gegen Olivenöl oder Leinöl tauschen und öfter zu fettem Fisch greifen, bringt schon etwas Balance. Das ist ein guter Anfang. Aber ob dein persönliches Verhältnis von Omega-6 zu Omega-3 wirklich passt, lässt sich mit bloßem Auge nicht beurteilen — das ist tatsächlich Messsache.',
-        bridge: 'Ich weiß, wie zermürbend es ist, sich erschöpft zu fühlen, ohne überhaupt zu wissen, woran es liegt — vor allem, wenn du dir schon so viel Mühe gibst und trotzdem keine Erklärung findest. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Deine Zellen produzieren Energie – aber nur, wenn sie aus den richtigen Bausteinen gebaut sind. Bekommen sie stattdessen die falschen Fette, brennen sie schlechter, und genau das erklärt einen Teil deiner Energielosigkeit, ohne dass du dafür eine offensichtliche Ursache findest. Das Tückische: Du fühlst nicht, welche Fette gerade in deinen Zellen verbaut werden – nur, dass dir irgendwo Energie fehlt.',
+        tip: 'Sonnenblumenöl ist eine der größten Omega-6-Quellen in einer durchschnittlichen Küche – schrittweise gegen Olivenöl oder Leinöl tauschen und öfter zu fettem Fisch greifen, bringt schon etwas Balance. Das ist ein guter Anfang. Aber ob dein persönliches Verhältnis von Omega-6 zu Omega-3 wirklich passt, lässt sich mit bloßem Auge nicht beurteilen – das ist tatsächlich Messsache.',
+        bridge: 'Ich weiß, wie zermürbend es ist, sich erschöpft zu fühlen, ohne überhaupt zu wissen, woran es liegt – vor allem, wenn du dir schon so viel Mühe gibst und trotzdem keine Erklärung findest. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       stress: {
         t: 'Typ: Dauerstrom ohne Pause',
-        p: 'Dauerstrom ohne echte Pausen verbrennt Energie schneller, als du sie nachladen kannst — und genau das ist bei dir vermutlich ein Hauptgrund für deine Erschöpfung. Dein Nervensystem läuft im Hintergrund ständig auf Anspannung, selbst wenn du gerade nichts tust, und das kostet Kraft, die dir dann für den eigentlichen Tag fehlt. So wird aus vollem Terminkalender ganz automatisch Dauermüdigkeit.',
-        tip: 'Bewusst 2–3 kurze Pausen am Tag ohne Bildschirm einbauen — schon eine Minute 4-7-8-Atmung (4 Sekunden einatmen, 7 halten, 8 ausatmen) wirkt auf dein Nervensystem oft stärker als der nächste Kaffee. Das lindert die Symptome spürbar. Was deinen Dauerstrom bei dir konkret befeuert und wie du wirklich aus dem Modus rauskommst, ist aber eine andere Frage.',
-        bridge: 'Ich weiß, wie erschöpfend es ist, ständig zu funktionieren, ohne wirklich abschalten zu können — und wie einsam sich diese Art von Müdigkeit anfühlt, weil sie von außen keiner sieht. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Dauerstrom ohne echte Pausen verbrennt Energie schneller, als du sie nachladen kannst – und genau das ist bei dir vermutlich ein Hauptgrund für deine Erschöpfung. Dein Nervensystem läuft im Hintergrund ständig auf Anspannung, selbst wenn du gerade nichts tust, und das kostet Kraft, die dir dann für den eigentlichen Tag fehlt. So wird aus vollem Terminkalender ganz automatisch Dauermüdigkeit.',
+        tip: 'Bewusst 2–3 kurze Pausen am Tag ohne Bildschirm einbauen – schon eine Minute 4-7-8-Atmung (4 Sekunden einatmen, 7 halten, 8 ausatmen) wirkt auf dein Nervensystem oft stärker als der nächste Kaffee. Das lindert die Symptome spürbar. Was deinen Dauerstrom bei dir konkret befeuert und wie du wirklich aus dem Modus rauskommst, ist aber eine andere Frage.',
+        bridge: 'Ich weiß, wie erschöpfend es ist, ständig zu funktionieren, ohne wirklich abschalten zu können – und wie einsam sich diese Art von Müdigkeit anfühlt, weil sie von außen keiner sieht. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       verdauung: {
         t: 'Typ: Bauch-Bremse',
-        p: 'Wenn dein Bauch bremst — Blähungen, eine unruhige Verdauung — kostet das mehr Energie, als man denkt: Ein großer Teil deiner Kraft entsteht im Darm, und wenn es dort hakt, fehlt dir genau diese Energie später am Tag als Müdigkeit. Das ist kein Zufall, sondern eine ziemlich direkte Folge — dein Bauch und dein Energielevel hängen enger zusammen, als es sich anfühlt.',
-        tip: 'Langsamer essen, große und späte Mahlzeiten möglichst meiden, und nach dem Essen lieber ein paar Minuten laufen als sich direkt hinzusetzen — das bringt die Verdauung sanft in Schwung. Das nimmt etwas Druck raus. Woran es bei dir konkret hakt und was dein Darm wirklich braucht, um wieder rund zu laufen, lässt sich damit allein aber noch nicht beantworten.',
-        bridge: 'Ich weiß, wie belastend es ist, wenn dich dein eigener Bauch ständig ausbremst — das kostet nicht nur Energie, sondern auch Lebensqualität, Tag für Tag. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Wenn dein Bauch bremst – Blähungen, eine unruhige Verdauung – kostet das mehr Energie, als man denkt: Ein großer Teil deiner Kraft entsteht im Darm, und wenn es dort hakt, fehlt dir genau diese Energie später am Tag als Müdigkeit. Das ist kein Zufall, sondern eine ziemlich direkte Folge – dein Bauch und dein Energielevel hängen enger zusammen, als es sich anfühlt.',
+        tip: 'Langsamer essen, große und späte Mahlzeiten möglichst meiden, und nach dem Essen lieber ein paar Minuten laufen als sich direkt hinzusetzen – das bringt die Verdauung sanft in Schwung. Das nimmt etwas Druck raus. Woran es bei dir konkret hakt und was dein Darm wirklich braucht, um wieder rund zu laufen, lässt sich damit allein aber noch nicht beantworten.',
+        bridge: 'Ich weiß, wie belastend es ist, wenn dich dein eigener Bauch ständig ausbremst – das kostet nicht nur Energie, sondern auch Lebensqualität, Tag für Tag. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       zucker_verdauung: {
         t: 'Typ: Zucker-Bauch',
-        p: 'Bei dir verstärken sich zwei Dinge gegenseitig: Dein Blutzucker fordert ständig Energie zum Ausgleichen — und dein Bauch verbraucht zusätzlich Kraft beim Verdauen von genau dem, was diese Achterbahn überhaupt erst auslöst. Das Ergebnis ist eine Erschöpfung, die sich doppelt anfühlt, weil eben zwei Energiefresser gleichzeitig aktiv sind, nicht nur einer.',
-        tip: 'Einen bewussten Tag lang ganz auf Zuckerbomben und Fertiggerichte verzichten — das ist der gemeinsame Nenner hinter beiden Symptomen, und schon dieser eine Tag zeigt oft überraschend deutlich, wie viel Bauch und Energie tatsächlich zusammenhängen. Das ist ein Anfang, kein vollständiges Bild.',
+        p: 'Bei dir verstärken sich zwei Dinge gegenseitig: Dein Blutzucker fordert ständig Energie zum Ausgleichen – und dein Bauch verbraucht zusätzlich Kraft beim Verdauen von genau dem, was diese Achterbahn überhaupt erst auslöst. Das Ergebnis ist eine Erschöpfung, die sich doppelt anfühlt, weil eben zwei Energiefresser gleichzeitig aktiv sind, nicht nur einer.',
+        tip: 'Einen bewussten Tag lang ganz auf Zuckerbomben und Fertiggerichte verzichten – das ist der gemeinsame Nenner hinter beiden Symptomen, und schon dieser eine Tag zeigt oft überraschend deutlich, wie viel Bauch und Energie tatsächlich zusammenhängen. Das ist ein Anfang, kein vollständiges Bild.',
         bridge: 'Ich weiß, wie zermürbend es ist, wenn sich gleich zwei Baustellen gegenseitig verstärken und du gar nicht mehr weißt, wo du zuerst ansetzen sollst. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       stress_zucker: {
         t: 'Typ: Cortisol-Crash',
-        p: 'Ständiger Stress treibt dich unbemerkt zu genau den Gewohnheiten, die deinen Blutzucker zusätzlich durcheinanderbringen — Kaffee statt Pause, Süßes statt Schlaf, ein Glas Wein zum Runterkommen. Das kostet dich doppelt Energie: einmal, um das Stresshormon auszugleichen, einmal, um den Blutzucker wieder einzufangen. Deine Erschöpfung ist in diesem Fall die Summe aus beidem, nicht nur eine Frage von „zu wenig Schlaf".',
-        tip: 'Bevor der nächste Kaffee oder Snack kommt, eine Minute 4-7-8-Atmung ausprobieren — das beruhigt dein Nervensystem, ohne deinen Blutzucker zusätzlich zu belasten, wie es Kaffee oder Zucker tun würden. Das unterbricht die Spirale kurz. Wie tief sie bei dir wirklich sitzt, ist damit aber noch nicht beantwortet.',
-        bridge: 'Ich weiß, wie erschöpfend sich diese Spirale aus Stress und Blutzucker anfühlt — ständig unter Strom und trotzdem nie wirklich wach. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Ständiger Stress treibt dich unbemerkt zu genau den Gewohnheiten, die deinen Blutzucker zusätzlich durcheinanderbringen – Kaffee statt Pause, Süßes statt Schlaf, ein Glas Wein zum Runterkommen. Das kostet dich doppelt Energie: einmal, um das Stresshormon auszugleichen, einmal, um den Blutzucker wieder einzufangen. Deine Erschöpfung ist in diesem Fall die Summe aus beidem, nicht nur eine Frage von „zu wenig Schlaf".',
+        tip: 'Bevor der nächste Kaffee oder Snack kommt, eine Minute 4-7-8-Atmung ausprobieren – das beruhigt dein Nervensystem, ohne deinen Blutzucker zusätzlich zu belasten, wie es Kaffee oder Zucker tun würden. Das unterbricht die Spirale kurz. Wie tief sie bei dir wirklich sitzt, ist damit aber noch nicht beantwortet.',
+        bridge: 'Ich weiß, wie erschöpfend sich diese Spirale aus Stress und Blutzucker anfühlt – ständig unter Strom und trotzdem nie wirklich wach. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       },
       none: {
         t: 'Typ: Fast am Ziel',
-        p: 'Du machst vieles richtig — und bist trotzdem müde. Genau das ist das Verwirrende an deinem Ergebnis. Wenn die offensichtlichen Stellschrauben (Schlaf, Blutzucker, Fette, Stress, Verdauung) schon einigermaßen sitzen, steckt die Ursache für deine Energielosigkeit meistens in Werten, die man nicht spüren kann — nur messen.',
-        tip: 'Nicht noch mehr optimieren auf Verdacht, keine weiteren Nahrungsergänzungsmittel raten. Dein Zell-Code verrät dir erst dann etwas, wenn du wirklich hinschaust — nicht durchs Fühlen, sondern durchs Messen. Alles andere ist an dieser Stelle vermutlich Zeitverschwendung.',
-        bridge: 'Ich weiß, wie frustrierend es ist, sich wirklich Mühe zu geben und trotzdem müde zu bleiben — das fühlt sich oft ungerechter an als offensichtliche Fehler. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
+        p: 'Du machst vieles richtig – und bist trotzdem müde. Genau das ist das Verwirrende an deinem Ergebnis. Wenn die offensichtlichen Stellschrauben (Schlaf, Blutzucker, Fette, Stress, Verdauung) schon einigermaßen sitzen, steckt die Ursache für deine Energielosigkeit meistens in Werten, die man nicht spüren kann – nur messen.',
+        tip: 'Nicht noch mehr optimieren auf Verdacht, keine weiteren Nahrungsergänzungsmittel raten. Dein Zell-Code verrät dir erst dann etwas, wenn du wirklich hinschaust – nicht durchs Fühlen, sondern durchs Messen. Alles andere ist an dieser Stelle vermutlich Zeitverschwendung.',
+        bridge: 'Ich weiß, wie frustrierend es ist, sich wirklich Mühe zu geben und trotzdem müde zu bleiben – das fühlt sich oft ungerechter an als offensichtliche Fehler. Lass uns gemeinsam herausfinden, wie du wieder zu mehr Energie im Alltag kommst. ' + SUPPLEMENT_BRIDGE
       }
     };
 
     // ── Kurz-Check-Texte je Bereich und Stufe (0 grün, 1 gelb, 2 rot) ──
     var CHECK_TEXT = {
       schlaf:    ['Schlaf: sieht erholsam aus.', 'Schlaf: Menge ok, aber die Qualität bremst dich.', 'Schlaf: hier verlierst du spürbar Energie (Licht, Handy, Durchschlafen).'],
-      zucker:    ['Blutzucker: stabil.', 'Blutzucker: leichte Achterbahn.', 'Blutzucker: starke Achterbahn — ein Hauptverdächtiger für dein Tief.'],
-      fette:     ['Zell-Bausteine: gute Fettqualität.', 'Zell-Bausteine: da ist Luft nach oben.', 'Zell-Bausteine: hier fehlt deinen Zellen womöglich das Richtige — messbar.'],
+      zucker:    ['Blutzucker: stabil.', 'Blutzucker: leichte Achterbahn.', 'Blutzucker: starke Achterbahn – ein Hauptverdächtiger für dein Tief.'],
+      fette:     ['Zell-Bausteine: gute Fettqualität.', 'Zell-Bausteine: da ist Luft nach oben.', 'Zell-Bausteine: hier fehlt deinen Zellen womöglich das Richtige – messbar.'],
       stress:    ['Stress & Pausen: im grünen Bereich.', 'Stress & Pausen: du läufst oft ohne echte Pause.', 'Stress & Pausen: Dauerstrom ohne Erholung zieht Energie.'],
       verdauung: ['Verdauung: unauffällig.', 'Verdauung: gelegentlich träge.', 'Verdauung: Blähbauch/Unregelmäßigkeit bremsen dich.']
     };
@@ -726,7 +767,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // Kombi-Paare: nur diese zwei Kombinationen bekommen einen eigenen Typ-Namen.
     // Andere enge Zweikämpfe (z.B. schlaf+fette) fallen auf den Solo-Typ des stärkeren
-    // Bereichs zurück — sonst müsste jede Bereichs-Kombination einen eigenen Text kriegen.
+    // Bereichs zurück – sonst müsste jede Bereichs-Kombination einen eigenen Text kriegen.
     var COMBO_TYPES = { 'verdauung_zucker': 'zucker_verdauung', 'stress_zucker': 'stress_zucker' };
 
     function primaryDim(scores) {
@@ -772,7 +813,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     function selectOption(optionIndex, opt) {
-      // Sperre gegen Mehrfach-Klicks während der 200ms Auto-Advance-Verzögerung —
+      // Sperre gegen Mehrfach-Klicks während der 200ms Auto-Advance-Verzögerung –
       // sonst läuft state.index bei schnellen Doppel-Tipps über das Array hinaus.
       if (state.locked) return;
       state.locked = true;
@@ -831,7 +872,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       var body = '<p>' + info.p + '</p>';
       if (state.context.goal) {
-        body += '<p>' + state.context.goal + ' Genau da setzt der nächste Schritt an — mit Zahlen, nicht auf Verdacht.</p>';
+        body += '<p>' + state.context.goal + ' Genau da setzt der nächste Schritt an – mit Zahlen, nicht auf Verdacht.</p>';
       }
       document.getElementById('qz-result-text').innerHTML = body;
 
@@ -883,7 +924,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // darüber GA4-Event-Tag und Google-Ads-Conversion-Tag auslösen.
       // Zusätzliche Funnel-Events auf dieser Seite (nur GA4, keine Ads-Conversion):
       // "quiz_start", "quiz_question_answered" (mit question_index/question_total/question_dim),
-      // "quiz_complete" — damit sich in GA4 die Abbruchquote pro Frage auswerten lässt.
+      // "quiz_complete" – damit sich in GA4 die Abbruchquote pro Frage auswerten lässt.
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'lead_quiz_complete',
@@ -892,7 +933,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         funnel: 'energie-test'
       });
 
-      // Formular geht in den versteckten iframe — Auswertung danach direkt zeigen
+      // Formular geht in den versteckten iframe – Auswertung danach direkt zeigen
       setTimeout(function() {
         renderResult();
         showScreen('screen-result');
@@ -902,7 +943,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 
 <!-- ══════════════════════════════════════════════
-     DSGVO COOKIE BANNER — Consent Mode v2
+     DSGVO COOKIE BANNER – Consent Mode v2
      Martina Lau · martinalau.org
      ══════════════════════════════════════════════ -->
 <style>
@@ -951,7 +992,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="cb-toggles">
       <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" checked disabled><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Technisch notwendig</strong><span>Immer aktiv</span></div></div>
       <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-gtm"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Google Tag Manager</strong><span>Standardmäßig deaktiviert</span></div></div>
-      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-marketing"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Marketing &amp; Werbung</strong><span>Google Ads — setzt GTM voraus</span></div></div>
+      <div class="cb-toggle-row"><label class="cb-switch"><input type="checkbox" id="cb-marketing"><span class="cb-slider"></span></label><div class="cb-toggle-label"><strong>Marketing &amp; Werbung</strong><span>Google Ads – setzt GTM voraus</span></div></div>
     </div>
     <div class="cb-buttons">
       <button class="cb-btn cb-btn-accept" id="cb-accept-all">Alle akzeptieren</button>
