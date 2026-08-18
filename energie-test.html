@@ -505,15 +505,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <iframe name="ml-hidden-frame-quiz" style="display:none;" aria-hidden="true"></iframe>
 
           <!--
-            MAIL-TOOL: MailerLite (Konto 1700428), Formular "Energie-Test Leads" (Gruppe
-            "Energie Test Leads"). Custom Fields "typ", "phase", "ziel" müssen in MailerLite
-            unter Einstellungen > Felder als Text angelegt sein, damit die fields[...] unten
-            gespeichert werden. Mögliche Werte für "typ" (8 Typen): schlaf / zucker / fette /
-            stress / verdauung / zucker_verdauung / stress_zucker / none. Details zur
-            Automation siehe Anleitung-MailerLite-Ergebnis-Mail.md im selben Ordner.
+            MAIL-TOOL: MailerLite (Konto 1700428), Formular "Energie-Testleitungen"
+            (Formular-ID 196152292335945176, Gruppe "Energieprüfleitungen", Double-Opt-in aus).
+            Custom Fields "typ", "phase", "ziel" müssen in MailerLite unter Einstellungen > Felder
+            als Text angelegt sein, damit die fields[...] unten gespeichert werden. Mögliche Werte
+            für "typ" (8 Typen): schlaf / zucker / fette / stress / verdauung / zucker_verdauung /
+            stress_zucker / none. Details zur Automation siehe Anleitung-MailerLite-Ergebnis-Mail.md
+            im selben Ordner. Die Automation "Anmeldung Webinar-Workflow" (8-Typen-Verzweigung)
+            muss im Trigger auf dieses Formular ("Energie-Testleitungen") umgestellt werden, sie
+            zeigte vorher auf das falsche/alte Formular "Testleitungen".
           -->
           <form
-            action="https://assets.mailerlite.com/jsonp/1700428/forms/19487920237486157/subscribe"
+            action="https://assets.mailerlite.com/jsonp/1700428/forms/196152292335945176/subscribe"
             method="post"
             target="ml-hidden-frame-quiz"
             id="quiz-lead-form"
@@ -542,6 +545,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p style="text-align:center;font-size:0.7rem;color:#aaa;margin-top:0.8rem;line-height:1.6;">
             🔒 Kein Spam · Jederzeit abmeldbar · 100% kostenlos
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════
+         SCREEN 3B – WARTET AUF BESTÄTIGUNG
+         Wird nach dem Formular gezeigt statt direkt der Auswertung, weil das
+         Ergebnis erst nach Double-Opt-in-Bestätigung freigeschaltet wird (bewusste
+         Entscheidung: erhöht die Bestätigungsquote, weil die Auswertung der
+         Anreiz zum Bestätigen ist).
+         ════════════════════════ -->
+    <section class="qz-screen" id="screen-pending" style="padding:5.5rem 0;">
+      <div class="container--narrow" style="text-align:center;">
+        <div class="form-box">
+          <p class="form-box__title" id="qz-pending-title">Fast geschafft!</p>
+          <p class="form-box__sub" id="qz-pending-text">
+            Wir haben dir eine E-Mail geschickt. Bestätige darin kurz deine E-Mail-Adresse — direkt danach zeigen wir dir deine persönliche Auswertung.
+          </p>
+          <p style="margin-top:1.5rem;font-size:0.8rem;color:#aaa;">Keine Mail angekommen? Schau auch im Spam-Ordner nach.</p>
         </div>
       </div>
     </section>
@@ -933,12 +955,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         funnel: 'energie-test'
       });
 
-      // Formular geht in den versteckten iframe – Auswertung danach direkt zeigen
+      // Ergebnis wird bewusst NICHT sofort gezeigt, sondern erst nach der
+      // Double-Opt-in-Bestätigung (siehe checkConfirmedReturn weiter unten) –
+      // die Auswertung selbst ist der Anreiz, die Bestätigungs-Mail zu bestätigen.
+      // Zwischenspeichern in localStorage, damit wir sie nach der Rückkehr von der
+      // Bestätigungs-Mail (selbes Gerät/Browser) direkt wieder anzeigen können.
+      try {
+        localStorage.setItem('energieTestResult', JSON.stringify({
+          typ: state.type,
+          phase: state.context.phase || '',
+          goal: state.context.goal || '',
+          ts: Date.now()
+        }));
+      } catch (err) {}
+
+      // Formular geht in den versteckten iframe – danach den "Bestätige deine
+      // E-Mail"-Screen zeigen statt direkt die Auswertung.
       setTimeout(function() {
-        renderResult();
-        showScreen('screen-result');
+        showScreen('screen-pending');
       }, 700);
     });
+
+    // ── Rückkehr nach Double-Opt-in-Bestätigung ──
+    // MailerLite leitet nach dem Bestätigungsklick auf
+    // energie-test.html?bestaetigt=1 weiter (in den Formular-Einstellungen als
+    // "Custom success page" hinterlegt). Auf demselben Gerät/Browser wie beim
+    // Ausfüllen liegt das Ergebnis noch in localStorage – dann direkt zeigen.
+    // Auf einem anderen Gerät bestätigt (kein localStorage-Treffer): Hinweis, dass
+    // die Auswertung per Mail kommt (die Mail-Automation läuft ja unabhängig davon).
+    function checkConfirmedReturn() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('bestaetigt') !== '1') return;
+
+      var stored = null;
+      try { stored = JSON.parse(localStorage.getItem('energieTestResult') || 'null'); } catch (err) {}
+
+      if (stored && stored.typ) {
+        state.type = stored.typ;
+        state.context = { phase: stored.phase, goal: stored.goal };
+        renderResult();
+        showScreen('screen-result');
+        try { localStorage.removeItem('energieTestResult'); } catch (err) {}
+      } else {
+        document.getElementById('qz-pending-title').textContent = 'Bestätigt!';
+        document.getElementById('qz-pending-text').textContent =
+          'Danke fürs Bestätigen – deine persönliche Auswertung ist unterwegs zu dir per E-Mail.';
+        showScreen('screen-pending');
+      }
+    }
+    checkConfirmedReturn();
   })();
   </script>
 
