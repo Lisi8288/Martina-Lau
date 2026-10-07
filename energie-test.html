@@ -529,13 +529,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <label for="qz-email">E-Mail-Adresse</label>
               <input type="email" id="qz-email" name="fields[email]" placeholder="deine@email.de" required />
             </div>
+            <!--
+              TELEFON (freiwillig): "phone" ist ein MailerLite-Standardfeld. Das Custom Field
+              "telefon_einwilligung" (Text) muss in MailerLite angelegt sein – dort landet der
+              Nachweis nach § 7a UWG: "ja | Zeitstempel | Textversion". Bei Änderung des
+              Checkbox-Textes PHONE_CONSENT_VERSION im Script hochzählen und den alten Text
+              archivieren (Nachweis 5 Jahre aufbewahren).
+            -->
+            <div style="margin:1.6rem 0 0.4rem;padding-top:1.4rem;border-top:1px solid rgba(0,0,0,0.08);">
+              <p style="font-weight:600;margin:0 0 0.4rem;">Willst du mehr als die Standard-Auswertung?</p>
+              <p style="font-size:0.9rem;line-height:1.6;margin:0;">Martina schaut sich dein Ergebnis persönlich an und sagt dir in einem kurzen Gespräch, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und wo du ansetzen solltest.</p>
+            </div>
+            <div class="form-group">
+              <label for="qz-phone">Telefonnummer <span style="font-weight:normal;color:#888;">(freiwillig)</span></label>
+              <input type="tel" id="qz-phone" name="fields[phone]" placeholder="Für deine persönliche Einschätzung" autocomplete="tel" />
+            </div>
+            <div class="form-checkbox">
+              <input type="checkbox" id="qz-phone-consent" />
+              <label for="qz-phone-consent">
+                Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür telefonisch oder per WhatsApp kontaktieren und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
+              </label>
+            </div>
+            <input type="hidden" name="fields[telefon_einwilligung]" id="qz-phone-consent-field" value="" />
             <input type="hidden" name="fields[typ]" id="qz-typ-field" value="" />
             <input type="hidden" name="fields[phase]" id="qz-phase-field" value="" />
             <input type="hidden" name="fields[ziel]" id="qz-goal-field" value="" />
             <div class="form-checkbox">
               <input type="checkbox" id="qz-privacy" name="privacy" required />
               <label for="qz-privacy">
-                Ich bin einverstanden, dass meine Daten gespeichert werden, um mir meine Auswertung, den Guide und Infos zum Webinar zuzusenden. Jederzeit abmeldbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
+                Ich bin ausdrücklich einverstanden, dass meine Daten einschließlich meines Testergebnisses (Angaben zu Energie, Schlaf, Stress und Verdauung) gespeichert werden, um mir meine Auswertung, den Guide und Infos zum Webinar zuzusenden. Jederzeit widerrufbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
               </label>
             </div>
             <button type="submit" class="btn btn--primary btn--lg" id="qz-submit-btn">Meine Auswertung zeigen →</button>
@@ -689,8 +711,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         o: [['ja', {}], ['wechselhaft', { verdauung: 1 }], ['oft Probleme', { verdauung: 2 }]] },
       { dim: 'Messen', q: 'Hast du deine Werte je gemessen (Fettsäuren, Blutzucker, Eisen)?',
         o: [['ja, aktuell', {}], ['vor Jahren mal', { fette: 1 }], ['nie', { fette: 1 }]] },
-      { dim: 'Über dich', q: 'Wo stehst du gerade?', key: 'phase',
-        o: [['30–40', {}, '30–40'], ['40–50', {}, '40–50'], ['50+', {}, '50+'], ['in den Wechseljahren', {}, 'Wechseljahre']] },
+      { dim: 'Über dich', q: 'Wie alt bist du?', key: 'phase',
+        o: [['unter 30', {}, 'unter 30'], ['30–39', {}, '30–39'], ['40–49', {}, '40–49'], ['50–59', {}, '50–59'], ['60 oder älter', {}, '60+']] },
       { dim: 'Dein Ziel', q: 'Was würdest du am liebsten zurückgewinnen?', key: 'goal',
         o: [['Meine Energie am Nachmittag', {}, 'Du willst deine Energie am Nachmittag zurück.'],
             ['Einen klaren Kopf', {}, 'Du willst deinen klaren Kopf zurück.'],
@@ -916,6 +938,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // ── E-Mail-Gate: Validierung + Submit ──
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Version des Einwilligungstexts (Telefon/WhatsApp) für den Nachweis nach § 7a UWG
+    var PHONE_CONSENT_VERSION = 'v2-2026-10-07';
 
     document.getElementById('quiz-lead-form').addEventListener('submit', function(e) {
       var name    = document.getElementById('qz-fname').value.trim();
@@ -937,6 +961,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         return;
       }
 
+      // ── Telefon (freiwillig): Nummer nur zusammen mit Einwilligung ──
+      var phoneInput   = document.getElementById('qz-phone');
+      var phone        = phoneInput.value.trim();
+      var phoneConsent = document.getElementById('qz-phone-consent').checked;
+      if (phone && !phoneConsent) {
+        e.preventDefault();
+        err.textContent = 'Bitte setz das Häkchen für den Anruf – oder lass das Telefonfeld leer.';
+        err.style.display = 'block';
+        return;
+      }
+      if (phoneConsent && phone.replace(/\D/g, '').length < 6) {
+        e.preventDefault();
+        err.textContent = 'Bitte gib deine Telefonnummer ein – oder entferne das Häkchen.';
+        err.style.display = 'block';
+        return;
+      }
+      phoneInput.value = phone;
+      document.getElementById('qz-phone-consent-field').value = phoneConsent
+        ? 'ja | ' + new Date().toISOString() + ' | ' + PHONE_CONSENT_VERSION
+        : '';
+
       err.style.display = 'none';
       btn.textContent = 'Wird ausgewertet …';
       btn.disabled = true;
@@ -952,6 +997,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         event: 'lead_quiz_complete',
         quiz_typ: state.type,
         quiz_phase: state.context.phase || '',
+        quiz_phone_optin: phoneConsent,
         funnel: 'energie-test'
       });
 
