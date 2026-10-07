@@ -90,13 +90,14 @@
       filter: drop-shadow(0 0 10px rgba(212,175,110,0.65)) drop-shadow(0 0 22px rgba(212,175,110,0.4));
     }
     .qz-hero-text h1 { font-size: clamp(1.7rem, 2.5vw, 2.25rem); line-height: 1.28; margin-bottom: 1.1rem; white-space: normal; }
-    .qz-intro-lead { font-size: clamp(1.4rem, 2.7vw, 1.7rem); line-height: 1.55; color: rgba(255,255,255,0.9); }
-    .qz-areas-line { font-size: clamp(1.1rem, 1.8vw, 1.25rem); color: var(--gold-light); letter-spacing: 0.03em; margin: 0.8rem 0 1.8rem; }
+    /* .webinar-header davor, sonst gewinnt .webinar-header p (0.85rem) aus style.css */
+    .webinar-header .qz-intro-lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.6; color: rgba(255,255,255,0.9); }
+    .webinar-header .qz-areas-line { font-size: clamp(1rem, 1.3vw, 1.1rem); color: var(--gold-light); letter-spacing: 0.03em; margin: 0.8rem 0 1.8rem; }
 
     .qz-benefits { list-style: none; margin: 0 0 1.8rem; text-align: left; }
     .qz-benefits li {
       display: flex; align-items: flex-start; gap: 0.7rem;
-      font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.5;
+      font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 1.5;
       margin-bottom: 0.9rem;
     }
     .qz-benefits li:last-child { margin-bottom: 0; }
@@ -176,7 +177,7 @@
     .qz-hero-trust-mobile { display: none; }
     @media (max-width: 600px) {
       .qz-hero-text h1 { font-size: clamp(1.8rem, 7vw, 2.3rem); }
-      .qz-intro-lead { font-size: 1.55rem; }
+      .webinar-header .qz-intro-lead { font-size: 1.1rem; }
     }
 
     /* Quiz */
@@ -334,14 +335,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h1>Ständig müde – und du fragst dich,<br/><em class="gold-em">woran es liegen könnte</em>?</h1>
 
               <p class="qz-intro-lead">
-                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> – und erhalte im Anschluss deine persönliche Auswertung.
+                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> - und erhalte im Anschluss deine persönliche Auswertung.
               </p>
               <p class="qz-areas-line">Schlaf · Blutzucker · Fette · Stress · Verdauung</p>
 
               <ul class="qz-benefits">
-                <li><span class="check">✓</span> 20 kurze Fragen – ca. 2–3 Minuten</li>
+                <li><span class="check">✓</span> 20 kurze Fragen - ca. 2-3 Minuten</li>
                 <li><span class="check">✓</span> Dein persönlicher Energie-Typ</li>
-                <li><span class="check">✓</span> Du erfährst im Anschluss, welcher Energie-Typ du bist – inklusive passender Tipps, die du direkt in deinem Alltag umsetzen kannst</li>
+                <li><span class="check">✓</span> Du erfährst im Anschluss, welcher Energie-Typ du bist - inklusive passender Tipps, die du direkt in deinem Alltag umsetzen kannst</li>
               </ul>
 
               <button type="button" class="btn btn--primary btn--lg start-quiz-btn" id="start-quiz-btn">Meinen Energie-Typ herausfinden →</button>
@@ -465,7 +466,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="divider divider--gold" style="margin:1.5rem auto 2rem;"></div>
           <p>20 kurze Fragen. Wenige Minuten. Deine persönliche Auswertung im Anschluss.</p>
           <button type="button" class="btn btn--primary btn--lg start-quiz-btn">Jetzt kostenlosen Energie-Test starten →</button>
-          <p class="qz-microcopy" style="margin-top:2.2rem;">Kostenlos · unverbindlich · ca. 2–3 Minuten</p>
+          <p class="qz-microcopy" style="margin-top:2.2rem;">Kostenlos · unverbindlich · ca. 2-3 Minuten</p>
         </div>
       </section>
 
@@ -583,7 +584,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="form-box">
           <p class="form-box__title" id="qz-pending-title">Fast geschafft!</p>
           <p class="form-box__sub" id="qz-pending-text">
-            Wir haben dir eine E-Mail geschickt. Bestätige darin kurz deine E-Mail-Adresse — direkt danach zeigen wir dir deine persönliche Auswertung.
+            Wir haben dir eine E-Mail geschickt. Bestätige darin kurz deine E-Mail-Adresse - direkt danach zeigen wir dir deine persönliche Auswertung.
           </p>
           <p style="margin-top:1.5rem;font-size:0.8rem;color:#aaa;">Keine Mail angekommen? Schau auch im Spam-Ordner nach.</p>
         </div>
