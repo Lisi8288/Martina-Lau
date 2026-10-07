@@ -538,8 +538,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               archivieren (Nachweis 5 Jahre aufbewahren).
             -->
             <div style="margin:1.6rem 0 0.4rem;padding-top:1.4rem;border-top:1px solid rgba(0,0,0,0.08);">
-              <p style="font-weight:600;margin:0 0 0.4rem;">Willst du mehr als die Standard-Auswertung?</p>
-              <p style="font-size:0.9rem;line-height:1.6;margin:0;">Martina schaut sich dein Ergebnis persönlich an und sagt dir in einem kurzen Gespräch, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und wo du ansetzen solltest.</p>
+              <p id="qz-pain-line" style="font-weight:600;margin:0 0 0.4rem;">Kaffee am Morgen, Tief am Nachmittag, abends platt auf dem Sofa?</p>
+              <p style="font-size:0.9rem;line-height:1.6;margin:0 0 0.5rem;">Die meisten machen jetzt den Test, nicken beim Ergebnis - und in drei Monaten ist alles wie vorher.</p>
+              <p style="font-size:0.9rem;line-height:1.6;margin:0;">Mach es diesmal anders: Martina schaut sich dein Ergebnis persönlich an und sagt dir in einem <strong>kostenlosen 15-Minuten-Gespräch</strong>, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen kannst.</p>
             </div>
             <div class="form-group">
               <label for="qz-phone">Telefonnummer <span style="font-weight:normal;color:#888;">(freiwillig)</span></label>
@@ -886,6 +887,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var scores = computeScores();
         state.type = primaryDim(scores);
         document.getElementById('qz-typ-field').value = state.type;
+        // Persönliche Schmerz-Zeile über dem Telefonfeld, passend zum Ergebnis-Typ
+        // (gespiegelt wird nur, was die Person selbst angeklickt hat - keine Angstwerbung)
+        var PAIN_LINES = {
+          schlaf: 'Du schläfst - und wachst trotzdem wie gerädert auf?',
+          zucker: 'Heißhunger, Nachmittagstief, der nächste Snack - und trotzdem keine Energie?',
+          fette: 'Du isst eigentlich ordentlich - und fühlst dich trotzdem leer?',
+          stress: 'Ständig unter Strom - und abends trotzdem nicht richtig abschalten?',
+          verdauung: 'Nach dem Essen aufgebläht und müde statt satt und fit?',
+          zucker_verdauung: 'Heißhunger, Blähbauch, Nachmittagstief - und abends völlig platt?',
+          stress_zucker: 'Kaffee statt Pause, Süßes statt Ruhe - und trotzdem ständig erschöpft?',
+          none: 'Du machst so vieles richtig - und bist trotzdem müde?'
+        };
+        if (PAIN_LINES[state.type]) document.getElementById('qz-pain-line').textContent = PAIN_LINES[state.type];
         document.getElementById('qz-phase-field').value = state.context.phase || '';
         document.getElementById('qz-goal-field').value = state.context.goal || '';
         window.dataLayer.push({ event: 'quiz_complete', quiz_typ: state.type, funnel: 'energie-test' });
