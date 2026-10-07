@@ -544,7 +544,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="form-group">
               <label for="qz-phone">Telefonnummer <span style="font-weight:normal;color:#888;">(freiwillig)</span></label>
-              <input type="tel" id="qz-phone" name="fields[phone]" placeholder="Für deine persönliche Einschätzung" autocomplete="tel" />
+              <input type="tel" id="qz-phone" name="fields[phone]" placeholder="Deine Telefonnummer" autocomplete="tel" />
             </div>
             <div class="form-checkbox">
               <input type="checkbox" id="qz-phone-consent" />
@@ -630,12 +630,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
 
-        <div class="qz-webinar-cta">
-          <span class="gold-badge" style="margin:0 auto;width:fit-content;">✦ Webinar-Aufzeichnung</span>
-          <h3>Verstehe, was hinter deiner Auswertung steckt</h3>
-          <span id="qz-webinar-date">ca. 30 Minuten</span>
+        <!-- Ergebnis-CTA: persönliches Gespräch statt Webinar-Aufzeichnung (Aufzeichnung wurde nicht angesehen).
+             Wer im E-Mail-Formular schon eine Nummer angegeben hat, sieht nur die Bestätigung;
+             alle anderen können die Nummer hier nachtragen (gleicher MailerLite-Kontakt per E-Mail). -->
+        <div class="qz-webinar-cta" id="qz-call-cta">
+          <span class="gold-badge" style="margin:0 auto;width:fit-content;">✦ Kostenloses 15-Minuten-Gespräch</span>
+          <h3>Jetzt weißt du, wo es bei dir hakt.</h3>
           <p id="qz-webinar-bridge" style="text-align:left;"></p>
-          <a href="energie-test-webinar.html" class="btn btn--primary btn--lg" id="qz-webinar-btn">Jetzt Aufzeichnung ansehen →</a>
+          <div id="qz-call-form-wrap" style="text-align:left;max-width:440px;margin:0 auto;">
+            <form action="https://assets.mailerlite.com/jsonp/1700428/forms/196152292335945176/subscribe" method="post" target="ml-hidden-frame-quiz" id="qz-call-form" novalidate>
+              <input type="hidden" name="fields[email]" id="qz-call-email" value="" />
+              <input type="hidden" name="fields[telefon_einwilligung]" id="qz-call-consent-field" value="" />
+              <div class="form-group">
+                <label for="qz-call-phone" style="color:var(--gold-light);">Telefonnummer</label>
+                <input type="tel" id="qz-call-phone" name="fields[phone]" placeholder="Deine Telefonnummer" autocomplete="tel" />
+              </div>
+              <div class="form-checkbox">
+                <input type="checkbox" id="qz-call-consent" />
+                <label for="qz-call-consent" style="color:rgba(255,255,255,0.75);">
+                  Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür anrufen und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
+                </label>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg" id="qz-webinar-btn" style="width:100%;margin-top:0.6rem;">Ja, ich möchte mein Gespräch →</button>
+              <p id="qz-call-error" style="display:none;color:#ffc9c9;margin:0.8rem 0 0;font-size:0.85rem;text-align:center;"></p>
+            </form>
+          </div>
+          <p id="qz-call-done" style="display:none;color:var(--gold-light);font-size:1.05rem;margin:0;">Danke! Martina meldet sich in den nächsten Tagen telefonisch bei dir.</p>
         </div>
       </div>
     </section>
@@ -661,15 +681,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   (function() {
     'use strict';
 
-    // ── Config-Konstanten ──
-    // Bewusst nur EIN CTA im Ergebnis-Screen (Webinar). Die Direktbuchung der
-    // Performanceanalyse (mit Rabatt + Kochbuch-Ausschnitt) läuft stattdessen
-    // über die Mail-Sequenz nach dem Quiz, nicht als zweite Wahl direkt hier.
-    var CONFIG = {
-      WEBINAR_URL: 'energie-test-webinar.html'
-    };
-
-    document.getElementById('qz-webinar-btn').href = CONFIG.WEBINAR_URL;
+    // ── Config ──
+    // Bewusst nur EIN CTA im Ergebnis-Screen: das kostenlose Gespräch (vorher Webinar-
+    // Aufzeichnung, wurde aber nicht angesehen). Die Direktbuchung der Performanceanalyse
+    // läuft weiterhin über die Mail-Sequenz nach dem Quiz.
+    // VARIANT: 'tel' = energie-test.html, 'wa' = energie-test-wa.html (A/B-Test)
+    var VARIANT = 'tel';
 
     // ── Quiz-Daten: 20 Fragen über 5 Bereiche + 2 Kontextfragen ──
     // Frage-Objekt: {dim (Anzeige-Label), q, o:[[Label, {bereich:Punkte}], ...]}.
@@ -725,7 +742,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // ── Haupt-Typ je nach stärkstem Bereich - 8 Typen: 5 Solo + 2 Kombi + Fast-am-Ziel.
     // Ein Nugget pro Typ stammt aus Martinas eigener White-/Black-List (bewusst nur EIN
     // konkreter Tipp, nicht die ganze Liste - das Restliche bleibt Grund, ins Webinar zu kommen).
-    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht - jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen - was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Webinar gehen wir noch viel tiefer rein - welche Ursachen bei dir infrage kommen und wie du wirklich ins Tun kommst, um etwas zu verändern. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind - geh jetzt für dich los und schenk dir selbst die 30 Minuten, die wirklich etwas verändern können.';
+    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht - jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen - was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Gespräch schauen wir gemeinsam, welche Ursachen bei dir infrage kommen und was du als Erstes angehen kannst. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind - geh jetzt für dich los und schenk dir selbst die 15 Minuten, die wirklich etwas verändern können.';
 
     var TYPES = {
       schlaf: {
@@ -1026,6 +1043,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           typ: state.type,
           phase: state.context.phase || '',
           goal: state.context.goal || '',
+          email: email,
+          phoneGiven: phoneConsent,
+          variant: VARIANT,
           ts: Date.now()
         }));
       } catch (err) {}
@@ -1034,6 +1054,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       // E-Mail"-Screen zeigen statt direkt die Auswertung.
       setTimeout(function() {
         showScreen('screen-pending');
+      }, 700);
+    });
+
+    // ── Ergebnis-CTA: Nummer nachtragen (nur wenn im E-Mail-Formular keine angegeben) ──
+    function setupCallCta() {
+      var wrap = document.getElementById('qz-call-form-wrap');
+      var done = document.getElementById('qz-call-done');
+      if (state.phoneGiven) {
+        wrap.style.display = 'none';
+        done.style.display = 'block';
+      } else if (!state.email) {
+        // Alte Zwischenspeicherung ohne E-Mail: Nummer ließe sich keinem Kontakt zuordnen
+        wrap.style.display = 'none';
+      }
+    }
+
+    document.getElementById('qz-call-form').addEventListener('submit', function(e) {
+      var phoneInput = document.getElementById('qz-call-phone');
+      var phone      = phoneInput.value.trim();
+      var consent    = document.getElementById('qz-call-consent').checked;
+      var err        = document.getElementById('qz-call-error');
+      if (phone.replace(/\D/g, '').length < 6 || !consent) {
+        e.preventDefault();
+        err.textContent = 'Bitte gib deine Telefonnummer ein und setz das Häkchen.';
+        err.style.display = 'block';
+        return;
+      }
+      err.style.display = 'none';
+      phoneInput.value = phone;
+      document.getElementById('qz-call-email').value = state.email;
+      document.getElementById('qz-call-consent-field').value =
+        'ja | ' + new Date().toISOString() + ' | ' + PHONE_CONSENT_VERSION;
+      document.getElementById('qz-webinar-btn').disabled = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lead_phone_result', funnel: 'energie-test' });
+
+      setTimeout(function() {
+        document.getElementById('qz-call-form-wrap').style.display = 'none';
+        document.getElementById('qz-call-done').style.display = 'block';
       }, 700);
     });
 
@@ -1051,10 +1111,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var stored = null;
       try { stored = JSON.parse(localStorage.getItem('energieTestResult') || 'null'); } catch (err) {}
 
+      // MailerLite leitet immer auf energie-test.html zurück - Leute aus der
+      // WhatsApp-Variante zur eigenen Seite weiterschicken (localStorage gilt für beide)
+      if (stored && stored.variant && stored.variant !== VARIANT) {
+        window.location.replace((stored.variant === 'wa' ? 'energie-test-wa.html' : 'energie-test.html') + '?bestaetigt=1');
+        return;
+      }
+
       if (stored && stored.typ) {
         state.type = stored.typ;
         state.context = { phase: stored.phase, goal: stored.goal };
+        state.email = stored.email || '';
+        state.phoneGiven = !!stored.phoneGiven;
         renderResult();
+        setupCallCta();
         showScreen('screen-result');
         try { localStorage.removeItem('energieTestResult'); } catch (err) {}
       } else {
