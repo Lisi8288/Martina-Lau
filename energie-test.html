@@ -635,7 +635,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              alle anderen können die Nummer hier nachtragen (gleicher MailerLite-Kontakt per E-Mail). -->
         <div class="qz-webinar-cta" id="qz-call-cta">
           <span class="gold-badge" style="margin:0 auto;width:fit-content;">✦ Kostenloses 15-Minuten-Gespräch</span>
-          <h3>Jetzt weißt du, wo es bei dir hakt.</h3>
+          <h3 id="qz-call-title">Jetzt weißt du, wo es bei dir hakt.</h3>
           <p id="qz-webinar-bridge" style="text-align:left;"></p>
           <div id="qz-call-form-wrap" style="text-align:left;max-width:440px;margin:0 auto;">
             <form action="https://assets.mailerlite.com/jsonp/1700428/forms/196152292335945176/subscribe" method="post" target="ml-hidden-frame-quiz" id="qz-call-form" novalidate>
@@ -655,7 +655,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p id="qz-call-error" style="display:none;color:#ffc9c9;margin:0.8rem 0 0;font-size:0.85rem;text-align:center;"></p>
             </form>
           </div>
-          <p id="qz-call-done" style="display:none;color:var(--gold-light);font-size:1.05rem;margin:0;">Danke! Martina meldet sich in den nächsten Tagen telefonisch bei dir.</p>
+          <div id="qz-call-done" style="display:none;max-width:460px;margin:0 auto;"><p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.7;margin:0 0 1rem;">Das war der wichtigste Schritt - die meisten lesen ihr Ergebnis und machen dann weiter wie bisher. Du nicht. Ich melde mich in den nächsten Tagen telefonisch bei dir - nimm dir für unser Gespräch 15 Minuten Ruhe.</p><p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.7;margin:0 0 1.2rem;">Überleg dir bis dahin schon mal: Was soll sich bei dir als Erstes verändern?</p><p style="color:var(--gold-light);font-family:var(--font-serif);font-size:1.15rem;margin:0;">Ich freu mich auf dich! Deine Martina</p></div>
         </div>
       </div>
     </section>
@@ -1059,12 +1059,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
 
     // ── Ergebnis-CTA: Nummer nachtragen (nur wenn im E-Mail-Formular keine angegeben) ──
+    function showCallDone() {
+      document.getElementById('qz-call-title').textContent = 'Hammer - wie schön, dass du für dich losgehst!';
+      document.getElementById('qz-webinar-bridge').style.display = 'none';
+      document.getElementById('qz-call-form-wrap').style.display = 'none';
+      document.getElementById('qz-call-done').style.display = 'block';
+    }
+
     function setupCallCta() {
       var wrap = document.getElementById('qz-call-form-wrap');
       var done = document.getElementById('qz-call-done');
       if (state.phoneGiven) {
-        wrap.style.display = 'none';
-        done.style.display = 'block';
+        showCallDone();
       } else if (!state.email) {
         // Alte Zwischenspeicherung ohne E-Mail: Nummer ließe sich keinem Kontakt zuordnen
         wrap.style.display = 'none';
@@ -1093,8 +1099,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       window.dataLayer.push({ event: 'lead_phone_result', funnel: 'energie-test' });
 
       setTimeout(function() {
-        document.getElementById('qz-call-form-wrap').style.display = 'none';
-        document.getElementById('qz-call-done').style.display = 'block';
+        showCallDone();
+        document.getElementById('qz-call-cta').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 700);
     });
 
