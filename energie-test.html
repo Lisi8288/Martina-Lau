@@ -548,7 +548,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="form-checkbox">
               <input type="checkbox" id="qz-phone-consent" />
               <label for="qz-phone-consent">
-                Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür telefonisch oder per WhatsApp kontaktieren und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
+                Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür anrufen und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
               </label>
             </div>
             <input type="hidden" name="fields[telefon_einwilligung]" id="qz-phone-consent-field" value="" />
@@ -939,8 +939,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // ── E-Mail-Gate: Validierung + Submit ──
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // Version des Einwilligungstexts (Telefon/WhatsApp) für den Nachweis nach § 7a UWG
-    var PHONE_CONSENT_VERSION = 'v2-2026-10-07';
+    // Version des Einwilligungstexts (Telefon) für den Nachweis nach § 7a UWG
+    var PHONE_CONSENT_VERSION = 'v3-2026-10-07';
 
     document.getElementById('quiz-lead-form').addEventListener('submit', function(e) {
       var name    = document.getElementById('qz-fname').value.trim();
