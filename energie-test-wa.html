@@ -684,12 +684,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <input type="hidden" name="fields[email]" id="qz-call-email" value="" />
               <input type="hidden" name="fields[telefon_einwilligung]" id="qz-call-consent-field" value="" />
               <div class="form-group">
-                <label for="qz-call-phone" style="color:var(--gold-light);">WhatsApp-Nummer</label>
+                <label style="color:var(--gold-light);">Wie soll sich Martina melden?</label>
+                <div style="display:flex;gap:1.4rem;margin-top:0.3rem;color:#fff;">
+                  <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;color:#fff;cursor:pointer;"><input type="radio" name="qz-call-kanal" value="anruf" /> Anruf</label>
+                  <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;color:#fff;cursor:pointer;"><input type="radio" name="qz-call-kanal" value="whatsapp" checked /> WhatsApp</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="qz-call-phone" id="qz-call-phone-label" style="color:var(--gold-light);">WhatsApp-Nummer</label>
                 <input type="tel" id="qz-call-phone" name="fields[phone]" placeholder="z. B. 0176 12345678" autocomplete="tel" />
               </div>
               <div class="form-checkbox">
                 <input type="checkbox" id="qz-call-consent" />
-                <label for="qz-call-consent" style="color:rgba(255,255,255,0.75);">
+                <label for="qz-call-consent" id="qz-call-consent-label" style="color:rgba(255,255,255,0.75);">
                   Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür per WhatsApp kontaktieren und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
                 </label>
               </div>
@@ -697,7 +704,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p id="qz-call-error" style="display:none;color:#ffc9c9;margin:0.8rem 0 0;font-size:0.85rem;text-align:center;"></p>
             </form>
           </div>
-          <div id="qz-call-done" style="display:none;max-width:460px;margin:0 auto;"><p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.7;margin:0 0 1rem;">Das war der wichtigste Schritt - die meisten lesen ihr Ergebnis und machen dann weiter wie bisher. Du nicht. Ich melde mich in den nächsten Tagen per WhatsApp bei dir.</p><p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.7;margin:0 0 1.2rem;">Überleg dir bis dahin schon mal: Was soll sich bei dir als Erstes verändern?</p><p style="color:var(--gold-light);font-family:var(--font-serif);font-size:1.15rem;margin:0;">Ich freu mich auf dich! Deine Martina</p></div>
+          <div id="qz-call-done" style="display:none;max-width:460px;margin:0 auto;"><p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.7;margin:0 0 1rem;">Das war der wichtigste Schritt - die meisten lesen ihr Ergebnis und machen dann weiter wie bisher. Du nicht. <span id="qz-call-done-channel">Ich melde mich in den nächsten Tagen per WhatsApp bei dir.</span></p><p style="color:rgba(255,255,255,0.85);font-size:1rem;line-height:1.7;margin:0 0 1.2rem;">Überleg dir bis dahin schon mal: Was soll sich bei dir als Erstes verändern?</p><p style="color:var(--gold-light);font-family:var(--font-serif);font-size:1.15rem;margin:0;">Ich freu mich auf dich! Deine Martina</p></div>
         </div>
       </div>
     </section>
@@ -1109,6 +1116,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById('qz-call-done').style.display = 'block';
     }
 
+    document.querySelectorAll('input[name="qz-call-kanal"]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        var ch = FB_CHANNELS[r.value];
+        document.getElementById('qz-call-phone-label').textContent = ch.label;
+        document.getElementById('qz-call-consent-label').textContent = ch.consent;
+        document.getElementById('qz-call-consent').checked = false;
+      });
+    });
+
     function setupCallCta() {
       var wrap = document.getElementById('qz-call-form-wrap');
       var done = document.getElementById('qz-call-done');
@@ -1134,8 +1150,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       err.style.display = 'none';
       phoneInput.value = phone;
       document.getElementById('qz-call-email').value = state.email;
+      var ch = FB_CHANNELS[(document.querySelector('input[name="qz-call-kanal"]:checked') || {}).value || 'whatsapp'];
       document.getElementById('qz-call-consent-field').value =
-        'ja | WhatsApp | ' + new Date().toISOString() + ' | ' + PHONE_CONSENT_VERSION;
+        'ja | ' + ch.marker + ' | Ergebnis-Seite | ' + new Date().toISOString() + ' | ' + ch.version;
+      document.getElementById('qz-call-done-channel').textContent = ch.done;
       document.getElementById('qz-webinar-btn').disabled = true;
 
       window.dataLayer = window.dataLayer || [];
