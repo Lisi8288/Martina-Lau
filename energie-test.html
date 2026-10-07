@@ -543,12 +543,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p style="font-size:0.9rem;line-height:1.6;margin:0;"><strong>Wenn du bereit bist, etwas zu ändern: Mach es diesmal anders und nutze die Chance, dein Ergebnis persönlich mit Martina zu besprechen.</strong> In einem kostenlosen 15-Minuten-Gespräch erfährst du, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen kannst.</p>
             </div>
             <div class="form-group">
-              <label for="qz-phone">Telefonnummer <span style="font-weight:normal;color:#888;">(freiwillig)</span></label>
+              <label>Wie soll sich Martina melden?</label>
+              <div style="display:flex;gap:1.4rem;margin:0.3rem 0 0.9rem;">
+                <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="radio" name="qz-phone-kanal" value="anruf" checked /> Anruf</label>
+                <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="radio" name="qz-phone-kanal" value="whatsapp" /> WhatsApp</label>
+              </div>
+              <label for="qz-phone"><span id="qz-phone-label">Telefonnummer</span> <span style="font-weight:normal;color:#888;">(freiwillig)</span></label>
               <input type="tel" id="qz-phone" name="fields[phone]" placeholder="z. B. 0176 12345678" autocomplete="tel" />
             </div>
             <div class="form-checkbox">
               <input type="checkbox" id="qz-phone-consent" />
-              <label for="qz-phone-consent">
+              <label for="qz-phone-consent" id="qz-phone-consent-label">
                 Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür anrufen und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
               </label>
             </div>
@@ -1047,19 +1052,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var phoneConsent = document.getElementById('qz-phone-consent').checked;
       if (phone && !phoneConsent) {
         e.preventDefault();
-        err.textContent = 'Bitte setz das Häkchen für den Anruf - oder lass das Telefonfeld leer.';
+        err.textContent = 'Bitte setz das Häkchen - oder lass das Nummernfeld leer.';
         err.style.display = 'block';
         return;
       }
       if (phoneConsent && phone.replace(/\D/g, '').length < 6) {
         e.preventDefault();
-        err.textContent = 'Bitte gib deine Telefonnummer ein - oder entferne das Häkchen.';
+        err.textContent = 'Bitte gib deine Nummer ein - oder entferne das Häkchen.';
         err.style.display = 'block';
         return;
       }
       phoneInput.value = phone;
+      var phoneKanal = (document.querySelector('input[name="qz-phone-kanal"]:checked') || {}).value || 'anruf';
+      var phoneCh = FB_CHANNELS[phoneKanal];
       document.getElementById('qz-phone-consent-field').value = phoneConsent
-        ? 'ja | ' + new Date().toISOString() + ' | ' + PHONE_CONSENT_VERSION
+        ? 'ja | ' + phoneCh.marker + ' | ' + new Date().toISOString() + ' | ' + phoneCh.version
         : '';
 
       err.style.display = 'none';
@@ -1093,6 +1100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           goal: state.context.goal || '',
           email: email,
           phoneGiven: phoneConsent,
+          phoneKanal: phoneConsent ? phoneKanal : '',
           variant: VARIANT,
           ts: Date.now()
         }));
@@ -1122,10 +1130,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     });
 
+    document.querySelectorAll('input[name="qz-phone-kanal"]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        var ch = FB_CHANNELS[r.value];
+        document.getElementById('qz-phone-label').textContent = ch.label;
+        document.getElementById('qz-phone-consent-label').textContent = ch.consent;
+        document.getElementById('qz-phone-consent').checked = false;
+      });
+    });
+
     function setupCallCta() {
       var wrap = document.getElementById('qz-call-form-wrap');
       var done = document.getElementById('qz-call-done');
       if (state.phoneGiven) {
+        if (FB_CHANNELS[state.phoneKanal]) {
+          document.getElementById('qz-call-done-channel').textContent = FB_CHANNELS[state.phoneKanal].done;
+        }
         showCallDone();
       } else if (!state.email) {
         // Alte Zwischenspeicherung ohne E-Mail: Nummer ließe sich keinem Kontakt zuordnen
@@ -1248,6 +1268,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         state.context = { phase: stored.phase, goal: stored.goal };
         state.email = stored.email || '';
         state.phoneGiven = !!stored.phoneGiven;
+        state.phoneKanal = stored.phoneKanal || '';
         renderResult();
         setupCallCta();
         showScreen('screen-result');
