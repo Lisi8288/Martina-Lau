@@ -588,6 +588,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Wir haben dir eine E-Mail geschickt. Bestätige darin kurz deine E-Mail-Adresse - direkt danach zeigen wir dir deine persönliche Auswertung.
           </p>
           <p style="margin-top:1.5rem;font-size:0.8rem;color:#aaa;">Keine Mail angekommen? Schau auch im Spam-Ordner nach.</p>
+
+          <!-- Zweite Chance auf dem "Bestätigt!"-Bildschirm (Bestätigung in anderem Browser/Mail-App,
+               daher kein Ergebnis im Browser): Gespräch anbieten, Kanal frei wählbar, weil hier
+               unbekannt ist, ob die Person von der Telefon- oder WhatsApp-Variante kam. -->
+          <div id="qz-fb-call" style="display:none;text-align:left;margin-top:2rem;padding-top:1.6rem;border-top:1px solid rgba(0,0,0,0.08);">
+            <div id="qz-fb-form-wrap">
+              <p style="font-weight:600;font-size:1.1rem;margin:0 0 0.5rem;">Willst du dein Ergebnis persönlich besprechen?</p>
+              <p style="font-size:0.92rem;line-height:1.65;margin:0 0 1.2rem;">Mach es diesmal anders: Martina schaut sich dein Ergebnis persönlich an und sagt dir <strong>kostenlos</strong>, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen kannst.</p>
+              <form action="https://assets.mailerlite.com/jsonp/1700428/forms/196152292335945176/subscribe" method="post" target="ml-hidden-frame-quiz" id="qz-fb-form" novalidate>
+                <input type="hidden" name="fields[telefon_einwilligung]" id="qz-fb-consent-field" value="" />
+                <div class="form-group">
+                  <label for="qz-fb-email">Deine E-Mail-Adresse (die du beim Test angegeben hast)</label>
+                  <input type="email" id="qz-fb-email" name="fields[email]" placeholder="deine@email.de" autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label>Wie soll sich Martina melden?</label>
+                  <div style="display:flex;gap:1.4rem;margin-top:0.3rem;">
+                    <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="radio" name="qz-fb-kanal" value="anruf" checked /> Anruf</label>
+                    <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="radio" name="qz-fb-kanal" value="whatsapp" /> WhatsApp</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="qz-fb-phone" id="qz-fb-phone-label">Telefonnummer</label>
+                  <input type="tel" id="qz-fb-phone" name="fields[phone]" placeholder="z. B. 0176 12345678" autocomplete="tel" />
+                </div>
+                <div class="form-checkbox">
+                  <input type="checkbox" id="qz-fb-consent" />
+                  <label for="qz-fb-consent" id="qz-fb-consent-label">Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür anrufen und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.</label>
+                </div>
+                <button type="submit" class="btn btn--primary btn--lg" id="qz-fb-btn" style="width:100%;">Ja, ich möchte mein Gespräch →</button>
+                <p id="qz-fb-error" style="display:none;color:#e05;margin-top:0.8rem;font-size:0.85rem;text-align:center;"></p>
+              </form>
+            </div>
+            <div id="qz-fb-done" style="display:none;text-align:center;">
+              <p style="font-family:var(--font-serif);font-size:1.3rem;margin:0 0 0.8rem;">Hammer - wie schön, dass du für dich losgehst!</p>
+              <p style="font-size:0.95rem;line-height:1.7;margin:0 0 1rem;">Das war der wichtigste Schritt - die meisten lesen ihr Ergebnis und machen dann weiter wie bisher. Du nicht. <span id="qz-fb-done-channel"></span></p>
+              <p style="font-size:0.95rem;line-height:1.7;margin:0 0 1rem;">Überleg dir bis dahin schon mal: Was soll sich bei dir als Erstes verändern?</p>
+              <p style="font-family:var(--font-serif);font-size:1.1rem;color:var(--gold-deep);margin:0;">Ich freu mich auf dich! Deine Martina</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1104,6 +1144,66 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }, 700);
     });
 
+    // ── Zweite Chance auf dem "Bestätigt!"-Bildschirm ──
+    // Einwilligungstexte je Kanal; Versionen = dieselben Texte wie auf energie-test.html (v3)
+    // bzw. energie-test-wa.html (wa-v1). Kennzeichnung "Bestätigt-Seite" trennt diese
+    // Leads in MailerLite vom A/B-Test (der misst nur das erste Formular).
+    var FB_CHANNELS = {
+      anruf: {
+        label: 'Telefonnummer',
+        consent: 'Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür anrufen und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.',
+        marker: 'Anruf', version: 'v3-2026-10-07',
+        done: 'Ich melde mich in den nächsten Tagen telefonisch bei dir - nimm dir für unser Gespräch 15 Minuten Ruhe.'
+      },
+      whatsapp: {
+        label: 'WhatsApp-Nummer',
+        consent: 'Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür per WhatsApp kontaktieren und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.',
+        marker: 'WhatsApp', version: 'wa-v1-2026-10-07',
+        done: 'Ich melde mich in den nächsten Tagen per WhatsApp bei dir.'
+      }
+    };
+    function fbChannel() {
+      var r = document.querySelector('input[name="qz-fb-kanal"]:checked');
+      return FB_CHANNELS[r ? r.value : 'anruf'];
+    }
+    document.querySelectorAll('input[name="qz-fb-kanal"]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        var c = fbChannel();
+        document.getElementById('qz-fb-phone-label').textContent = c.label;
+        document.getElementById('qz-fb-consent-label').textContent = c.consent;
+        document.getElementById('qz-fb-consent').checked = false;
+      });
+    });
+    document.getElementById('qz-fb-form').addEventListener('submit', function(e) {
+      var c       = fbChannel();
+      var email   = document.getElementById('qz-fb-email').value.trim();
+      var phoneEl = document.getElementById('qz-fb-phone');
+      var phone   = phoneEl.value.trim();
+      var consent = document.getElementById('qz-fb-consent').checked;
+      var err     = document.getElementById('qz-fb-error');
+      if (!EMAIL_RE.test(email) || phone.replace(/\D/g, '').length < 6 || !consent) {
+        e.preventDefault();
+        err.textContent = 'Bitte gib deine E-Mail-Adresse und deine Nummer ein und setz das Häkchen.';
+        err.style.display = 'block';
+        return;
+      }
+      err.style.display = 'none';
+      document.getElementById('qz-fb-email').value = email;
+      phoneEl.value = phone;
+      document.getElementById('qz-fb-consent-field').value =
+        'ja | ' + c.marker + ' | Bestätigt-Seite | ' + new Date().toISOString() + ' | ' + c.version;
+      document.getElementById('qz-fb-btn').disabled = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lead_phone_fallback', kanal: c.marker, funnel: 'bestaetigt-seite' });
+
+      setTimeout(function() {
+        document.getElementById('qz-fb-done-channel').textContent = c.done;
+        document.getElementById('qz-fb-form-wrap').style.display = 'none';
+        document.getElementById('qz-fb-done').style.display = 'block';
+      }, 700);
+    });
+
     // ── Rückkehr nach Double-Opt-in-Bestätigung ──
     // MailerLite leitet nach dem Bestätigungsklick auf
     // energie-test.html?bestaetigt=1 weiter (in den Formular-Einstellungen als
@@ -1138,6 +1238,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.getElementById('qz-pending-title').textContent = 'Bestätigt!';
         document.getElementById('qz-pending-text').textContent =
           'Danke fürs Bestätigen - deine persönliche Auswertung ist unterwegs zu dir per E-Mail.';
+        document.getElementById('qz-fb-call').style.display = 'block';
         showScreen('screen-pending');
       }
     }
