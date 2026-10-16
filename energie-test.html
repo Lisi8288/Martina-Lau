@@ -209,6 +209,20 @@
     /* E-Mail-Gate - nutzt bestehende .form-box Optik */
     #screen-email input { font-size: 16px; }
 
+    /* Keine einzelnen Wörter in der letzten Zeile */
+    h1, h2, h3 { text-wrap: balance; }
+    p, li { text-wrap: pretty; }
+
+    /* Vorab-Blick aufs Ergebnis über dem E-Mail-Formular */
+    .qz-teaser { background: var(--gradient-dark); color: #fff; border-radius: 10px; padding: 2rem 2rem 1.6rem; margin-bottom: 1.6rem; text-align: center; box-shadow: 0 16px 48px rgba(0,55,64,0.18); border: 1px solid rgba(255,210,100,0.35); }
+    .qz-teaser__eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: #FFD87A; font-weight: 600; margin: 0 0 0.6rem; }
+    .qz-teaser__type { font-family: var(--font-serif); font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.2; margin: 0 0 0.6rem; color: #fff; text-wrap: balance; }
+    .qz-teaser__text { font-size: 0.98rem; line-height: 1.7; color: rgba(255,255,255,0.85); margin: 0 auto 1.2rem; max-width: 460px; text-wrap: pretty; }
+    .qz-teaser__list { list-style: none; padding: 0; margin: 0 auto 1rem; max-width: 380px; text-align: left; }
+    .qz-teaser__list li { font-size: 0.88rem; color: rgba(255,255,255,0.8); padding: 0.25rem 0; display: flex; gap: 0.6rem; }
+    .qz-teaser__list li span { color: #FFD87A; flex-shrink: 0; }
+    .qz-teaser__lock { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin: 0; }
+
     /* Ergebnis */
     .qz-result-card {
       background: var(--white); border: 1px solid var(--gold-border); border-radius: 10px;
@@ -335,14 +349,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h1>Ständig müde - und du fragst dich,<br/><em class="gold-em">woran es liegen könnte</em>?</h1>
 
               <p class="qz-intro-lead">
-                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> - und erhalte im Anschluss deine persönliche Auswertung.
+                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> - deinen Energie-Typ siehst du sofort, die ausführliche Auswertung bekommst du per E-Mail.
               </p>
               <p class="qz-areas-line">Schlaf · Blutzucker · Fette · Stress · Verdauung</p>
 
               <ul class="qz-benefits">
                 <li><span class="check">✓</span> 20 kurze Fragen - ca. 2-3 Minuten</li>
                 <li><span class="check">✓</span> Dein persönlicher Energie-Typ</li>
-                <li><span class="check">✓</span> Du erfährst im Anschluss, welcher Energie-Typ du bist - inklusive passender Tipps, die du direkt in deinem Alltag umsetzen kannst</li>
+                <li><span class="check">✓</span> Deine ausführliche Auswertung kommt per E-Mail - mit passenden Tipps für deinen Alltag und jederzeit zum Nachlesen</li>
               </ul>
 
               <button type="button" class="btn btn--primary btn--lg start-quiz-btn" id="start-quiz-btn">Meinen Energie-Typ herausfinden →</button>
@@ -355,7 +369,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
               </div>
 
-              <p class="qz-microcopy">Kostenlos · unverbindlich · Ergebnis im Anschluss</p>
+              <p class="qz-microcopy">Kostenlos · Auswertung per E-Mail · kein Spam, jederzeit abmeldbar</p>
             </div>
           </div>
         </div>
@@ -464,7 +478,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
           <h2>Bereit herauszufinden, welcher <em>Energie-Typ</em> du bist?</h2>
           <div class="divider divider--gold" style="margin:1.5rem auto 2rem;"></div>
-          <p>20 kurze Fragen. Wenige Minuten. Deine persönliche Auswertung im Anschluss.</p>
+          <p>20 kurze Fragen. Wenige Minuten. Deine persönliche Auswertung per E-Mail.</p>
           <button type="button" class="btn btn--primary btn--lg start-quiz-btn">Jetzt kostenlosen Energie-Test starten →</button>
           <p class="qz-microcopy" style="margin-top:2.2rem;">Kostenlos · unverbindlich · ca. 2-3 Minuten</p>
         </div>
@@ -493,9 +507,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          ════════════════════════ -->
     <section class="qz-screen" id="screen-email" style="padding:4.5rem 0;">
       <div class="container--narrow">
+        <!-- Vorab-Blick aufs Ergebnis: Typ + ein Satz, Details nach E-Mail-Bestätigung.
+             Erst etwas geben, dann fragen - und die Person weiß, wofür sie ihre Adresse gibt. -->
+        <div class="qz-teaser" id="qz-teaser">
+          <p class="qz-teaser__eyebrow">✦ Geschafft - dein Ergebnis steht fest</p>
+          <p class="qz-teaser__type" id="qz-teaser-type">Dein Energie-Typ</p>
+          <p class="qz-teaser__text" id="qz-teaser-text"></p>
+          <ul class="qz-teaser__list">
+            <li><span>✓</span> Was bei dir hinter der Müdigkeit stecken kann</li>
+            <li><span>✓</span> Dein erster konkreter Schritt für den Alltag</li>
+            <li><span>✓</span> Der Energie-Guide mit allen 5 Bereichen</li>
+          </ul>
+          <p class="qz-teaser__lock">🔒 Die ausführliche Auswertung schicken wir dir per E-Mail.</p>
+        </div>
+
         <div class="form-box">
           <p class="form-box__title">Wohin dürfen wir deine Auswertung schicken?</p>
-          <p class="form-box__sub">Deinen persönlichen Energie-Bereich-Check plus den Energie-Guide mit den Faktoren hinter deiner Müdigkeit.</p>
+          <p class="form-box__sub">Du bekommst gleich eine kurze Bestätigungsmail. Ein Klick darauf - und deine ausführliche Auswertung erscheint.</p>
 
           <div class="form-proof" style="margin-bottom:1.6rem;">
             <span style="color:var(--gold);letter-spacing:0.1em;font-size:0.85rem;flex-shrink:0;">★★★★★</span>
@@ -538,9 +566,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               archivieren (Nachweis 5 Jahre aufbewahren).
             -->
             <div style="margin:1.6rem 0 0.4rem;padding-top:1.4rem;border-top:1px solid rgba(0,0,0,0.08);">
-              <p id="qz-pain-line" style="font-weight:600;margin:0 0 0.4rem;">Kaffee am Morgen, Tief am Nachmittag, abends platt auf dem Sofa?</p>
-              <p style="font-size:0.9rem;line-height:1.6;margin:0 0 0.5rem;">Die meisten machen jetzt den Test, nicken beim Ergebnis - und in drei Monaten ist alles wie vorher.</p>
-              <p style="font-size:0.9rem;line-height:1.6;margin:0;"><strong>Wenn du bereit bist, etwas zu ändern: Mach es diesmal anders und nutze die Chance, dein Ergebnis persönlich mit Martina zu besprechen.</strong> In einem kostenlosen 15-Minuten-Gespräch erfährst du, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen kannst.</p>
+              <p style="font-size:0.9rem;line-height:1.6;margin:0;"><strong>Wenn du bereit bist, etwas zu ändern: Mach es diesmal anders und nutze die Chance, dein Ergebnis persönlich mit Martina zu besprechen.</strong> In einem kostenlosen 15-Minuten-Gespräch erfährst du, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen solltest.</p>
             </div>
             <div class="form-group">
               <label>Wie soll sich Martina melden?</label>
@@ -564,7 +590,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="form-checkbox">
               <input type="checkbox" id="qz-privacy" name="privacy" required />
               <label for="qz-privacy">
-                Ich bin ausdrücklich einverstanden, dass meine Daten einschließlich meines Testergebnisses (Angaben zu Energie, Schlaf, Stress und Verdauung) gespeichert werden, um mir meine Auswertung, den Guide und Infos zum Webinar zuzusenden. Jederzeit widerrufbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
+                Ich bin ausdrücklich einverstanden, dass meine Daten einschließlich meines Testergebnisses (Angaben zu Energie, Schlaf, Stress und Verdauung) gespeichert werden, um mir meine Auswertung, den Guide und Infos zu Martinas Angeboten rund um Energie und Gesundheit zuzusenden. Jederzeit widerrufbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
               </label>
             </div>
             <button type="submit" class="btn btn--primary btn--lg" id="qz-submit-btn">Meine Auswertung zeigen →</button>
@@ -600,7 +626,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div id="qz-fb-call" style="display:none;text-align:left;margin-top:2rem;padding-top:1.6rem;border-top:1px solid rgba(0,0,0,0.08);">
             <div id="qz-fb-form-wrap">
               <p style="font-weight:600;font-size:1.1rem;margin:0 0 0.5rem;">Willst du dein Ergebnis persönlich besprechen?</p>
-              <p style="font-size:0.92rem;line-height:1.65;margin:0 0 1.2rem;">Mach es diesmal anders: Martina schaut sich dein Ergebnis persönlich an und sagt dir <strong>kostenlos</strong>, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen kannst.</p>
+              <p style="font-size:0.92rem;line-height:1.65;margin:0 0 1.2rem;">Mach es diesmal anders: Martina schaut sich dein Ergebnis persönlich an und sagt dir <strong>kostenlos</strong>, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen solltest.</p>
               <form action="https://assets.mailerlite.com/jsonp/1700428/forms/196152292335945176/subscribe" method="post" target="ml-hidden-frame-quiz" id="qz-fb-form" novalidate>
                 <input type="hidden" name="fields[telefon_einwilligung]" id="qz-fb-consent-field" value="" />
                 <div class="form-group">
@@ -795,7 +821,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // ── Haupt-Typ je nach stärkstem Bereich - 8 Typen: 5 Solo + 2 Kombi + Fast-am-Ziel.
     // Ein Nugget pro Typ stammt aus Martinas eigener White-/Black-List (bewusst nur EIN
     // konkreter Tipp, nicht die ganze Liste - das Restliche bleibt Grund, ins Webinar zu kommen).
-    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht - jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen - was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Gespräch schauen wir gemeinsam, welche Ursachen bei dir infrage kommen und was du als Erstes angehen kannst. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind - geh jetzt für dich los und schenk dir selbst die 15 Minuten, die wirklich etwas verändern können.';
+    var SUPPLEMENT_BRIDGE = 'Deshalb bekommst du von mir keine pauschale Supplement-Liste: Das Gießkannenprinzip funktioniert nicht, und viel hilft nicht immer viel. Was bei der einen Person wirkt, wirkt bei der nächsten noch lange nicht - jeder Mensch ist individuell zu betrachten. Mir ist dabei wichtig zu sagen: Es geht gar nicht nur um Supplemente, sondern darum, dich als Ganzes anzuschauen - was dein Körper wirklich braucht, was bei dir gerade dran ist und in welcher Reihenfolge. Das heißt: messen statt raten. Im Gespräch schauen wir gemeinsam, welche Ursachen bei dir infrage kommen und was du als Erstes angehen solltest. Du hast hier schon ein paar Tipps bekommen, die dir helfen können, etwas zu bewegen, oder die einfach ein erster Schritt in die richtige Richtung sind - geh jetzt für dich los und schenk dir selbst die 15 Minuten, die wirklich etwas verändern können.';
 
     var TYPES = {
       schlaf: {
@@ -957,19 +983,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var scores = computeScores();
         state.type = primaryDim(scores);
         document.getElementById('qz-typ-field').value = state.type;
-        // Persönliche Schmerz-Zeile über dem Telefonfeld, passend zum Ergebnis-Typ
-        // (gespiegelt wird nur, was die Person selbst angeklickt hat - keine Angstwerbung)
-        var PAIN_LINES = {
-          schlaf: 'Du schläfst - und wachst trotzdem wie gerädert auf?',
-          zucker: 'Heißhunger, Nachmittagstief, der nächste Snack - und trotzdem keine Energie?',
-          fette: 'Du isst eigentlich ordentlich - und fühlst dich trotzdem leer?',
-          stress: 'Ständig unter Strom - und abends trotzdem nicht richtig abschalten?',
-          verdauung: 'Nach dem Essen aufgebläht und müde statt satt und fit?',
-          zucker_verdauung: 'Heißhunger, Blähbauch, Nachmittagstief - und abends völlig platt?',
-          stress_zucker: 'Kaffee statt Pause, Süßes statt Ruhe - und trotzdem ständig erschöpft?',
-          none: 'Du machst so vieles richtig - und bist trotzdem müde?'
+        // Vorab-Blick: Typ-Name + ein Satz (keine Tipps, keine Details - die kommen nach der Bestätigung)
+        var TEASER_LINES = {
+          schlaf: 'Dein Schlaf ist da - aber er lädt deinen Akku nicht richtig auf.',
+          zucker: 'Dein Körper verbraucht viel Kraft damit, deinen Blutzucker immer wieder auszugleichen.',
+          fette: 'Bei dir deutet einiges darauf hin, dass deinen Zellen die richtigen Bausteine fehlen.',
+          stress: 'Dein Nervensystem läuft im Hintergrund dauerhaft auf Anspannung.',
+          verdauung: 'Dein Bauch kostet dich mehr Energie, als du denkst.',
+          zucker_verdauung: 'Bei dir verstärken sich zwei Energiefresser gegenseitig: Blutzucker und Bauch.',
+          stress_zucker: 'Dauerstress und Blutzucker-Schwankungen schaukeln sich bei dir gegenseitig hoch.',
+          none: 'Du machst schon vieles richtig - es fehlen eher Feinheiten.'
         };
-        if (PAIN_LINES[state.type]) document.getElementById('qz-pain-line').textContent = PAIN_LINES[state.type];
+        var teaserType = (TYPES[state.type] && TYPES[state.type].t) || 'Dein Energie-Typ';
+        document.getElementById('qz-teaser-type').textContent = teaserType;
+        document.getElementById('qz-teaser-text').textContent = TEASER_LINES[state.type] || '';
         document.getElementById('qz-phase-field').value = state.context.phase || '';
         document.getElementById('qz-goal-field').value = state.context.goal || '';
         window.dataLayer.push({ event: 'quiz_complete', quiz_typ: state.type, funnel: 'energie-test' });
