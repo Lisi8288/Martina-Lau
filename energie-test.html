@@ -492,6 +492,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- ════════════════════════
          SCREEN 2 - QUIZ
          ════════════════════════ -->
+    <!-- Vorname vor Frage 1 (wie bei Eric): danach wird die Frau persönlich angesprochen.
+         Kein eigener QUESTIONS-Eintrag, damit Auswertung und Antwort-Felder unverändert bleiben. -->
+    <section class="qz-screen" id="screen-name" style="background:var(--cream-teal);padding:4.5rem 0;">
+      <div class="container--narrow">
+        <div class="qz-progress"><div class="qz-progress__bar" style="width:0%;"></div></div>
+        <p class="qz-progress__label">Los geht's</p>
+        <h2 class="qz-question__title">Wie heißt du?</h2>
+        <p style="color:var(--warm-gray);margin:-0.6rem 0 1.4rem;">Damit ich dich persönlich ansprechen kann.</p>
+        <form id="qz-name-form" novalidate>
+          <input type="text" id="qz-name-input" placeholder="Dein Vorname" autocomplete="given-name"
+                 style="width:100%;padding:1rem 1.2rem;font-size:1.1rem;border:1.5px solid var(--teal-border);border-radius:8px;background:#fff;" />
+          <p id="qz-name-error" style="display:none;color:#e05;font-size:0.85rem;margin:0.6rem 0 0;">Bitte gib deinen Vornamen ein.</p>
+          <button type="submit" class="btn btn--primary btn--lg" style="margin-top:1.2rem;width:100%;">Weiter →</button>
+        </form>
+      </div>
+    </section>
+
     <section class="qz-screen" id="screen-quiz" style="background:var(--cream-teal);padding:4.5rem 0;">
       <div class="container--narrow">
         <div class="qz-progress"><div class="qz-progress__bar" id="qz-progress-bar"></div></div>
@@ -513,7 +530,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- Vorab-Blick aufs Ergebnis: Typ + ein Satz, Details nach E-Mail-Bestätigung.
              Erst etwas geben, dann fragen - und die Person weiß, wofür sie ihre Adresse gibt. -->
         <div class="qz-teaser" id="qz-teaser">
-          <p class="qz-teaser__eyebrow">✦ Geschafft - dein Ergebnis steht fest</p>
+          <p class="qz-teaser__eyebrow" id="qz-teaser-eyebrow">✦ Geschafft - dein Ergebnis steht fest</p>
           <p class="qz-teaser__type" id="qz-teaser-type">Dein Energie-Typ</p>
           <p class="qz-teaser__text" id="qz-teaser-text"></p>
           <p class="qz-teaser__list-title">In deiner persönlichen Auswertung mit Martina:</p>
@@ -526,7 +543,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="form-box">
-          <p class="form-box__title">Wie erreicht Martina dich?</p>
+          <p class="form-box__title" id="qz-form-title">Wie erreicht Martina dich?</p>
           <p class="form-box__sub">Martina meldet sich innerhalb von 24 Stunden bei dir und bespricht dein Ergebnis persönlich mit dir - per Anruf oder WhatsApp, wie du magst.</p>
 
           <div class="form-proof" style="margin-bottom:1.6rem;">
@@ -563,7 +580,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             target="ml-hidden-frame-quiz"
             id="quiz-lead-form"
             novalidate>
-            <div class="form-group">
+            <div class="form-group" id="qz-fname-group">
               <label for="qz-fname">Vorname</label>
               <input type="text" id="qz-fname" name="fields[name]" placeholder="Dein Vorname" required />
             </div>
@@ -987,7 +1004,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById('qz-progress-bar').style.width = (state.index / QUESTIONS.length * 100) + '%';
       document.getElementById('qz-dimtag').textContent = q.dim || '';
       document.getElementById('qz-progress-label').textContent = 'Frage ' + (state.index + 1) + ' von ' + QUESTIONS.length;
-      document.getElementById('qz-question-title').textContent = q.q;
+      // Persönliche Ansprache bei einzelnen Fragen (nicht bei allen, sonst wirkt es aufdringlich)
+      var PERSONAL = [0, 5, 10, 15, 19];
+      document.getElementById('qz-question-title').textContent =
+        (state.name && PERSONAL.indexOf(state.index) !== -1)
+          ? state.name + ', ' + q.q.charAt(0).toLowerCase() + q.q.slice(1)
+          : q.q;
 
       var list = document.getElementById('qz-options-list');
       list.innerHTML = '';
@@ -1067,11 +1089,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     document.querySelectorAll('.start-quiz-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        showScreen('screen-quiz');
-        renderQuestion();
+        showScreen('screen-name');
+        window.scrollTo(0, 0);
+        setTimeout(function() { document.getElementById('qz-name-input').focus(); }, 150);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'quiz_start', funnel: 'energie-test' });
       });
+    });
+
+    // ── Vorname vor Frage 1: danach persönliche Ansprache ──
+    document.getElementById('qz-name-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var raw = document.getElementById('qz-name-input').value.trim();
+      if (!raw) { document.getElementById('qz-name-error').style.display = 'block'; return; }
+      // Nur der erste Vorname, erster Buchstabe groß
+      var first = raw.split(/\s+/)[0];
+      state.name = first.charAt(0).toUpperCase() + first.slice(1);
+      // Formular am Ende: Vorname schon bekannt -> Feld vorbefüllen und ausblenden
+      document.getElementById('qz-fname').value = state.name;
+      document.getElementById('qz-fname-group').style.display = 'none';
+      document.getElementById('qz-teaser-eyebrow').textContent = '✦ ' + state.name + ', dein Ergebnis steht fest';
+      document.getElementById('qz-form-title').textContent = 'Wie erreicht Martina dich, ' + state.name + '?';
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'quiz_name_entered', funnel: 'energie-test' });
+      showScreen('screen-quiz');
+      window.scrollTo(0, 0);
+      renderQuestion();
     });
 
     function renderResult() {
