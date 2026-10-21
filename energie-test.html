@@ -115,6 +115,8 @@
 
     .qz-hero-text #start-quiz-btn { font-size: 0.95rem; padding: 1.35rem 3.2rem; }
     .qz-microcopy { margin-top: 1.2rem; font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+    /* höhere Spezifität, sonst gewinnt .webinar-header p (blass, 0.85rem) aus style.css */
+    .webinar-header p.qz-microcopy--clear, section p.qz-microcopy--clear { font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.88); max-width: 520px; margin-left: auto; margin-right: auto; }
 
     /* Foto bricht bewusst aus dem .container aus und läuft rechts randlos bis zur
        Viewport-Kante - deshalb jetzt direktes Kind von .qz-hero (position:relative),
@@ -221,7 +223,8 @@
     .qz-teaser__list { list-style: none; padding: 0; margin: 0 auto 1rem; max-width: 380px; text-align: left; }
     .qz-teaser__list li { font-size: 0.88rem; color: rgba(255,255,255,0.8); padding: 0.25rem 0; display: flex; gap: 0.6rem; }
     .qz-teaser__list li span { color: #FFD87A; flex-shrink: 0; }
-    .qz-teaser__lock { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin: 0; }
+    .qz-teaser__lock { font-size: 0.85rem; color: #FFD87A; margin: 0; }
+    .qz-teaser__list-title { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin: 0 0 0.4rem; }
 
     /* Ergebnis */
     .qz-result-card {
@@ -349,14 +352,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <h1>Ständig müde - und du fragst dich,<br/><em class="gold-em">woran es liegen könnte</em>?</h1>
 
               <p class="qz-intro-lead">
-                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> - deinen Energie-Typ siehst du sofort, die ausführliche Auswertung bekommst du per E-Mail.
+                Finde mit dem kostenlosen Energie-Selbsttest heraus, <strong>in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen</strong> - deinen Energie-Typ siehst du sofort, die persönliche Auswertung bespricht Martina mit dir am Telefon.
               </p>
               <p class="qz-areas-line">Schlaf · Blutzucker · Fette · Stress · Verdauung</p>
 
               <ul class="qz-benefits">
                 <li><span class="check">✓</span> 20 kurze Fragen - ca. 2-3 Minuten</li>
                 <li><span class="check">✓</span> Dein persönlicher Energie-Typ</li>
-                <li><span class="check">✓</span> Deine ausführliche Auswertung kommt per E-Mail - mit passenden Tipps für deinen Alltag und jederzeit zum Nachlesen</li>
+                <li><span class="check">✓</span> Deine persönliche Auswertung: Martina ruft dich an und bespricht dein Ergebnis mit dir - ca. 15 Minuten, kostenlos</li>
               </ul>
 
               <button type="button" class="btn btn--primary btn--lg start-quiz-btn" id="start-quiz-btn">Meinen Energie-Typ herausfinden →</button>
@@ -369,7 +372,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
               </div>
 
-              <p class="qz-microcopy">Kostenlos · Auswertung per E-Mail · kein Spam, jederzeit abmeldbar</p>
+              <p class="qz-microcopy qz-microcopy--clear">📞 Am Ende gibst du Vorname, E-Mail und Telefonnummer an - Martina ruft dich für deine persönliche Auswertung an. Kostenlos.</p>
             </div>
           </div>
         </div>
@@ -478,9 +481,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
           <h2>Bereit herauszufinden, welcher <em>Energie-Typ</em> du bist?</h2>
           <div class="divider divider--gold" style="margin:1.5rem auto 2rem;"></div>
-          <p>20 kurze Fragen. Wenige Minuten. Deine persönliche Auswertung per E-Mail.</p>
+          <p>20 kurze Fragen. Wenige Minuten. Deine persönliche Auswertung am Telefon mit Martina.</p>
           <button type="button" class="btn btn--primary btn--lg start-quiz-btn">Jetzt kostenlosen Energie-Test starten →</button>
-          <p class="qz-microcopy" style="margin-top:2.2rem;">Kostenlos · unverbindlich · ca. 2-3 Minuten</p>
+          <p class="qz-microcopy qz-microcopy--clear" style="margin-top:2.2rem;">📞 Am Ende gibst du Vorname, E-Mail und Telefonnummer an - Martina ruft dich für deine persönliche Auswertung an. Kostenlos.</p>
         </div>
       </section>
 
@@ -513,17 +516,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="qz-teaser__eyebrow">✦ Geschafft - dein Ergebnis steht fest</p>
           <p class="qz-teaser__type" id="qz-teaser-type">Dein Energie-Typ</p>
           <p class="qz-teaser__text" id="qz-teaser-text"></p>
+          <p class="qz-teaser__list-title">In deiner persönlichen Auswertung mit Martina:</p>
           <ul class="qz-teaser__list">
             <li><span>✓</span> Was bei dir hinter der Müdigkeit stecken kann</li>
-            <li><span>✓</span> Dein erster konkreter Schritt für den Alltag</li>
-            <li><span>✓</span> Der Energie-Guide mit allen 5 Bereichen</li>
+            <li><span>✓</span> Was du als Erstes angehen solltest</li>
+            <li><span>✓</span> Deine Fragen - direkt beantwortet</li>
           </ul>
-          <p class="qz-teaser__lock">🔒 Die ausführliche Auswertung schicken wir dir per E-Mail.</p>
+          <p class="qz-teaser__lock">📞 Ca. 15 Minuten am Telefon · kostenlos</p>
         </div>
 
         <div class="form-box">
-          <p class="form-box__title">Wohin dürfen wir deine Auswertung schicken?</p>
-          <p class="form-box__sub">Du bekommst gleich eine kurze Bestätigungsmail. Ein Klick darauf - und deine ausführliche Auswertung erscheint.</p>
+          <p class="form-box__title">Wie erreicht Martina dich?</p>
+          <p class="form-box__sub">Martina meldet sich innerhalb von 24 Stunden bei dir und bespricht dein Ergebnis persönlich mit dir - per Anruf oder WhatsApp, wie du magst.</p>
 
           <div class="form-proof" style="margin-bottom:1.6rem;">
             <span style="color:var(--gold);letter-spacing:0.1em;font-size:0.85rem;flex-shrink:0;">★★★★★</span>
@@ -544,8 +548,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             muss im Trigger auf dieses Formular ("Energie-Testleitungen") umgestellt werden, sie
             zeigte vorher auf das falsche/alte Formular "Testleitungen".
           -->
+          <!--
+            TELEFON-AUSWERTUNG (Entwurf): Die Auswertung ist ein Telefonat, deshalb ist die
+            Nummer Pflicht und es gibt KEIN Anruf-Häkchen (angeforderte Leistung). Grundlage:
+            unterschriebene Weisung Martina Lau. Neues MailerLite-Formular OHNE Double-Opt-in
+            anlegen (z. B. "Energie-Test Telefon-Auswertung", eigene Gruppe, keine Werbe-
+            Automationen) und die ID statt FORM_ID_AUSWERTUNG eintragen.
+            "telefon_einwilligung" speichert hier den Nachweis der Anfrage:
+            "angefragt | Kanal | Seite | Zeit | Version".
+          -->
           <form
-            action="https://assets.mailerlite.com/jsonp/1700428/forms/196152292335945176/subscribe"
+            action="https://assets.mailerlite.com/jsonp/1700428/forms/201873435534559138/subscribe"
             method="post"
             target="ml-hidden-frame-quiz"
             id="quiz-lead-form"
@@ -565,41 +578,82 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               Checkbox-Textes PHONE_CONSENT_VERSION im Script hochzählen und den alten Text
               archivieren (Nachweis 5 Jahre aufbewahren).
             -->
-            <div style="margin:1.6rem 0 0.4rem;padding-top:1.4rem;border-top:1px solid rgba(0,0,0,0.08);">
-              <p style="font-size:0.9rem;line-height:1.6;margin:0;"><strong>Wenn du bereit bist, etwas zu ändern: Mach es diesmal anders und nutze die Chance, dein Ergebnis persönlich mit Martina zu besprechen.</strong> In einem kostenlosen 15-Minuten-Gespräch erfährst du, was in <strong>deinem</strong> Fall hinter der Müdigkeit stecken kann und was du als Erstes angehen solltest.</p>
-            </div>
             <div class="form-group">
               <label>Wie soll sich Martina melden?</label>
               <div style="display:flex;gap:1.4rem;margin:0.3rem 0 0.9rem;">
                 <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="radio" name="qz-phone-kanal" value="anruf" checked /> Anruf</label>
                 <label style="display:flex;align-items:center;gap:0.4rem;font-weight:normal;text-transform:none;letter-spacing:0;cursor:pointer;"><input type="radio" name="qz-phone-kanal" value="whatsapp" /> WhatsApp</label>
               </div>
-              <label for="qz-phone"><span id="qz-phone-label">Telefonnummer</span> <span style="font-weight:normal;color:#888;">(freiwillig)</span></label>
-              <input type="tel" id="qz-phone" name="fields[phone]" placeholder="z. B. 0176 12345678" autocomplete="tel" />
-            </div>
-            <div class="form-checkbox">
-              <input type="checkbox" id="qz-phone-consent" />
-              <label for="qz-phone-consent" id="qz-phone-consent-label">
-                Ja, ich möchte meine persönliche Einschätzung. Martina Lau darf mich dafür anrufen und mir passende Gesundheits- und Coaching-Angebote vorstellen. Jederzeit widerrufbar.
-              </label>
+              <label for="qz-phone"><span id="qz-phone-label">Telefonnummer</span></label>
+              <input type="tel" id="qz-phone" name="fields[phone]" placeholder="z. B. 0176 12345678" autocomplete="tel" required />
             </div>
             <input type="hidden" name="fields[telefon_einwilligung]" id="qz-phone-consent-field" value="" />
+            <input type="hidden" name="fields[newsletter]" id="qz-newsletter-field" value="" />
+            <!-- Für Martinas Telefonat: Bereichs-Übersicht + alle Antworten im Klartext.
+                 Custom Fields "bereiche", "antwort_1" bis "antwort_4" (Text) in MailerLite anlegen
+                 (je 5 Antworten, damit kein Feld zu lang wird). -->
+            <input type="hidden" name="fields[bereiche]" id="qz-bereiche-field" value="" />
+            <input type="hidden" name="fields[antwort_1]" id="qz-antw1-field" value="" />
+            <input type="hidden" name="fields[antwort_2]" id="qz-antw2-field" value="" />
+            <input type="hidden" name="fields[antwort_3]" id="qz-antw3-field" value="" />
+            <input type="hidden" name="fields[antwort_4]" id="qz-antw4-field" value="" />
             <input type="hidden" name="fields[typ]" id="qz-typ-field" value="" />
             <input type="hidden" name="fields[phase]" id="qz-phase-field" value="" />
             <input type="hidden" name="fields[ziel]" id="qz-goal-field" value="" />
             <div class="form-checkbox">
               <input type="checkbox" id="qz-privacy" name="privacy" required />
               <label for="qz-privacy">
-                Ich bin ausdrücklich einverstanden, dass meine Daten einschließlich meines Testergebnisses (Angaben zu Energie, Schlaf, Stress und Verdauung) gespeichert werden, um mir meine Auswertung, den Guide und Infos zu Martinas Angeboten rund um Energie und Gesundheit zuzusenden. Jederzeit widerrufbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
+                Ich bin ausdrücklich einverstanden, dass meine Angaben einschließlich meiner Testantworten (Angaben zu Energie, Schlaf, Stress und Verdauung) gespeichert werden, damit Martina Lau mein Ergebnis persönlich mit mir besprechen kann. Jederzeit widerrufbar. Es gilt die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.
               </label>
             </div>
-            <button type="submit" class="btn btn--primary btn--lg" id="qz-submit-btn">Meine Auswertung zeigen →</button>
+            <div class="form-checkbox">
+              <input type="checkbox" id="qz-newsletter" />
+              <label for="qz-newsletter">
+                Ja, schick mir Martinas Impulse rund um Energie und Gesundheit per E-Mail, auch zu ihren Angeboten. Abmelden geht jederzeit. <span style="color:#888;">(freiwillig)</span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg" id="qz-submit-btn">Persönliche Auswertung anfordern →</button>
             <p id="qz-form-error" style="display:none;color:#e05;margin-top:0.8rem;font-size:0.85rem;text-align:center;"></p>
           </form>
 
           <p style="text-align:center;font-size:0.7rem;color:#aaa;margin-top:0.8rem;line-height:1.6;">
-            🔒 Kein Spam · Jederzeit abmeldbar · 100% kostenlos
+            🔒 Deine Nummer nutzt Martina nur für deine Auswertung · 100% kostenlos
           </p>
+
+          <!--
+            NEWSLETTER (nur mit freiwilligem Häkchen): separates MailerLite-Formular MIT
+            Double-Opt-in (z. B. "Energie-Test Newsletter", eigene Gruppe). Wird nur
+            abgeschickt, wenn das Häkchen gesetzt ist. ID statt FORM_ID_NEWSLETTER eintragen.
+            Bestätigungs-Dankesseite in MailerLite: energie-test.html?bestaetigt=1
+          -->
+          <iframe name="ml-hidden-frame-nl" style="display:none;" aria-hidden="true"></iframe>
+          <form action="https://assets.mailerlite.com/jsonp/1700428/forms/201873852952741208/subscribe"
+                method="post" target="ml-hidden-frame-nl" id="qz-nl-form" style="display:none;">
+            <input type="hidden" name="fields[name]" id="qz-nl-name" value="" />
+            <input type="hidden" name="fields[email]" id="qz-nl-email" value="" />
+            <input type="hidden" name="fields[typ]" id="qz-nl-typ" value="" />
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════
+         SCREEN 3A - DANKE (Telefon-Auswertung angefordert)
+         ════════════════════════ -->
+    <section class="qz-screen" id="screen-thanks" style="padding:5.5rem 0;">
+      <div class="container--narrow" style="text-align:center;">
+        <div class="form-box">
+          <span class="gold-star">✦ &nbsp; ✦ &nbsp; ✦</span>
+          <p class="form-box__title" id="qz-thanks-title" style="margin-top:0.6rem;">Danke - deine Auswertung ist angefragt!</p>
+          <p class="form-box__sub" id="qz-thanks-text">Martina meldet sich innerhalb von 24 Stunden telefonisch bei dir und bespricht dein Ergebnis persönlich mit dir. Nimm dir dafür ca. 15 Minuten Ruhe.</p>
+          <p style="font-size:0.88rem;color:var(--warm-gray);line-height:1.7;margin:0 0 1.2rem;" id="qz-thanks-tip">Tipp: Geh in den nächsten 24 Stunden auch ran, wenn eine unbekannte Nummer anruft.</p>
+          <p id="qz-thanks-nl" style="display:none;font-size:0.88rem;color:var(--warm-gray);line-height:1.7;margin:0 0 1.2rem;">Und schau in dein Postfach: Bitte bestätige noch kurz deine E-Mail-Adresse, damit Martinas Impulse bei dir ankommen.</p>
+          <p style="font-weight:600;margin:1.6rem 0 0.4rem;">Überleg dir bis dahin schon mal: Was soll sich bei dir als Erstes verändern?</p>
+          <p style="font-family:var(--font-serif);font-size:1.15rem;color:var(--gold-deep);margin:0 0 1.8rem;">Ich freu mich auf dich! Deine Martina</p>
+          <div style="border-top:1px solid rgba(0,0,0,0.08);padding-top:1.4rem;">
+            <p style="font-size:0.9rem;color:var(--warm-gray);margin:0 0 0.8rem;">Bis Martina dich anruft: Komm in die kostenlose WhatsApp-Community.</p>
+            <a href="community.html" class="btn btn--outline">Zur Community →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1060,45 +1114,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var err     = document.getElementById('qz-form-error');
       var btn     = document.getElementById('qz-submit-btn');
 
-      if (!name || !email || !privacy) {
-        e.preventDefault();
-        err.textContent = 'Bitte alle Felder ausfüllen und der Datenschutzerklärung zustimmen.';
-        err.style.display = 'block';
-        return;
-      }
-      if (!EMAIL_RE.test(email)) {
-        e.preventDefault();
-        err.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-        err.style.display = 'block';
-        return;
-      }
+      var phoneInput = document.getElementById('qz-phone');
+      var phone      = phoneInput.value.trim();
+      var newsletter = document.getElementById('qz-newsletter').checked;
 
-      // ── Telefon (freiwillig): Nummer nur zusammen mit Einwilligung ──
-      var phoneInput   = document.getElementById('qz-phone');
-      var phone        = phoneInput.value.trim();
-      var phoneConsent = document.getElementById('qz-phone-consent').checked;
-      if (phone && !phoneConsent) {
-        e.preventDefault();
-        err.textContent = 'Bitte setz das Häkchen - oder lass das Nummernfeld leer.';
-        err.style.display = 'block';
-        return;
-      }
-      if (phoneConsent && phone.replace(/\D/g, '').length < 6) {
-        e.preventDefault();
-        err.textContent = 'Bitte gib deine Nummer ein - oder entferne das Häkchen.';
-        err.style.display = 'block';
-        return;
-      }
+      function fail(msg) { e.preventDefault(); err.textContent = msg; err.style.display = 'block'; }
+      if (!name || !email || !phone) return fail('Bitte Vorname, E-Mail-Adresse und Telefonnummer ausfüllen - Martina braucht die Nummer für deine Auswertung.');
+      if (!EMAIL_RE.test(email)) return fail('Bitte gib eine gültige E-Mail-Adresse ein.');
+      if (phone.replace(/\D/g, '').length < 6) return fail('Bitte gib eine gültige Telefonnummer ein.');
+      if (!privacy) return fail('Bitte stimme der Speicherung deiner Angaben zu, damit Martina dein Ergebnis mit dir besprechen kann.');
+
+      // ── Telefon (Pflicht): die Auswertung IST das Telefonat - kein Anruf-Häkchen.
+      // Nachweis der Anfrage: "angefragt | Kanal | Seite | Zeit | Version"
       phoneInput.value = phone;
       var phoneKanal = (document.querySelector('input[name="qz-phone-kanal"]:checked') || {}).value || 'anruf';
       var phoneCh = FB_CHANNELS[phoneKanal];
-      document.getElementById('qz-phone-consent-field').value = phoneConsent
-        ? 'ja | ' + phoneCh.marker + ' | ' + new Date().toISOString() + ' | ' + phoneCh.version
-        : '';
+      var phoneConsent = true;
+      document.getElementById('qz-phone-consent-field').value =
+        'angefragt | ' + phoneCh.marker + ' | Telefon-Auswertung | ' + new Date().toISOString() + ' | ' + REQUEST_VERSION;
+      document.getElementById('qz-newsletter-field').value = newsletter ? 'ja' : 'nein';
+
+      // ── Für Martinas Telefonat: Bereiche + Antworten im Klartext ──
+      var scores = computeScores();
+      var DIM_NAMES = { schlaf: 'Schlaf', zucker: 'Blutzucker', fette: 'Fette', stress: 'Stress', verdauung: 'Verdauung' };
+      var LEVEL_NAMES = ['unauffällig', 'leicht', 'AUFFÄLLIG'];
+      // Kanal + Nachweis der Anfrage zusätzlich vorne in "bereiche" (falls das Feld
+      // telefon_einwilligung im MailerLite-Formular fehlt, geht diese Info so nicht verloren)
+      document.getElementById('qz-bereiche-field').value =
+        'Kontakt: ' + phoneCh.marker + ' (angefragt ' + new Date().toLocaleString('de-DE') + ') · ' +
+        DIM_ORDER.map(function(d) {
+          return DIM_NAMES[d] + ': ' + LEVEL_NAMES[level(scores[d])] + ' (' + scores[d] + ')';
+        }).join(' · ');
+      var SHORT = ['Müde wann', 'Dunkel/Handy', 'Nachts wach', 'Heißhunger', 'Satt', '3-4 Std. ohne Essen',
+                   'Gezuckertes', 'Eiweiß', 'Fette', 'Fisch', 'Omega-3', 'Bewegung', 'Pausen', 'Kaffee',
+                   'Stress', 'Blähbauch', 'Verdauung', 'Werte gemessen', 'Alter', 'Ziel'];
+      var lines = QUESTIONS.map(function(q, i) {
+        var a = state.answers[i];
+        var txt = (a && q.o[a.optionIndex]) ? q.o[a.optionIndex][0] : '-';
+        return (i + 1) + ' ' + (SHORT[i] || q.dim) + ': ' + txt;
+      });
+      [1, 2, 3, 4].forEach(function(n) {
+        document.getElementById('qz-antw' + n + '-field').value = lines.slice((n - 1) * 5, n * 5).join(' | ');
+      });
 
       err.style.display = 'none';
-      btn.textContent = 'Wird ausgewertet …';
+      btn.textContent = 'Wird gesendet …';
       btn.disabled = true;
+
+      // Solange keine echten Formular-IDs eingetragen sind (Entwurf), nichts an MailerLite senden
+      var isDraft = this.action.indexOf('FORM_ID_') !== -1;
+      if (isDraft) e.preventDefault();
+
+      // Newsletter nur mit freiwilligem Häkchen: separates Formular mit Double-Opt-in
+      if (newsletter) {
+        document.getElementById('qz-nl-name').value = name;
+        document.getElementById('qz-nl-email').value = email;
+        document.getElementById('qz-nl-typ').value = state.type || '';
+        var nlForm = document.getElementById('qz-nl-form');
+        if (nlForm.action.indexOf('FORM_ID_') === -1) nlForm.submit();
+      }
 
       // ── Conversion-Event: GA4 + Google Ads über GTM ──
       // In GTM: Trigger auf Custom Event "lead_quiz_complete" anlegen,
@@ -1115,30 +1189,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         funnel: 'energie-test'
       });
 
-      // Ergebnis wird bewusst NICHT sofort gezeigt, sondern erst nach der
-      // Double-Opt-in-Bestätigung (siehe checkConfirmedReturn weiter unten) -
-      // die Auswertung selbst ist der Anreiz, die Bestätigungs-Mail zu bestätigen.
-      // Zwischenspeichern in localStorage, damit wir sie nach der Rückkehr von der
-      // Bestätigungs-Mail (selbes Gerät/Browser) direkt wieder anzeigen können.
-      try {
-        localStorage.setItem('energieTestResult', JSON.stringify({
-          typ: state.type,
-          phase: state.context.phase || '',
-          goal: state.context.goal || '',
-          email: email,
-          phoneGiven: phoneConsent,
-          phoneKanal: phoneConsent ? phoneKanal : '',
-          variant: VARIANT,
-          ts: Date.now()
-        }));
-      } catch (err) {}
+      // Danke-Bildschirm: persönlich, passend zum gewählten Kanal
+      document.getElementById('qz-thanks-title').textContent = 'Danke, ' + name + ' - deine Auswertung ist angefragt!';
+      if (phoneKanal === 'whatsapp') {
+        document.getElementById('qz-thanks-text').textContent =
+          'Martina meldet sich innerhalb von 24 Stunden per WhatsApp bei dir und bespricht dein Ergebnis persönlich mit dir. Nimm dir dafür ca. 15 Minuten Ruhe.';
+        document.getElementById('qz-thanks-tip').textContent =
+          'Tipp: Schau in den nächsten 24 Stunden auch bei WhatsApp in die Nachrichtenanfragen.';
+      }
+      document.getElementById('qz-thanks-nl').style.display = newsletter ? 'block' : 'none';
 
-      // Formular geht in den versteckten iframe - danach den "Bestätige deine
-      // E-Mail"-Screen zeigen statt direkt die Auswertung.
       setTimeout(function() {
-        showScreen('screen-pending');
+        showScreen('screen-thanks');
       }, 700);
     });
+
+    // Version des Anfrage-Texts (Nachweis, dass die telefonische Auswertung angefordert wurde)
+    var REQUEST_VERSION = 'tel-auswertung-v1-2026-10-20';
 
     // ── Ergebnis-CTA: Nummer nachtragen (nur wenn im E-Mail-Formular keine angegeben) ──
     function showCallDone() {
@@ -1159,10 +1226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     document.querySelectorAll('input[name="qz-phone-kanal"]').forEach(function(r) {
       r.addEventListener('change', function() {
-        var ch = FB_CHANNELS[r.value];
-        document.getElementById('qz-phone-label').textContent = ch.label;
-        document.getElementById('qz-phone-consent-label').textContent = ch.consent;
-        document.getElementById('qz-phone-consent').checked = false;
+        document.getElementById('qz-phone-label').textContent = FB_CHANNELS[r.value].label;
       });
     });
 
@@ -1280,33 +1344,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var params = new URLSearchParams(window.location.search);
       if (params.get('bestaetigt') !== '1') return;
 
-      var stored = null;
-      try { stored = JSON.parse(localStorage.getItem('energieTestResult') || 'null'); } catch (err) {}
-
-      // MailerLite leitet immer auf energie-test.html zurück - Leute aus der
-      // WhatsApp-Variante zur eigenen Seite weiterschicken (localStorage gilt für beide)
-      if (stored && stored.variant && stored.variant !== VARIANT) {
-        window.location.replace((stored.variant === 'wa' ? 'energie-test-wa.html' : 'energie-test.html') + '?bestaetigt=1');
-        return;
-      }
-
-      if (stored && stored.typ) {
-        state.type = stored.typ;
-        state.context = { phase: stored.phase, goal: stored.goal };
-        state.email = stored.email || '';
-        state.phoneGiven = !!stored.phoneGiven;
-        state.phoneKanal = stored.phoneKanal || '';
-        renderResult();
-        setupCallCta();
-        showScreen('screen-result');
-        try { localStorage.removeItem('energieTestResult'); } catch (err) {}
-      } else {
-        document.getElementById('qz-pending-title').textContent = 'Bestätigt!';
-        document.getElementById('qz-pending-text').textContent =
-          'Danke fürs Bestätigen - deine persönliche Auswertung ist unterwegs zu dir per E-Mail.';
-        document.getElementById('qz-fb-call').style.display = 'block';
-        showScreen('screen-pending');
-      }
+      // Telefon-Variante: Zurück von der Newsletter-Bestätigung - kein Ergebnis anzeigen
+      // (die Auswertung gibt es im Telefonat), nur bestätigen.
+      document.getElementById('qz-thanks-title').textContent = 'Bestätigt - schön, dass du dabei bist!';
+      document.getElementById('qz-thanks-text').textContent =
+        'Ab jetzt bekommst du Martinas Impulse rund um Energie und Gesundheit. Und falls noch nicht geschehen: Martina meldet sich für deine persönliche Auswertung bei dir.';
+      document.getElementById('qz-thanks-tip').style.display = 'none';
+      showScreen('screen-thanks');
     }
     checkConfirmedReturn();
   })();
