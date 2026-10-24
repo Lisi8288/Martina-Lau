@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tina Lau · Links</title>
+<meta name="description" content="Energie-Test und Angebote von Martina (Tina) Lau auf einen Blick.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#FDFAF7">
+<link rel="icon" href="Bilder/links/logo-icon.png">
+<style>
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cormorant-garamond-v21-latin/cormorant-garamond-v21-latin-regular.woff2) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-display:swap;src:url(fonts/cormorant-garamond-v21-latin/cormorant-garamond-v21-latin-italic.woff2) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/cormorant-garamond-v21-latin/cormorant-garamond-v21-latin-500.woff2) format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:300;font-display:swap;src:url(fonts/jost-v20-latin/jost-v20-latin-300.woff2) format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jost-v20-latin/jost-v20-latin-regular.woff2) format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/jost-v20-latin/jost-v20-latin-500.woff2) format('woff2')}
+:root{
+  /* Farben von martinalau.org (css/style.css) */
+  --teal:#0098A6;--teal-dark:#00707C;--teal-deep:#004E58;--teal-deeper:#003740;--teal-pale:#E6F7F9;
+  --gold:#C9A84C;--gold-light:#E8CC82;--gold-deep:#9A7830;
+  --cream:#FDFAF7;--cream-teal:#F0FAFB;
+  --ink:#1A2A2D;--ink-2:#2E3A3C;--ink-3:#607070;
+  --line:rgba(0,152,166,.16);--line-gold:rgba(201,168,76,.35);
+  --dark:linear-gradient(135deg,#001E25 0%,#004A56 45%,#007A8A 80%,#0098A6 100%);
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.55;overflow-x:hidden;min-height:100vh;
+  background-image:radial-gradient(ellipse 80% 38% at 50% 0%,rgba(0,152,166,.12),transparent 70%),radial-gradient(ellipse 70% 30% at 50% 100%,rgba(201,168,76,.12),transparent 70%)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.card__label,blockquote{text-wrap:balance}
+.lead,.offer__text,.contact p,.hint{text-wrap:pretty}
+img{display:block;max-width:100%}
+.page{max-width:520px;margin:0 auto;padding:30px 0 40px;overflow-x:hidden}
+.pad{padding:0 20px}
+
+/* Kopf */
+.brand{text-align:center}
+.brand img{width:92px;height:92px;margin:0 auto 12px;border-radius:50%;box-shadow:0 0 0 1px var(--line-gold),0 10px 36px rgba(0,152,166,.18)}
+.brand__name{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:.06em;color:var(--teal-deeper);line-height:1.1}
+.brand__sub{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);margin-top:6px;font-weight:500}
+
+/* Galerie */
+.count{font-family:var(--serif);font-style:italic;font-size:24px;text-align:center;margin:24px 0 12px;color:var(--ink-3)}
+.count b{font-weight:400;font-style:normal;color:var(--teal-deeper)}
+.stage{perspective:1100px}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:14px 0 30px}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 74%;max-width:360px;scroll-snap-align:center;transform-style:preserve-3d;will-change:transform;transition:transform .08s linear}
+.slide+.slide{margin-left:-9%}
+.slide:first-child{margin-left:13%}.slide:last-child{margin-right:13%}
+@media(min-width:520px){.slide:first-child{margin-left:80px}.slide:last-child{margin-right:80px}}
+.card{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:var(--teal-deeper);
+  box-shadow:0 0 0 1px var(--line-gold),0 22px 46px rgba(0,55,64,.28)}
+.card img{width:100%;height:100%;object-fit:cover}
+.card--scroll{background:#fff}
+.card--scroll img{height:auto;object-fit:initial;margin-top:26px;animation:roll 16s ease-in-out infinite alternate;animation-play-state:paused}
+.slide.is-active .card--scroll img{animation-play-state:running}
+@keyframes roll{0%,8%{transform:translateY(0)}92%,100%{transform:translateY(calc(-100% + var(--h,400px)))}}
+.card__bar{position:absolute;top:0;left:0;right:0;height:26px;background:rgba(0,55,64,.92);display:flex;align-items:center;gap:5px;padding:0 12px;z-index:2}
+.card__bar i{width:6px;height:6px;border-radius:50%;background:rgba(232,204,130,.6)}
+.card__bar span{margin-left:8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.card__label{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 16px;z-index:2;color:#fff;
+  background:linear-gradient(transparent,rgba(0,30,37,.9));font-family:var(--serif);font-size:23px;line-height:1.15;font-weight:500}
+.card--scroll .card__label{background:linear-gradient(rgba(0,30,37,0),rgba(0,30,37,.96) 45%)}
+.card__label em{font-style:italic;font-weight:400;color:var(--gold-light)}
+.card__label small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:5px;font-weight:500}
+/* Bewertungs-Slides (echte ProvenExpert-Bewertungen, wörtlich) */
+.card--quote{background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:30px 24px;color:#fff}
+.card--quote .stars{color:var(--gold-light);letter-spacing:.18em;font-size:15px}
+.card--quote blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(20px,6.2vw,24px);line-height:1.28;margin:14px 0 16px}
+.card--quote .who{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light);font-weight:500}
+.card--quote .src{font-size:12px;color:rgba(255,255,255,.65);margin-top:4px}
+.progress{width:190px;height:1px;background:var(--line);margin:0 auto;position:relative}
+.progress span{position:absolute;top:-1px;height:3px;border-radius:2px;background:var(--teal);width:30px;left:0;transition:left .2s}
+.swipe{text-align:center;font-size:10px;letter-spacing:.45em;text-transform:uppercase;color:var(--ink-3);margin-top:18px}
+
+/* Hero-Text */
+.kicker{text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin:42px 0 12px;font-weight:500}
+h1{text-align:center;font-family:var(--serif);font-weight:500;font-size:clamp(31px,8.6vw,40px);line-height:1.1;color:var(--teal-deeper)}
+h1 em{display:block;font-style:italic;font-weight:400;color:var(--teal);margin-top:4px}
+.lead{text-align:center;color:var(--ink-2);font-size:15.5px;margin:16px auto 0;max-width:340px}
+.btn{display:flex;align-items:center;justify-content:center;gap:12px;min-height:62px;border-radius:999px;margin:26px 0 10px;padding:0 20px;
+  background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#fff;font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  box-shadow:0 0 0 1.5px rgba(232,204,130,.85),0 14px 34px rgba(0,152,166,.3)}
+.btn svg{width:18px;height:18px;flex:0 0 auto}
+.hint{text-align:center;font-size:13px;color:var(--ink-3)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:38px 0 0;text-align:center}
+.stats div{padding:0 6px}
+.stats div+div{border-left:1px solid var(--line-gold)}
+.stats b{display:block;font-family:var(--serif);font-weight:500;font-size:40px;line-height:1;color:var(--teal-deeper)}
+.stats b small{font-size:.55em;color:var(--gold)}
+.stats span{display:block;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-top:8px;line-height:1.5}
+
+/* Angebote */
+.eyebrow{text-align:center;font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-deep);margin:58px 0 10px;font-weight:500}
+h2{text-align:center;font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.1;color:var(--teal-deeper)}
+h2 em{display:block;font-style:italic;font-weight:400;color:var(--teal)}
+.sub{text-align:center;color:var(--ink-3);font-size:14px;margin-top:8px}
+.offers{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:32px}
+.offer{position:relative;display:flex;align-items:center;gap:14px;padding:16px 14px 16px 16px;border-radius:22px;color:#fff;
+  background:var(--dark);box-shadow:inset 0 0 0 1px rgba(232,204,130,.35),0 18px 40px rgba(0,55,64,.25)}
+.offer__img{flex:0 0 78px;height:92px;border-radius:14px;overflow:hidden;background:var(--teal-deeper)}
+.offer__img img{width:100%;height:100%;object-fit:cover}
+.offer__body{flex:1;min-width:0}
+.offer__tag{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light);margin-bottom:3px;font-weight:500}
+.offer__title{font-family:var(--serif);font-size:27px;line-height:1.05;font-weight:500}
+.offer__title em{font-style:italic;font-weight:400;color:var(--gold-light)}
+.offer__text{font-size:13px;line-height:1.45;color:rgba(255,255,255,.82);margin-top:5px}
+.offer__go{flex:0 0 40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--teal-deep)}
+.offer__go svg{width:16px;height:16px}
+.badge{position:absolute;top:-11px;right:18px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;padding:5px 12px;border-radius:999px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#fff;font-weight:500}
+
+/* Kontakt */
+.contact{margin-top:52px;padding:28px 20px;border-radius:22px;background:var(--cream-teal);box-shadow:inset 0 0 0 1px var(--line);text-align:center}
+.contact h3{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.15;color:var(--teal-deeper)}
+.contact h3 em{font-style:italic;font-weight:400;color:var(--teal)}
+.contact p{color:var(--ink-3);font-size:14px;margin-top:4px}
+.pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line-gold);font-size:13.5px;color:var(--teal-deeper);background:#fff;max-width:100%}
+.pill svg{width:16px;height:16px;color:var(--teal);flex:0 0 auto}
+footer{text-align:center;margin-top:44px}
+footer img{width:52px;height:52px;border-radius:50%;margin:0 auto 12px;opacity:.9}
+footer nav{font-size:12px;color:var(--ink-3)}
+footer nav a{border-bottom:1px solid var(--line);margin:0 6px}
+footer small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:10px}
+@media(prefers-reduced-motion:reduce){.card--scroll img{animation:none}.slide{transition:none}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="brand pad">
+    <img src="Bilder/links/logo-icon.png" alt="Logo Tina Lau">
+    <div class="brand__name">Tina Lau</div>
+    <div class="brand__sub">Gesundheit &amp; Vitalität</div>
+  </header>
+
+  <div class="count" aria-live="polite"><b id="cur">01</b>/<span id="tot">06</span></div>
+  <div class="stage">
+    <div class="track" id="track">
+      <div class="slide"><div class="card"><img src="Bilder/links/tina.webp" alt="Martina (Tina) Lau"><div class="card__label"><small>Hi, ich bin Tina</small>Ich kenne Erschöpfung <em>nicht aus dem Lehrbuch.</em></div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina holt einen genau da ab und nimmt einen an der Hand, wo man selber nicht weiterkommt.“</blockquote><div class="who">Nicole R.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Sie hört einem zu und hat mich durch ihr fundiertes Wissen im Bereich Zellgesundheit sehr beeindruckt.“</blockquote><div class="who">Bewertung vom 14.10.2026</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Wenn man selbst bereit ist für sich persönlich loszugehen, dann ist Martina eine inspirierende Begleiterin.“</blockquote><div class="who">Dr. Sandy E.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina ist eine Powerfrau und hat mich sehr gut begleitet. Ich fühle mich bei ihr sehr gut aufgehoben und beraten.“</blockquote><div class="who">Maria V.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina hat ein sehr gutes Fachwissen, mit ihrer ganzen Art fühlt man sich einfach wohl und gut aufgehoben.“</blockquote><div class="who">C.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+    </div>
+  </div>
+  <div class="progress"><span id="bar"></span></div>
+  <div class="swipe">&larr;&nbsp;&nbsp;Wischen&nbsp;&nbsp;&rarr;</div>
+
+  <section class="pad">
+    <p class="kicker">Für Frauen ab 30, die nur noch funktionieren</p>
+    <h1>Ständig müde und du weißt nicht, warum? <em>Finde es heraus.</em></h1>
+    <p class="lead">Der kostenlose Energie-Test zeigt dir, in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen. Deine persönliche Auswertung bespreche ich mit dir am Telefon.</p>
+    <a class="btn" href="https://www.martinalau.org/energie-test.html">Zum Energie-Test <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    <p class="hint">Kostenlos · 20 Fragen · ca. 3 Minuten</p>
+
+    <!-- Nur echte Werte: ProvenExpert (Stand 21.10.2026) und European Speaker Award 2026 -->
+    <div class="stats">
+      <div><b>5,0<small>★</small></b><span>Sterne auf<br>ProvenExpert</span></div>
+      <div><b>35</b><span>verifizierte<br>Bewertungen</span></div>
+      <div><b>4.</b><span>Platz European<br>Speaker Award</span></div>
+    </div>
+
+    <p class="eyebrow">Starte hier</p>
+    <h2>Dein erster Schritt <em>zu mehr Klarheit.</em></h2>
+    <p class="sub">Erst verstehen, dann gezielt angehen.</p>
+
+    <div class="offers">
+      <a class="offer" href="https://www.martinalau.org/energie-test.html">
+        <span class="badge">Kostenlos</span>
+        <div class="offer__img"><img src="Bilder/links/thumb-test.webp" alt="" loading="lazy"></div>
+        <div class="offer__body">
+          <div class="offer__tag">Selbsttest · 3 Min.</div>
+          <div class="offer__title">Energie-<em>Test</em></div>
+          <div class="offer__text">Dein Energie-Typ sofort, die persönliche Auswertung am Telefon.</div>
+        </div>
+        <span class="offer__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <!-- COACHING AKKU VOLL: freischalten, sobald die AKKU-VOLL-Seite auf martinalau.org live ist
+           (wartet auf MailerLite-Formular "AKKU VOLL Gesprächsanfrage"). Link dann auf die neue Startseite.
+      <a class="offer" href="https://www.martinalau.org/">
+        <span class="badge">12 Wochen</span>
+        <div class="offer__img"><img src="Bilder/links/thumb-coaching.webp" alt="" loading="lazy"></div>
+        <div class="offer__body">
+          <div class="offer__tag">Coaching · persönlich</div>
+          <div class="offer__title">AKKU <em>VOLL</em></div>
+          <div class="offer__text">12 Wochen raus aus dem Funktionsmodus. Mit Test, Begleitung und Retest.</div>
+        </div>
+        <span class="offer__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
+      COMMUNITY: erst wenn Community-Seite + Datenschutz-Abschnitt live sind. -->
+
+    </div>
+
+    <div class="contact">
+      <h3>Noch Fragen? <em>Schreib&nbsp;mir.</em></h3>
+      <p>Ich antworte dir persönlich.</p>
+      <div class="pills">
+        <a class="pill" href="mailto:hello@martinalau.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>hello@martinalau.com</a>
+      </div>
+    </div>
+
+    <footer>
+      <img src="Bilder/links/logo-icon.png" alt="">
+      <nav><a href="https://www.martinalau.org/impressum.html">Impressum</a>·<a href="https://www.martinalau.org/datenschutz.html">Datenschutz</a></nav>
+      <small>© 2026 Martina Lau</small>
+    </footer>
+  </section>
+</main>
+<script>
+(function(){
+  var track=document.getElementById('track'),slides=[].slice.call(track.children),cur=document.getElementById('cur'),bar=document.getElementById('bar');
+  var n=slides.length;document.getElementById('tot').textContent=String(n).padStart(2,'0');
+  function update(){
+    var mid=track.scrollLeft+track.clientWidth/2,best=0,bd=1e9;
+    slides.forEach(function(s,i){
+      var c=s.offsetLeft+s.offsetWidth/2,d=(c-mid)/s.offsetWidth;
+      if(Math.abs(d)<bd){bd=Math.abs(d);best=i}
+      var k=Math.max(-1.4,Math.min(1.4,d));
+      s.style.transform='rotateY('+(-k*28)+'deg) scale('+(1-Math.abs(k)*.12)+') translateZ('+(-Math.abs(k)*60)+'px)';
+      s.style.zIndex=10-Math.round(Math.abs(d)*3);
+    });
+    slides.forEach(function(s,i){s.classList.toggle('is-active',i===best)});
+    cur.textContent=String(best+1).padStart(2,'0');
+    bar.style.left=(best/(n-1))*(190-30)+'px';
+  }
+  function sizes(){slides.forEach(function(s){var c=s.querySelector('.card--scroll');if(c)c.style.setProperty('--h',(c.clientHeight-26)+'px')});update()}
+  track.addEventListener('scroll',function(){requestAnimationFrame(update)},{passive:true});
+  window.addEventListener('resize',sizes);window.addEventListener('load',sizes);sizes();
+})();
+</script>
+</body>
+</html>
