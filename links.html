@@ -65,6 +65,9 @@ img{display:block;max-width:100%}
 .card__label{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 16px;z-index:2;color:#fff;
   background:linear-gradient(transparent,rgba(0,30,37,.9));font-family:var(--serif);font-size:23px;line-height:1.15;font-weight:500}
 .card--scroll .card__label{background:linear-gradient(rgba(0,30,37,0),rgba(0,30,37,.96) 45%)}
+/* Foto mit Zitat: dunklerer Verlauf + weiße Schrift, damit es auch auf hellen Fotos lesbar bleibt */
+.card:not(.card--quote) .card__label{padding-top:70px;background:linear-gradient(rgba(0,30,37,0),rgba(0,30,37,.72) 38%,rgba(0,30,37,.94))}
+.card__label>em:only-of-type{color:#fff}
 .card__label em{font-style:italic;font-weight:400;color:var(--gold-light)}
 .card__label small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:5px;font-weight:500}
 /* Bewertungs-Slides (echte ProvenExpert-Bewertungen, wörtlich) */
@@ -139,15 +142,21 @@ footer small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:10px}
     <div class="brand__sub">Gesundheit &amp; Vitalität</div>
   </header>
 
-  <div class="count" aria-live="polite"><b id="cur">01</b>/<span id="tot">06</span></div>
+  <div class="count" aria-live="polite"><b id="cur">01</b>/<span id="tot">12</span></div>
   <div class="stage">
     <div class="track" id="track">
       <div class="slide"><div class="card"><img src="Bilder/links/tina.webp" alt="Martina (Tina) Lau"><div class="card__label"><small>Hi, ich bin Tina</small>Ich kenne Erschöpfung <em>nicht aus dem Lehrbuch.</em></div></div></div>
       <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina holt einen genau da ab und nimmt einen an der Hand, wo man selber nicht weiterkommt.“</blockquote><div class="who">Nicole R.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
       <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Sie hört einem zu und hat mich durch ihr fundiertes Wissen im Bereich Zellgesundheit sehr beeindruckt.“</blockquote><div class="who">Bewertung vom 14.10.2026</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card"><img src="Bilder/links/telefon.webp" alt="Tina Lau am Telefon" loading="lazy"><div class="card__label"><small>Tina Lau</small><em>„Hör auf zu raten und fang an zu wissen.“</em></div></div></div>
       <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Wenn man selbst bereit ist für sich persönlich loszugehen, dann ist Martina eine inspirierende Begleiterin.“</blockquote><div class="who">Dr. Sandy E.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
       <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina ist eine Powerfrau und hat mich sehr gut begleitet. Ich fühle mich bei ihr sehr gut aufgehoben und beraten.“</blockquote><div class="who">Maria V.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card"><img src="Bilder/links/laptop.webp" alt="Tina Lau am Laptop" loading="lazy"><div class="card__label"><small>Tina Lau</small><em>„Weil „funktionieren“ für dein Leben einfach nicht reicht.“</em></div></div></div>
       <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina hat ein sehr gutes Fachwissen, mit ihrer ganzen Art fühlt man sich einfach wohl und gut aufgehoben.“</blockquote><div class="who">C.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Tina ist eine absolute Expertin auf ihrem Gebiet und unglaublich toll!“</blockquote><div class="who">Bewertung vom 27.07.2026</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card"><img src="Bilder/links/buehne.webp" alt="Tina Lau auf der Bühne" loading="lazy"><div class="card__label"><small>Tina Lau</small><em>„Lass uns gemeinsam deinen Akku vollmachen.“</em></div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Professionalität gepaart mit Herz. Immer positiv, empathisch und hilfsbereit …“</blockquote><div class="who">E.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
+      <div class="slide"><div class="card card--quote"><div class="stars">★★★★★</div><blockquote>„Martina hat ein großes Fachwissen was sie sehr gut vermittelt und in die Welt trägt.“</blockquote><div class="who">Beate S.</div><div class="src">Verifizierte Bewertung · ProvenExpert</div></div></div>
     </div>
   </div>
   <div class="progress"><span id="bar"></span></div>
