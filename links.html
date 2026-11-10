@@ -124,6 +124,14 @@ h2 em{display:block;font-style:italic;font-weight:400;color:var(--teal)}
 .contact p{color:var(--ink-3);font-size:14px;margin-top:4px}
 .pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line-gold);font-size:13.5px;color:var(--teal-deeper);background:#fff;max-width:100%}
+.pill--main{background:linear-gradient(135deg,var(--teal-deep),var(--teal));color:#fff;box-shadow:0 0 0 1px rgba(232,204,130,.7),0 10px 24px rgba(0,152,166,.22)}
+.pill--main svg{color:#fff}
+/* Community-Karte: hell und ruhig, damit Test und Coaching im Vordergrund bleiben */
+.offer--light{background:#fff;color:var(--teal-deeper);box-shadow:inset 0 0 0 1px var(--line-gold),0 12px 30px rgba(0,55,64,.10)}
+.offer--light .offer__tag{color:var(--gold-deep)}
+.offer--light .offer__title em{color:var(--teal)}
+.offer--light .offer__text{color:var(--ink-3)}
+.offer--light .offer__go{background:var(--cream-teal);color:var(--teal-deep);box-shadow:inset 0 0 0 1px var(--line)}
 .pill svg{width:16px;height:16px;color:var(--teal);flex:0 0 auto}
 footer{text-align:center;margin-top:44px}
 footer img{width:52px;height:52px;border-radius:50%;margin:0 auto 12px;opacity:.9}
@@ -165,7 +173,7 @@ footer small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:10px}
   <section class="pad">
     <p class="kicker">Für Frauen ab 30, die nur noch funktionieren</p>
     <h1>Ständig müde und du weißt nicht, warum? <em>Finde es heraus.</em></h1>
-    <p class="lead">Der kostenlose Energie-Test zeigt dir, in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen. Deine persönliche Auswertung bespreche ich mit dir am Telefon.</p>
+    <p class="lead">Der kostenlose Energie-Test zeigt dir, in welchem von 5 Bereichen bei dir die meisten Hinweise zusammenkommen. Dein Ergebnis siehst du direkt im Anschluss.</p>
     <a class="btn" href="https://www.martinalau.org/energie-test.html">Zum Energie-Test <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
     <p class="hint">Kostenlos · 20 Fragen · ca. 3 Minuten</p>
 
@@ -187,7 +195,7 @@ footer small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:10px}
         <div class="offer__body">
           <div class="offer__tag">Selbsttest · 3 Min.</div>
           <div class="offer__title">Energie-<em>Test</em></div>
-          <div class="offer__text">Dein Energie-Typ sofort, die persönliche Auswertung am Telefon.</div>
+          <div class="offer__text">20 Fragen und deine Auswertung direkt im Anschluss.</div>
         </div>
         <span class="offer__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
       </a>
@@ -195,9 +203,21 @@ footer small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:10px}
         <span class="badge">12 Wochen</span>
         <div class="offer__img"><img src="Bilder/links/thumb-coaching.webp" alt="" loading="lazy"></div>
         <div class="offer__body">
-          <div class="offer__tag">Coaching · persönlich</div>
+          <div class="offer__tag">Coaching</div>
           <div class="offer__title">AKKU <em>VOLL</em></div>
           <div class="offer__text">12 Wochen raus aus dem Funktionsmodus. Mit Test, Begleitung und Retest.</div>
+        </div>
+        <span class="offer__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <!-- Community: bewusst heller und ruhiger, damit sie nicht vom Test ablenkt.
+           Führt auf die Community-Seite (dort Hinweis zur Sichtbarkeit der Nummer + Datenschutz). -->
+      <a class="offer offer--light" href="https://www.martinalau.org/community.html">
+        <span class="badge">Kostenlos</span>
+        <div class="offer__img"><img src="Bilder/links/thumb-community.webp" alt="" loading="lazy"></div>
+        <div class="offer__body">
+          <div class="offer__tag">Per WhatsApp</div>
+          <div class="offer__title">Die <em>Community</em></div>
+          <div class="offer__text">Kurze Impulse von mir und Frauen, denen es genauso geht wie dir.</div>
         </div>
         <span class="offer__go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
       </a>
@@ -206,8 +226,9 @@ footer small{display:block;font-size:11.5px;color:var(--ink-3);margin-top:10px}
 
     <div class="contact">
       <h3>Noch Fragen? <em>Schreib&nbsp;mir.</em></h3>
-      <p>Ich antworte dir persönlich.</p>
+      <p>Am schnellsten per Nachricht auf Instagram.</p>
       <div class="pills">
+        <a class="pill pill--main" href="https://ig.me/m/martinalau.balance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Nachricht auf Instagram</a>
         <a class="pill" href="mailto:hello@martinalau.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>hello@martinalau.com</a>
       </div>
     </div>
