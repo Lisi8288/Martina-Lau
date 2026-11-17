@@ -1059,7 +1059,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>
           Diese Website verwendet Cookies und ähnliche Technologien.
           Technisch notwendige Cookies sind immer aktiv.
-          Google Tag Manager und Google Ads Conversion Tracking kannst du einzeln aktivieren — standardmäßig sind beide deaktiviert.
+          Google Tag Manager sowie Werbung und Statistik (Google Ads, Google Analytics und Meta-Pixel für Facebook und Instagram) kannst du einzeln aktivieren - standardmäßig ist alles deaktiviert.
           Mehr Infos in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.
         </p>
       </div>
@@ -1093,7 +1093,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </label>
         <div class="cb-toggle-label">
           <strong>Marketing &amp; Werbung</strong>
-          <span>Google Ads Conversion Tracking &amp; personalisierte Werbung — setzt Google Tag Manager voraus</span>
+          <span>Google Ads, Google Analytics &amp; Meta-Pixel (Facebook/Instagram) - setzt Google Tag Manager voraus</span>
         </div>
       </div>
     </div>
@@ -1210,5 +1210,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 
+
+<!-- Meta-Pixel (Facebook/Instagram): lädt NUR nach Einwilligung "Marketing & Werbung".
+     META_PIXEL_ID vom Meta-Ads-Dienstleister eintragen - solange leer, lädt nichts. -->
+<script>
+(function(){
+  var META_PIXEL_ID = '';
+  function load(){
+    if (!META_PIXEL_ID || window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+  function check(){
+    try {
+      var d = JSON.parse(localStorage.getItem('martina_lau_consent') || 'null');
+      if (d && d.marketing && (!d.expires || Date.now() < d.expires)) load();
+    } catch (e) {}
+  }
+  check();
+  ['cb-accept-all', 'cb-save'].forEach(function(id){
+    var b = document.getElementById(id);
+    if (b) b.addEventListener('click', function(){ setTimeout(check, 50); });
+  });
+})();
+</script>
 </body>
 </html>
